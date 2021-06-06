@@ -3,4 +3,3 @@ version: 2.2.0
 authors: [VadamDev, Implements]
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP
-loadbefore: [LysariaMagie, LysariaFaction, LuckyDrop]
