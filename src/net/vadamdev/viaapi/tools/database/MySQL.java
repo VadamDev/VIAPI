@@ -25,7 +25,7 @@ public abstract class MySQL {
                 if(getPluginName() != null) {
                     System.out.println(pluginName + " : Successful connected to the Database !");
                 }else {
-                    Bukkit.getConsoleSender().sendMessage("[VIAPI.ERROR.NOTITLE] §f: Successful connected to the Database !");
+                    Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Successful connected to the Database !");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -114,7 +114,7 @@ public abstract class MySQL {
                 if(getPluginName() != null) {
                     System.out.println(pluginName + " : Deconnection to the database done !");
                 }else {
-                    Bukkit.getConsoleSender().sendMessage("[VIAPI.ERROR.NOTITLE] §f: Deconnection to the database done !");
+                    Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Deconnection to the database done !");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -14,6 +14,5 @@ public enum ParticleDirection {
     NORTH_WEST,
     SUD_EAST,
     SUD_WEST,
-    FLOOR,
-    TEST
+    FLOOR
 }

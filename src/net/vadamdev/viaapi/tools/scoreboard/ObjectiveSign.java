@@ -1,7 +1,5 @@
 package net.vadamdev.viaapi.tools.scoreboard;
 
-
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -9,7 +7,7 @@ import java.util.HashMap;
 
 public class ObjectiveSign extends VObjective
 {
-    public HashMap<Integer, String> lines = new HashMap<>();
+    public HashMap<Integer, String> lines;
 
     /**
      * Constructor

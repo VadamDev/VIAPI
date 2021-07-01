@@ -11,22 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PotionBuilder {
+    /**
+     * @author VadamDev
+     * @since 01.07.2021
+     */
+
     private ItemStack is;
 
-    public PotionBuilder(Material m) {
-        this(m, 1);
-    }
-
-    public PotionBuilder(ItemStack is) {
+    public PotionBuilder(ItemStack is){
         this.is = is;
     }
 
-    public PotionBuilder(Material m, int amount) {
-        is = new ItemStack(m, amount);
-    }
-
-    public PotionBuilder(Material m, int amount, short meta){
-        is = new ItemStack(m, amount, meta);
+    public PotionBuilder(int amount, short meta){
+        is = new ItemStack(Material.POTION, amount, meta);
     }
 
     public PotionBuilder clone() {
@@ -66,5 +63,9 @@ public class PotionBuilder {
         im.setLore(lore);
         is.setItemMeta(im);
         return this;
+    }
+
+    public ItemStack toItemStack() {
+        return is;
     }
 }
