@@ -1,2 +1,2 @@
 # VIAPI
-A API for make plugins
+An API for make minecraft spigot plugins.
