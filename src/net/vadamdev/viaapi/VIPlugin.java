@@ -7,7 +7,12 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 
 public class VIPlugin extends JavaPlugin {
-    protected void registerCommand(Command cmd) { MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd); }
+    /**
+     * @author VadamDev
+     * @since 09.10.2020
+     */
+
+    public void registerCommand(Command cmd) { MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd); }
 
     public void saveResource(String resourcePath, String outoutpath){
         if(resourcePath == null || resourcePath.isEmpty()) throw new IllegalArgumentException("ResourcePath cannot be null or empty");

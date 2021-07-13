@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -44,10 +45,12 @@ public class InventoryManager {
         this.openers = new ArrayList<>();
     }
 
-    public void init() {
+    public InventoryManager init() {
         pluginManager.registerEvents(new InvListener(), plugin);
 
         new InvTask().runTaskTimer(plugin, 1, 1);
+
+        return this;
     }
 
     public Optional<InventoryOpener> findOpener(InventoryType type) {

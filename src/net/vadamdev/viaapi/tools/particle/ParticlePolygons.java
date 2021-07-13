@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.particle;
 
+import net.vadamdev.viaapi.tools.math.MathF;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,39 +16,35 @@ public class ParticlePolygons {
      */
 
     public void drawLine(ParticleEffect particle, Location loc1, Location loc2, float space) {
-        World world = loc1.getWorld();
-        double distance = loc1.distance(loc2);
-
         Vector v1 = loc1.toVector();
-        Vector v2 = loc2.toVector();
 
-        Vector f = v2.clone().subtract(v1).normalize().multiply(space);
+        Vector f = loc2.toVector().clone().subtract(v1).normalize().multiply(space);
 
-        for(double length = 0; length < distance; v1.add(f)) {
-            particle.display(0, 0, 0, 0.2f, 1, new Location(world, v1.getX(), v1.getY(), v1.getZ()), (List<Player>) Bukkit.getOnlinePlayers());
+        for(double length = 0; length < loc1.distance(loc2); v1.add(f)) {
+            particle.display(0, 0, 0, 0.2f, 1, new Location(loc1.getWorld(), v1.getX(), v1.getY(), v1.getZ()), (List<Player>) Bukkit.getOnlinePlayers());
             length += space;
         }
     }
 
     public void drawCycle(ParticleEffect particle, Location center, float radius, ParticleDirection direction) {
         if(direction.equals(ParticleDirection.FLOOR)) {
-            for (double t = 0.0D; t < 50.0D; t += 0.5D) {
-                float x = radius * (float)Math.sin(t);
-                float z = radius * (float)Math.cos(t);
+            for (float t = 0.0f; t < 50.0f; t += 0.5f) {
+                float x = radius * MathF.sin(t);
+                float z = radius * MathF.cos(t);
 
                 particle.display(0, 0, 0, 1, 1, new Location(center.getWorld(), center.getX() + x, center.getY(), center.getZ() + z));
             }
         }else if(direction.equals(ParticleDirection.SOUTH) || direction.equals(ParticleDirection.NORTH)) {
-            for (double t = 0.0D; t < 50.0D; t += 0.5D) {
-                float x = radius * (float)Math.sin(t);
-                float y = radius * (float)Math.cos(t);
+            for (float t = 0.0f; t < 50.0f; t += 0.5f) {
+                float x = radius * MathF.sin(t);
+                float y = radius * MathF.cos(t);
 
                 particle.display(0, 0, 0, 1, 1, new Location(center.getWorld(), center.getX() + x, center.getY() + y, center.getZ()));
             }
         }else if(direction.equals(ParticleDirection.EAST) || direction.equals(ParticleDirection.WEST)) {
-            for (double t = 0.0D; t < 50.0D; t += 0.5D) {
-                float z = radius * (float)Math.sin(t);
-                float y = radius * (float)Math.cos(t);
+            for (float t = 0.0f; t < 50.0f; t += 0.5f) {
+                float z = radius * MathF.sin(t);
+                float y = radius * MathF.cos(t);
 
                 particle.display(0, 0, 0, 1, 1, new Location(center.getWorld(), center.getX(), center.getY() + y, center.getZ() + z));
             }

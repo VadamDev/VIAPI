@@ -52,12 +52,12 @@ public class MathUtils {
 
     public static boolean percentageLuck(int percentage) {
         float rdm = (MathF.random() * (10 - 1)) + 1;
-        return rdm < percentage + 1;
+        return rdm <= percentage;
     }
 
     public static boolean percentageLuck(float percentage) {
         float rdm = (MathF.random() * (10 - 1)) + 1;
-        return rdm < percentage + 0.1;
+        return rdm <= percentage;
     }
 
     public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
