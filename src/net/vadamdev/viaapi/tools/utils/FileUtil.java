@@ -3,8 +3,12 @@ package net.vadamdev.viaapi.tools.utils;
 import com.sun.istack.internal.NotNull;
 
 import javax.annotation.Nullable;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
@@ -13,6 +17,11 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 public class FileUtil {
+    /**
+     * @author VadamDev
+     * @since 22.07.2021
+     */
+
     @Nullable
     public static <T> Class<? extends T> findClass(File file, Class<T> clazz) throws IOException, ClassNotFoundException {
         if (!file.exists()) return null;
@@ -46,5 +55,10 @@ public class FileUtil {
         }
 
         return classes.get(0);
+    }
+
+    public static BufferedImage getImage(String path) throws IOException {
+        if(path.startsWith("http://") || path.startsWith("https://")) return ImageIO.read(new URL(path));
+        return ImageIO.read(new File(path));
     }
 }

@@ -1,6 +1,6 @@
 name: VIAPI
-version: 2.3.0
+version: 2.3.5
 authors: [VadamDev, Implements]
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP
-loadbefore: [LysariaMagie, LysariaFaction, LuckyDrop]
+loadbefore: [LysariaMagie, LysariaFaction, LysariaCosmetics]

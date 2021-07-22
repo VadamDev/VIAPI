@@ -86,24 +86,16 @@ public class Utils {
         List<Entity> entities = new ArrayList<>();
 
         for (Entity entity : location.getWorld().getEntities()) {
-            if (entity.getLocation().distanceSquared(location) <= radius * radius) {
-                entities.add(entity);
-            }
+            if (entity.getLocation().distanceSquared(location) <= radius * radius) entities.add(entity);
         }
         return entities;
     }
 
     public static String[] getSkinFromName(String name) {
         try {
-            URL url0 = new URL("https://api.mojang.com/users/profiles/minecraft/" + name);
-            InputStream in;
-            InputStreamReader reader_0 = new InputStreamReader(url0.openStream());
-            String uuid = new JsonParser().parse(reader_0).getAsJsonObject().get("id").getAsString();
+            String uuid = new JsonParser().parse(new InputStreamReader(new URL("https://api.mojang.com/users/profiles/minecraft/" + name).openStream())).getAsJsonObject().get("id").getAsString();
 
-            URL url1 = new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid + "?unsigned=false");
-            InputStreamReader reader_1 = new InputStreamReader(url1.openStream());
-            JsonObject textureProperty = new JsonParser().parse(reader_1).getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
-
+            JsonObject textureProperty = new JsonParser().parse(new InputStreamReader(new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid + "?unsigned=false").openStream())).getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
             String value = textureProperty.get("value").getAsString();
             String signature = textureProperty.get("signature").getAsString();
 

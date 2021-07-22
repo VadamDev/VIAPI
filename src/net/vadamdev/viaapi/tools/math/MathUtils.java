@@ -39,7 +39,7 @@ public class MathUtils {
         double z = Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
 
         if(rdm.nextBoolean()) oabs(x);
-        if(rdm.nextBoolean() && negativeY) oabs(y);
+        if(negativeY && rdm.nextBoolean()) oabs(y);
         if(rdm.nextBoolean()) oabs(z);
 
         Location nLoc = loc.clone();

@@ -4,7 +4,10 @@ import net.vadamdev.viaapi.api.inv.InventoryManager;
 import net.vadamdev.viaapi.modules.ModuleManager;
 import net.vadamdev.viaapi.tools.bungeecord.BungeeUtils;
 import net.vadamdev.viaapi.tools.scheduler.Scheduler;
+import org.bukkit.map.MapCanvas;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.awt.image.BufferedImage;
 
 public class VIAPI extends JavaPlugin {
     /**
