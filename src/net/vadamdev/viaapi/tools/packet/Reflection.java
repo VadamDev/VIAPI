@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Reflection {
+    /**
+     * @author ?, edited by Implements
+     */
 
     public static void playSound(Player player, Location location, String soundName, float volume, float pitch) {
         try {
