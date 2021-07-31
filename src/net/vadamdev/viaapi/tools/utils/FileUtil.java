@@ -22,6 +22,11 @@ public class FileUtil {
      * @since 22.07.2021
      */
 
+    public static BufferedImage getImage(String path) throws IOException {
+        if(path.startsWith("http://") || path.startsWith("https://")) return ImageIO.read(new URL(path));
+        return ImageIO.read(new File(path));
+    }
+
     @Nullable
     public static <T> Class<? extends T> findClass(File file, Class<T> clazz) throws IOException, ClassNotFoundException {
         if (!file.exists()) return null;
@@ -55,10 +60,5 @@ public class FileUtil {
         }
 
         return classes.get(0);
-    }
-
-    public static BufferedImage getImage(String path) throws IOException {
-        if(path.startsWith("http://") || path.startsWith("https://")) return ImageIO.read(new URL(path));
-        return ImageIO.read(new File(path));
     }
 }

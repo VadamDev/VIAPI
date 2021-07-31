@@ -1,9 +1,12 @@
 package net.vadamdev.viaapi.tools.images.particle;
 
+import net.vadamdev.viaapi.tools.enums.EnumDirection;
+import net.vadamdev.viaapi.tools.math.VectorUtils;
 import net.vadamdev.viaapi.tools.particle.ParticleEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.awt.*;
 import java.util.List;
@@ -14,10 +17,10 @@ public class PixelParticle {
      * @since 22.07.2021
      */
 
-    private int x, y;
+    private double x, y;
     private Color color;
 
-    public PixelParticle(int x, int y, int rgb) {
+    public PixelParticle(double x, double y, int rgb) {
         this.x = x;
         this.y = -y;
 
@@ -25,6 +28,10 @@ public class PixelParticle {
     }
 
     public void render(Location locBase) {
-        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(color.getRed(), color.getGreen(), color.getBlue()), locBase.clone().add(x, y, 0), (List<Player>) Bukkit.getOnlinePlayers());
+        if (Bukkit.getOnlinePlayers().isEmpty()) return;
+
+        Vector v = new Vector(x, y, 0);
+
+        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(color.getRed(), color.getGreen(), color.getBlue()), VectorUtils.combineVector(v, locBase), (List<Player>) Bukkit.getOnlinePlayers());
     }
 }

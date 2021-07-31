@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.images.particle;
 
+import net.vadamdev.viaapi.tools.enums.EnumDirection;
 import org.bukkit.Location;
 
 public class ParticleImage {
@@ -9,10 +10,10 @@ public class ParticleImage {
      */
 
     private PixelParticle[] pixelParticles;
-    private int width, height;
-    private float space;
+    private double width, height;
+    private int space;
 
-    public ParticleImage(PixelParticle[] pixelParticles, int width, int height, float space) {
+    public ParticleImage(PixelParticle[] pixelParticles, int width, int height, int space) {
         this.pixelParticles = pixelParticles;
 
         this.width = width;
@@ -22,11 +23,23 @@ public class ParticleImage {
     }
 
     public void render(Location location) {
-        Location loc = location.clone().add(-(width / 2) / space, height / 2 / space, 0);
+        Location loc = location.clone().add(-(width / 2 / space), height / 2 / space, 0);
 
         for (PixelParticle pixelParticle : pixelParticles) {
             if(pixelParticle == null) continue;
             pixelParticle.render(loc);
         }
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public int getSpace() {
+        return space;
     }
 }

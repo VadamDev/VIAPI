@@ -1,5 +1,5 @@
 name: VIAPI
-version: 2.3.6
+version: 2.3.7
 authors: [VadamDev, Implements]
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP

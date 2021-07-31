@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.math;
 
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -10,22 +11,6 @@ public class MathUtils {
      * @author VadamDev
      * @since 03.11.2020
      */
-
-    public static Vector randomVector() {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random());
-        v.setY(Math.random());
-        v.setZ(Math.random() - Math.random());
-        return v;
-    }
-
-    public static Vector randomVector(int multiply) {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random()).multiply(multiply);
-        v.setY(Math.random()).multiply(multiply);
-        v.setZ(Math.random() - Math.random()).multiply(multiply);
-        return v;
-    }
 
     public static int percentage(double max, double d) {
         return (int) Math.round(d * 100 / max);
