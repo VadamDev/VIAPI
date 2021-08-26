@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.math;
 
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -10,22 +11,6 @@ public class MathUtils {
      * @author VadamDev
      * @since 03.11.2020
      */
-
-    public static Vector randomVector() {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random());
-        v.setY(Math.random());
-        v.setZ(Math.random() - Math.random());
-        return v;
-    }
-
-    public static Vector randomVector(int multiply) {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random()).multiply(multiply);
-        v.setY(Math.random()).multiply(multiply);
-        v.setZ(Math.random() - Math.random()).multiply(multiply);
-        return v;
-    }
 
     public static int percentage(double max, double d) {
         return (int) Math.round(d * 100 / max);
@@ -39,7 +24,7 @@ public class MathUtils {
         double z = Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
 
         if(rdm.nextBoolean()) oabs(x);
-        if(rdm.nextBoolean() && negativeY) oabs(y);
+        if(negativeY && rdm.nextBoolean()) oabs(y);
         if(rdm.nextBoolean()) oabs(z);
 
         Location nLoc = loc.clone();
@@ -52,12 +37,12 @@ public class MathUtils {
 
     public static boolean percentageLuck(int percentage) {
         float rdm = (MathF.random() * (10 - 1)) + 1;
-        return rdm < percentage + 1;
+        return rdm <= percentage;
     }
 
     public static boolean percentageLuck(float percentage) {
         float rdm = (MathF.random() * (10 - 1)) + 1;
-        return rdm < percentage + 0.1;
+        return rdm <= percentage;
     }
 
     public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }

@@ -1,5 +1,6 @@
-package net.vadamdev.viaapi.tools.database;
+package net.vadamdev.viaapi.tools.database.mysql;
 
+import net.vadamdev.viaapi.tools.database.DatabaseCredential;
 import org.bukkit.Bukkit;
 
 import java.sql.*;
@@ -15,35 +16,45 @@ public abstract class MySQL {
     public Connection c;
     public String usedTab, pluginName;
 
-    public void connect(String host, int port, String database, String user, String password, String usedTab, boolean autoReconnect) {
+    public MySQL() {
         this.pluginName = "[" + getPluginName() + "]";
+    }
 
+    /*
+    Connection / Disconnection
+     */
+
+    public void connect(DatabaseCredential credential, String usedTab, boolean autoReconnect) {
         if(!isConnected()) {
             try {
-                c = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database +"?autoReconnect=" + autoReconnect, user, password);
+                c = DriverManager.getConnection(credential.toURL() + "?autoReconnect=" + autoReconnect, credential.getUser(), credential.getPassword());
 
-                if(getPluginName() != null) {
-                    System.out.println(pluginName + " : Successful connected to the Database !");
-                }else {
-                    Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Successful connected to the Database !");
-                }
+                if(getPluginName() != null) Bukkit.getConsoleSender().sendMessage(pluginName + " : Successful connected to the Database with DriverManager!");
+                else Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Successful connected to the Database with DriverManager !");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            this.usedTab = usedTab;
+        }
+    }
+
+    public void disconnect() {
+        if(isConnected()) {
+            try {
+                c.close();
+
+                if(getPluginName() != null) Bukkit.getConsoleSender().sendMessage(pluginName + " : Successful disconnected to the Database !");
+                else Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Successful disconnected to the Database !");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
-        this.usedTab = usedTab;
     }
 
-    public void connect(String host, int port, String database, String user, String password, String usedTab) {
-        connect(host, port, database, user, password, usedTab, false);
-    }
-
-    public void connect(DatabaseUser user) { connect(user, false); }
-
-    public void connect(DatabaseUser user, boolean autoReconnect) {
-        connect(user.getHost(), user.getPort(), user.getDatabase(), user.getUser(), user.getPassword(), user.getUsedTab(), autoReconnect);
-    }
+    /*
+    SQL Default Methods
+     */
 
     public Object get(String objectNameEntry, String objectNameExit, String column) {
         try {
@@ -96,41 +107,26 @@ public abstract class MySQL {
         return null;
     }
 
-    public void trim(String column) {
-        try {
-            PreparedStatement q = c.prepareStatement("UPDATE " + usedTab + " SET " + column + " = TRIM(CHAR(9) FROM TRIM(0))");
-            q.executeUpdate();
-            q.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
+    /*
+    Abstract Methods & utility methods
+     */
 
-    public void disconnect() {
-        if(isConnected()) {
-            try {
-                c.close();
-
-                if(getPluginName() != null) {
-                    System.out.println(pluginName + " : Deconnection to the database done !");
-                }else {
-                    Bukkit.getConsoleSender().sendMessage("[VIAPI] §f: Deconnection to the database done !");
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public void setUsedTab(String usedTab) {
+        this.usedTab = usedTab;
     }
 
     public abstract String getPluginName();
 
+    /*
+    Private Methods
+     */
+
     private boolean isConnected() {
         try {
-            if(c == null || c.isClosed() || c.isValid(5)) return false;
-        } catch (SQLException e) {
+            return !(c == null || c.isClosed());
+        }catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
-
-        return true;
     }
 }

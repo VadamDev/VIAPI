@@ -7,7 +7,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
-public class FireWorksBuilder {
+public class FireworksBuilder {
     /**
      * @author Implements
      * @since 12.10.2020
@@ -17,49 +17,49 @@ public class FireWorksBuilder {
     private Location loc;
     private FireworkEffect.Builder fke;
 
-    public FireWorksBuilder(Location loc, FireworkEffect.Type type) {
+    public FireworksBuilder(Location loc, FireworkEffect.Type type) {
         this.loc = loc;
         this.fk = (Firework) loc.getWorld().spawnEntity(loc , EntityType.FIREWORK);
         this.fke = FireworkEffect.builder();
         this.fke = fke.with(type);
     }
 
-    public FireWorksBuilder setColor(Color color){
+    public FireworksBuilder setColor(Color color){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffect(fke.withColor(color).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireWorksBuilder setPower(int power){
+    public FireworksBuilder setPower(int power){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.setPower(power);
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireWorksBuilder setFlicker(boolean flicker){
+    public FireworksBuilder setFlicker(boolean flicker){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFlicker().flicker(flicker).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireWorksBuilder setTrail(boolean trail){
+    public FireworksBuilder setTrail(boolean trail){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withTrail().trail(trail).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireWorksBuilder withFade(Color color){
+    public FireworksBuilder withFade(Color color){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFade(color).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireWorksBuilder withFade(Color... color){
+    public FireworksBuilder withFade(Color... color){
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFade(color).build());
         fk.setFireworkMeta(fkm);

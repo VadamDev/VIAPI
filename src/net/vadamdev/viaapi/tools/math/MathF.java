@@ -4,22 +4,18 @@ public class MathF {
     public static final float PI = 3.14159265358979323846264338327950288419716939937510582f;
 
     public static float min(float a, float b) {
-        if (a < b)
-            return a;
+        if (a < b) return a;
         return b;
     }
 
     public static float max(float a, float b) {
-        if (a > b)
-            return a;
+        if (a > b) return a;
         return b;
     }
 
     public static float clamp(float min, float max, float value) {
-        if (value < min)
-            value = min;
-        if (value > max)
-            value = max;
+        if (value < min) value = min;
+        if (value > max) value = max;
 
         return value;
     }
@@ -81,7 +77,7 @@ public class MathF {
     }
 
     public static float random(float a, float b) {
-        return (float) a + random() * (b - a);
+        return a + random() * (b - a);
     }
 
     public static float abs(float a) {

@@ -3,7 +3,6 @@ package net.vadamdev.viaapi.api.entities;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.server.v1_8_R3.*;
-import net.vadamdev.viaapi.tools.utils.Constants;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -11,10 +10,13 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
+@Deprecated
 public class EntityFakePlayer {
     /**
      * @author VadamDev
      * @since 21.12.2020
+     *
+     * Currently abandonned
      */
 
     public EntityPlayer fakePlayer, nmsPlayer;
@@ -40,8 +42,6 @@ public class EntityFakePlayer {
         gameProfile.getProperties().put("textures", new Property("textures", value, signature));
 
         fakePlayer.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-
-        Constants.npcIds.add(fakePlayer.getId());
     }
 
     public void sendWithPacket(Player player) {

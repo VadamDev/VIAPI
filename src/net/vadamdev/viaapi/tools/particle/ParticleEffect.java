@@ -41,7 +41,7 @@ import java.util.Map.Entry;
  * <p>
  * <i>It would be nice if you provide credit to me if you use this class in a published project</i>
  * 
- * @author DarkBlade12
+ * @author DarkBlade12, edited by VadamDev
  * @version 1.7
  */
 public enum ParticleEffect {
@@ -613,14 +613,14 @@ public enum ParticleEffect {
 	 * @param speed Display speed of the particles
 	 * @param amount Amount of particles
 	 * @param center Center location of the effect
-	 * @param players Receivers of the effect
 	 * @throws ParticleVersionException If the particle effect is not supported by the server version
 	 * @throws ParticleDataException If the particle effect requires additional data
 	 * @throws IllegalArgumentException If the particle effect requires water and none is at the center location
 	 * @see #display(float, float, float, float, int, Location, List)
 	 */
-	public void display(float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, Player... players) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
-		display(offsetX, offsetY, offsetZ, speed, amount, center, Arrays.asList(players));
+	public void display(float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
+		if(Bukkit.getOnlinePlayers().isEmpty()) return;
+		display(offsetX, offsetY, offsetZ, speed, amount, center, (List<Player>) Bukkit.getOnlinePlayers());
 	}
 
 	/**
@@ -687,14 +687,14 @@ public enum ParticleEffect {
 	 * @param direction Direction of the particle
 	 * @param speed Display speed of the particle
 	 * @param center Center location of the effect
-	 * @param players Receivers of the effect
 	 * @throws ParticleVersionException If the particle effect is not supported by the server version
 	 * @throws ParticleDataException If the particle effect requires additional data
 	 * @throws IllegalArgumentException If the particle effect is not directional or if it requires water and none is at the center location
 	 * @see #display(Vector, float, Location, List)
 	 */
-	public void display(Vector direction, float speed, Location center, Player... players) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
-		display(direction, speed, center, Arrays.asList(players));
+	public void display(Vector direction, float speed, Location center) throws ParticleVersionException, ParticleDataException, IllegalArgumentException {
+		if(Bukkit.getOnlinePlayers().isEmpty()) return;
+		display(direction, speed, center, (List<Player>) Bukkit.getOnlinePlayers());
 	}
 
 	/**
@@ -750,13 +750,13 @@ public enum ParticleEffect {
 	 * 
 	 * @param color Color of the particle
 	 * @param center Center location of the effect
-	 * @param players Receivers of the effect
 	 * @throws ParticleVersionException If the particle effect is not supported by the server version
 	 * @throws ParticleColorException If the particle effect is not colorable or the color type is incorrect
 	 * @see #display(ParticleColor, Location, List)
 	 */
-	public void display(ParticleColor color, Location center, Player... players) throws ParticleVersionException, ParticleColorException {
-		display(color, center, Arrays.asList(players));
+	public void display(ParticleColor color, Location center) throws ParticleVersionException, ParticleColorException {
+		if(Bukkit.getOnlinePlayers().isEmpty()) return;
+		display(color, center, (List<Player>) Bukkit.getOnlinePlayers());
 	}
 
 	/**
@@ -827,13 +827,13 @@ public enum ParticleEffect {
 	 * @param speed Display speed of the particles
 	 * @param amount Amount of particles
 	 * @param center Center location of the effect
-	 * @param players Receivers of the effect
 	 * @throws ParticleVersionException If the particle effect is not supported by the server version
 	 * @throws ParticleDataException If the particle effect does not require additional data or if the data type is incorrect
 	 * @see #display(ParticleData, float, float, float, float, int, Location, List)
 	 */
-	public void display(ParticleData data, float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center, Player... players) throws ParticleVersionException, ParticleDataException {
-		display(data, offsetX, offsetY, offsetZ, speed, amount, center, Arrays.asList(players));
+	public void display(ParticleData data, float offsetX, float offsetY, float offsetZ, float speed, int amount, Location center) throws ParticleVersionException, ParticleDataException {
+		if(Bukkit.getOnlinePlayers().isEmpty()) return;
+		display(data, offsetX, offsetY, offsetZ, speed, amount, center, (List<Player>) Bukkit.getOnlinePlayers());
 	}
 
 	/**
@@ -895,13 +895,13 @@ public enum ParticleEffect {
 	 * @param direction Direction of the particle
 	 * @param speed Display speed of the particles
 	 * @param center Center location of the effect
-	 * @param players Receivers of the effect
 	 * @throws ParticleVersionException If the particle effect is not supported by the server version
 	 * @throws ParticleDataException If the particle effect does not require additional data or if the data type is incorrect
 	 * @see #display(ParticleData, Vector, float, Location, List)
 	 */
-	public void display(ParticleData data, Vector direction, float speed, Location center, Player... players) throws ParticleVersionException, ParticleDataException {
-		display(data, direction, speed, center, Arrays.asList(players));
+	public void display(ParticleData data, Vector direction, float speed, Location center) throws ParticleVersionException, ParticleDataException {
+		if(Bukkit.getOnlinePlayers().isEmpty()) return;
+		display(data, direction, speed, center, (List<Player>) Bukkit.getOnlinePlayers());
 	}
 
 	/**

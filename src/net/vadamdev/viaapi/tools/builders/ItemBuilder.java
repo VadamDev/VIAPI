@@ -50,6 +50,11 @@ public class ItemBuilder {
 		return this;
 	}
 
+	public ItemBuilder setType(Material material) {
+		is.setType(material);
+		return this;
+	}
+
 	public ItemBuilder addUnsafeEnchantment(Enchantment ench, int level) {
 		is.addUnsafeEnchantment(ench, level);
 		return this;

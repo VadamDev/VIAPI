@@ -46,19 +46,30 @@ public class SmartInventory {
             this.manager.setInventory(player, null);
         });
 
-        InventoryContents contents = new InventoryContents.Impl(this, player);
+        InventoryContents contents = new InventoryContents.Impl(this, player.getUniqueId());
         contents.pagination().page(page);
 
         this.manager.setContents(player, contents);
-        this.provider.init(player, contents);
 
-        InventoryOpener opener = this.manager.findOpener(type)
-                .orElseThrow(() -> new IllegalStateException("No opener found for the inventory type " + type.name()));
-        Inventory handle = opener.open(this, player);
+        try {
+            this.provider.init(player, contents);
 
-        this.manager.setInventory(player, this);
+            // If the current inventory has been closed or replaced within the init method, returns
+            if (!this.manager.getContents(player).equals(Optional.of(contents))) {
+                return null;
+            }
 
-        return handle;
+            InventoryOpener opener = this.manager.findOpener(type)
+                    .orElseThrow(() -> new IllegalStateException("No opener found for the inventory type " + type.name()));
+            Inventory handle = opener.open(this, player);
+
+            this.manager.setInventory(player, this);
+
+            return handle;
+        } catch (Exception e) {
+            this.manager.handleInventoryOpenError(this, player, e);
+            return null;
+        }
     }
 
     @SuppressWarnings("unchecked")
