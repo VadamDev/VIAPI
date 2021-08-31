@@ -1,4 +1,4 @@
-package net.vadamdev.viaapi.tools.scoreboard;
+package net.vadamdev.viaapi.tools.visual.scoreboard;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

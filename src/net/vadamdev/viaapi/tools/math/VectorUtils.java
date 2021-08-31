@@ -1,6 +1,5 @@
 package net.vadamdev.viaapi.tools.math;
 
-import net.vadamdev.viaapi.tools.enums.EnumDirection;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -32,7 +31,7 @@ public class VectorUtils {
         return v;
     }
 
-    public static Vector randomVector(int multiply) {
+    public static Vector randomVector(float multiply) {
         Vector v = new Vector();
         v.setX(Math.random() - Math.random()).multiply(multiply);
         v.setY(Math.random()).multiply(multiply);

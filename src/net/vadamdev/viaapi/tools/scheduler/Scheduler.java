@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 public class Scheduler {
     /**
      * @author VadamDev
-     * @since 14.01.2021
+     * @since 14.01.2021 - Updated 29.08.2021
      */
 
     public void runTaskLater(Plugin plugin, Consumer<Runnable> r, long delay) {
@@ -37,5 +37,19 @@ public class Scheduler {
             @Override
             public void run() { r.accept(this); }
         }, delay, period);
+    }
+
+    public void runTask(Plugin plugin, Consumer<Runnable> r) {
+        Bukkit.getScheduler().runTask(plugin, new Runnable() {
+            @Override
+            public void run() { r.accept(this); }
+        });
+    }
+
+    public void runTaskAsynchronously(Plugin plugin, Consumer<Runnable> r) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, new Runnable() {
+            @Override
+            public void run() { r.accept(this); }
+        });
     }
 }

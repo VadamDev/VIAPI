@@ -28,6 +28,7 @@ public class PixelParticle {
         this.space = space;
     }
 
+    @Deprecated
     public void render(Location locBase, double angle) {
         render(locBase, angle, 0, 0, 0);
     }

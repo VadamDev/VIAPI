@@ -30,7 +30,11 @@ public abstract class HikariDatabase {
      */
 
     public void connect(DatabaseCredential credential, String defaultUsedTab) {
-        setupHikariCP(credential);
+        connect(credential, new HikariInfo(600000L, 300000L, 300000L, 10000L), defaultUsedTab);
+    }
+
+    public void connect(DatabaseCredential credential, HikariInfo hikariInfo, String defaultUsedTab) {
+        setupHikariCP(credential, hikariInfo);
         this.c = getConnection();
 
         if(isConnected()) {
@@ -139,18 +143,18 @@ public abstract class HikariDatabase {
         }
     }
 
-    private void setupHikariCP(DatabaseCredential credential) {
+    private void setupHikariCP(DatabaseCredential credential, HikariInfo hikariInfo) {
         HikariConfig config = new HikariConfig();
 
         config.setMaximumPoolSize(maxPoolSize);
         config.setJdbcUrl(credential.toURL());
         config.setUsername(credential.getUser());
         config.setPassword(credential.getPassword());
-        config.setMaxLifetime(600000L);
-        config.setIdleTimeout(300000L);
-        config.setLeakDetectionThreshold(300000L);
-        config.setConnectionTimeout(10000L);
+        config.setMaxLifetime(hikariInfo.getMaxLifeTime());
+        config.setIdleTimeout(hikariInfo.getIdleTimeout());
+        config.setLeakDetectionThreshold(hikariInfo.getLeakDetectionThreshold());
+        config.setConnectionTimeout(hikariInfo.getConnectionTimeout());
 
-        this.hikariDataSource = new HikariDataSource(config);
+        hikariDataSource = new HikariDataSource(config);
     }
 }

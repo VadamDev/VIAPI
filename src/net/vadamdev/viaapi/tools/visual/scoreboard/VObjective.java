@@ -1,4 +1,4 @@
-package net.vadamdev.viaapi.tools.scoreboard;
+package net.vadamdev.viaapi.tools.visual.scoreboard;
 
 
 import net.minecraft.server.v1_8_R3.IScoreboardCriteria;

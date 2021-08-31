@@ -1,6 +1,8 @@
 name: VIAPI
-version: 2.3.8
+version: 2.3.9
+website: VadamDev.fr
 authors: [VadamDev, Implements]
+
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP
-loadbefore: [LysariaMagie, LysariaFaction, LysariaCosmetics]
+softdepend: [ProtocolLib]

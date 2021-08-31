@@ -3,23 +3,20 @@ package net.vadamdev.viaapi.api.entities;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.server.v1_8_R3.*;
+import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-@Deprecated
 public class EntityFakePlayer {
     /**
      * @author VadamDev
-     * @since 21.12.2020
-     *
-     * Currently abandonned
+     * @since 21.12.2020 - Updated 28.08.2021
      */
 
-    public EntityPlayer fakePlayer, nmsPlayer;
+    public EntityPlayer fakePlayer;
     private Location loc;
     private String name, value, signature;
 
@@ -33,11 +30,10 @@ public class EntityFakePlayer {
     }
 
     private void init() {
-        MinecraftServer ms = MinecraftServer.getServer();
         WorldServer ws = ((CraftWorld) loc.getWorld()).getHandle();
         GameProfile gameProfile = new GameProfile(UUID.randomUUID(), name);
 
-        fakePlayer = new EntityPlayer(ms, ws, gameProfile, new PlayerInteractManager(ws));
+        fakePlayer = new EntityPlayer(MinecraftServer.getServer(), ws, gameProfile, new PlayerInteractManager(ws));
 
         gameProfile.getProperties().put("textures", new Property("textures", value, signature));
 
@@ -45,32 +41,15 @@ public class EntityFakePlayer {
     }
 
     public void sendWithPacket(Player player) {
-        nmsPlayer = ((CraftPlayer) player).getHandle();
-
-        PacketPlayOutPlayerInfo ppopi = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, fakePlayer);
-        PacketPlayOutNamedEntitySpawn ppones = new PacketPlayOutNamedEntitySpawn(fakePlayer);
-
-        nmsPlayer.playerConnection.sendPacket(ppopi);
-        nmsPlayer.playerConnection.sendPacket(ppones);
+        Reflection.sendPacket(player, new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, fakePlayer));
+        Reflection.sendPacket(player, new PacketPlayOutNamedEntitySpawn(fakePlayer));
     }
 
     public void removeWithPacket(Player player) {
-        nmsPlayer = ((CraftPlayer) player).getHandle();
-
-        PacketPlayOutEntityDestroy packet = new PacketPlayOutEntityDestroy(fakePlayer.getId());
-        nmsPlayer.playerConnection.sendPacket(packet);
+        Reflection.sendPacket(player, new PacketPlayOutEntityDestroy(fakePlayer.getId()));
     }
 
     public void setSneaking() {
         fakePlayer.setSneaking(true);
-    }
-
-    public void removeFromTab() {
-        PacketPlayOutPlayerInfo ppopi = new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, fakePlayer);
-        nmsPlayer.playerConnection.sendPacket(ppopi);
-    }
-
-    public enum NPCAction {
-        INTERRACT, ATTACK
     }
 }
