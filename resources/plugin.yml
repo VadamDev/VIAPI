@@ -1,8 +1,7 @@
 name: VIAPI
-version: 2.3.9
-website: VadamDev.fr
+version: 2.4.0
 authors: [VadamDev, Implements]
+website: vadamdev.fr
 
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP
-softdepend: [ProtocolLib]

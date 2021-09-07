@@ -6,6 +6,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class RGBGenerator extends BukkitRunnable {
+    /**
+     * @author VadamDev
+     * @since 31.07.2021
+     */
+
     private int r, g, b;
 
     public void start(int delay, int period) {
