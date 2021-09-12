@@ -1,16 +1,27 @@
 package net.vadamdev.viaapi;
 
 import net.minecraft.server.v1_8_R3.MinecraftServer;
+import net.vadamdev.viaapi.startup.APIVersion;
+import net.vadamdev.viaapi.startup.VIAPIInfo;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 
 public class VIPlugin extends JavaPlugin {
+    public VIAPIInfo viapiInfo;
+
     /**
      * @author VadamDev
-     * @since 09.10.2020
+     * @since 09.10.2020 - Updated 13.09.2021
      */
+
+    @Override
+    public void onEnable() {
+        viapiInfo = getVIAPIInfo();
+        Bukkit.getConsoleSender().sendMessage("[" + viapiInfo.getPluginName() + "] I'm using " + viapiInfo.getApiVersion() + " VIAPI Version");
+    }
 
     public void registerCommand(Command cmd) { MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd); }
 
@@ -44,5 +55,9 @@ public class VIPlugin extends JavaPlugin {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public VIAPIInfo getVIAPIInfo() {
+        return new VIAPIInfo(APIVersion.UNKNOWN, "UNKNOWN");
     }
 }
