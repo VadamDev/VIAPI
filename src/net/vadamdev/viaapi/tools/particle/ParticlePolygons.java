@@ -2,13 +2,8 @@ package net.vadamdev.viaapi.tools.particle;
 
 import net.vadamdev.viaapi.tools.enums.EnumDirection;
 import net.vadamdev.viaapi.tools.math.MathF;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
-import java.util.List;
 
 public class ParticlePolygons {
     /**

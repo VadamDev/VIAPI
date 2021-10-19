@@ -24,6 +24,10 @@ public class VIPlugin extends JavaPlugin {
 
     public void registerCommand(Command cmd) { MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd); }
 
+    public void saveResource(String path) {
+        saveResource(path, path);
+    }
+
     public void saveResource(String resourcePath, String outoutpath){
         if(resourcePath == null || resourcePath.isEmpty()) throw new IllegalArgumentException("ResourcePath cannot be null or empty");
 

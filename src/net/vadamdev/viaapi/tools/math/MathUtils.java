@@ -1,8 +1,6 @@
 package net.vadamdev.viaapi.tools.math;
 
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.util.Vector;
 
 import java.util.Random;
 

@@ -1,6 +1,8 @@
 package net.vadamdev.viaapi.tools.pathfinding;
 
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_8_R3.EntityInsentient;
+import net.minecraft.server.v1_8_R3.EntityLiving;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
 
 public class PathFinderGoalFollowMaster extends PathfinderGoal {
     private final EntityInsentient follower;

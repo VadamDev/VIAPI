@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.builders;
 
+import net.vadamdev.viaapi.tools.enums.LockType;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
@@ -82,6 +83,13 @@ public class ArmorStandBuilder {
         return this;
     }
 
+    public ArmorStandBuilder setRotation(float yaw){
+        Location loc = armorStand.getLocation();
+        loc.setYaw(yaw);
+        armorStand.teleport(loc);
+        return this;
+    }
+
     /*
     Setters
      */
@@ -119,6 +127,11 @@ public class ArmorStandBuilder {
 
     public ArmorStandBuilder setLocation(Location loc){
         armorStand.teleport(loc);
+        return this;
+    }
+
+    public ArmorStandBuilder lockSlot(LockType lockType) {
+        lockType.setToArmorStand(armorStand);
         return this;
     }
 

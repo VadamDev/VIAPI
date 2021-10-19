@@ -4,6 +4,8 @@ public enum APIVersion {
     /**
      * @author VadamDev
      * @since 13.09.2021
+     *
+     * There're some versions not written here because they are not public version.
      */
 
     V2_2_0,
@@ -17,6 +19,7 @@ public enum APIVersion {
     V2_4_0,
     V2_4_1,
     V2_4_2,
+    V2_4_3,
     DEV,
     UNKNOWN
 }

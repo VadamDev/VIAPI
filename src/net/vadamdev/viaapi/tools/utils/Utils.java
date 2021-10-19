@@ -10,11 +10,11 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Utils {
     /**
@@ -83,23 +83,15 @@ public class Utils {
     }
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
-        List<Entity> entities = new ArrayList<>();
-
-        for (Entity entity : location.getWorld().getEntities()) {
-            if (entity.getLocation().distanceSquared(location) <= radius * radius) entities.add(entity);
-        }
-        return entities;
+        return location.getWorld().getEntities().stream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
     }
 
     public static String[] getSkinFromName(String name) {
         try {
             String uuid = new JsonParser().parse(new InputStreamReader(new URL("https://api.mojang.com/users/profiles/minecraft/" + name).openStream())).getAsJsonObject().get("id").getAsString();
-
             JsonObject textureProperty = new JsonParser().parse(new InputStreamReader(new URL("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid + "?unsigned=false").openStream())).getAsJsonObject().get("properties").getAsJsonArray().get(0).getAsJsonObject();
-            String value = textureProperty.get("value").getAsString();
-            String signature = textureProperty.get("signature").getAsString();
 
-            return new String[] {value, signature};
+            return new String[] {textureProperty.get("value").getAsString(), textureProperty.get("signature").getAsString()};
         }catch (IOException e) {
             e.printStackTrace();
             return null;

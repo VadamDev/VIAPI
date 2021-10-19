@@ -1,7 +1,5 @@
 package net.vadamdev.viaapi.tools.enums;
 
-import org.bukkit.block.BlockFace;
-
 public enum EnumDirection {
     /**
      * @author VadamDev
