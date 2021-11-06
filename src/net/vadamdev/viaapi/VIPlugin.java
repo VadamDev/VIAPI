@@ -19,7 +19,11 @@ public class VIPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         apiVersion = getAPIVersion();
-        Bukkit.getConsoleSender().sendMessage("[" + getName() + "] I'm using " + apiVersion + " VIAPI Version");
+        String pluginName = getName();
+
+        Bukkit.getConsoleSender().sendMessage("[" + pluginName + "] I'm using " + apiVersion + " VIAPI Version");
+
+        VIAPI.get().getDependsMap().put(pluginName, apiVersion);
     }
 
     public void registerCommand(Command cmd) {
