@@ -1,11 +1,11 @@
 package net.vadamdev.viaapi;
 
 import net.vadamdev.viaapi.api.inv.InventoryManager;
+import net.vadamdev.viaapi.startup.VIAPICommand;
 import net.vadamdev.viaapi.tools.bungeecord.BungeeUtils;
 import net.vadamdev.viaapi.tools.scheduler.Scheduler;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class VIAPI extends JavaPlugin {
+public class VIAPI extends VIPlugin {
     /**
      * @author VadamDev & Implements
      * @since 09.10.2020
@@ -21,6 +21,8 @@ public class VIAPI extends JavaPlugin {
         api = this;
 
         saveDefaultConfig();
+
+        registerCommand(new VIAPICommand());
 
         setupTools();
     }

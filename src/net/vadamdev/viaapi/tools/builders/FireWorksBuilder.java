@@ -9,16 +9,14 @@ import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireworksBuilder {
     /**
-     * @author Implements
+     * @author Implements, Edited By VadamDev
      * @since 12.10.2020
      */
 
     private Firework fk;
-    private Location loc;
     private FireworkEffect.Builder fke;
 
     public FireworksBuilder(Location loc, FireworkEffect.Type type) {
-        this.loc = loc;
         this.fk = (Firework) loc.getWorld().spawnEntity(loc , EntityType.FIREWORK);
         this.fke = FireworkEffect.builder();
         this.fke = fke.with(type);

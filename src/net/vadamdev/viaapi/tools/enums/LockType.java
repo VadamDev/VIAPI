@@ -13,7 +13,7 @@ public enum LockType {
     MELEE(65793),
     ALL(2039583);
 
-    private int value;
+    private final int value;
 
     LockType(int value) {
         this.value = value;

@@ -14,6 +14,8 @@ public class MathUtils {
         return (int) Math.round(d * 100 / max);
     }
 
+    public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
+
     public static Location rlap(Location loc, int r, int maxY, boolean negativeY) {
         Random rdm = new Random();
 
@@ -21,29 +23,24 @@ public class MathUtils {
         double y = rdm.nextInt(maxY);
         double z = Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
 
-        if(rdm.nextBoolean()) oabs(x);
-        if(negativeY && rdm.nextBoolean()) oabs(y);
-        if(rdm.nextBoolean()) oabs(z);
+        if(rdm.nextBoolean()) x = oabs(x);
+        if(negativeY && rdm.nextBoolean()) y = oabs(y);
+        if(rdm.nextBoolean()) z = oabs(z);
 
-        Location nLoc = loc.clone();
-        nLoc.setX(nLoc.getX() + x);
-        nLoc.setY(nLoc.getY() + y);
-        nLoc.setZ(nLoc.getZ() + z);
-
-        return nLoc;
+        return loc.clone().add(x, y, z);
     }
 
     public static boolean percentageLuck(int percentage) {
-        float rdm = (MathF.random() * (10 - 1)) + 1;
+        float rdm = (MathF.random() * 9) + 1;
         return rdm <= percentage;
     }
 
     public static boolean percentageLuck(float percentage) {
-        float rdm = (MathF.random() * (10 - 1)) + 1;
+        float rdm = (MathF.random() * 9) + 0.1f;
         return rdm <= percentage;
     }
 
-    public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
-
-    public static double oabs(double a) { return (a < 0) ? a : -a; }
+    public static double oabs(double a) {
+        return -Math.abs(a);
+    }
 }

@@ -13,7 +13,6 @@ public class ParticlePolygons {
 
     public static void drawLine(ParticleEffect particle, Location loc1, Location loc2, float space) {
         Vector v1 = loc1.toVector();
-
         Vector f = loc2.toVector().clone().subtract(v1).normalize().multiply(space);
 
         for(double length = 0; length < loc1.distance(loc2); v1.add(f)) {

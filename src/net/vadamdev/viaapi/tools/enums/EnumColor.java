@@ -24,7 +24,7 @@ public enum EnumColor {
     BLACK(DyeColor.BLACK),
     ALL(DyeColor.WHITE);
 
-    private DyeColor dyeColor;
+    private final DyeColor dyeColor;
 
     EnumColor(DyeColor dyeColor) {
         this.dyeColor = dyeColor;

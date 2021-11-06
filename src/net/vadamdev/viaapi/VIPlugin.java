@@ -22,7 +22,9 @@ public class VIPlugin extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("[" + getName() + "] I'm using " + apiVersion + " VIAPI Version");
     }
 
-    public void registerCommand(Command cmd) { MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd); }
+    public void registerCommand(Command cmd) {
+        MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd);
+    }
 
     public void saveResource(String path) {
         saveResource(path, path);

@@ -8,40 +8,23 @@ public class ParticleImage {
      * @since 22.07.2021
      */
 
-    private PixelParticle[] pixelParticles;
-    private double width, height;
-    private int space;
+    private PixelParticle[] buffer;
 
-    public ParticleImage(PixelParticle[] pixelParticles, int width, int height, int space) {
-        this.pixelParticles = pixelParticles;
-
-        this.width = width;
-        this.height = -height;
-
-        this.space = space;
-    }
-
-    @Deprecated
-    public void render(Location location, double angle) {
-        render(location, angle, 0, 0, 0);
+    public ParticleImage(PixelParticle[] buffer) {
+        this.buffer = buffer;
     }
 
     public void render(Location location, double offsetX, double offsetY, double offsetZ, double angle) {
-        for (PixelParticle pixelParticle : pixelParticles) {
-            if(pixelParticle == null) continue;
-            pixelParticle.render(location, offsetX, offsetY, offsetZ, angle);
+        for (PixelParticle pixelParticle : buffer) {
+            if(pixelParticle != null) pixelParticle.render(location, offsetX, offsetY, offsetZ, angle);
         }
     }
 
-    public double getWidth() {
-        return width;
+    public PixelParticle[] getBuffer() {
+        return buffer;
     }
 
-    public double getHeight() {
-        return height;
-    }
-
-    public int getSpace() {
-        return space;
+    public void setBuffer(PixelParticle[] buffer) {
+        this.buffer = buffer;
     }
 }
