@@ -12,7 +12,11 @@ import org.bukkit.entity.Entity;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +88,22 @@ public class Utils {
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
         return location.getWorld().getEntities().stream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
+    }
+
+    public static String date2str(Date date){
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return f.format(date);
+    }
+
+    public static Date str2date(String date) {
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date d = null;
+        try {
+            d = f.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return d;
     }
 
     public static String[] getSkinFromName(String name) {
