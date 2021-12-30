@@ -12,14 +12,18 @@ import org.bukkit.entity.Entity;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Utils {
     /**
      * @author Implements & VadamDev
-     * @since 03.11.2020
+     * @since 30.12.2020
      */
 
     public static String color(String str){
@@ -34,36 +38,21 @@ public class Utils {
 
     public static Location str2loc(String str){
         String[] str2loc = str.split("\\:");
-
-        Location loc = new Location(Bukkit.getWorld(str2loc[0]),0,0,0);
-
-        loc.setX(Double.parseDouble(str2loc[1]));
-        loc.setY(Double.parseDouble(str2loc[2]));
-        loc.setZ(Double.parseDouble(str2loc[3]));
-
-        return loc;
+        return new Location(Bukkit.getWorld(str2loc[0]), Double.parseDouble(str2loc[1]), Double.parseDouble(str2loc[2]), Double.parseDouble(str2loc[3]));
     }
 
     public static String loc2str(Location loc) {
-        return loc.getWorld().getName()+":"+loc.getBlockX()+":"+loc.getBlockY()+":"+loc.getBlockZ();
+        return loc.getWorld().getName() + ":" + loc.getBlockX() + ":" + loc.getBlockY() + ":" + loc.getBlockZ();
     }
 
     public static Location str2locYAP(String str){
         String[] str2loc = str.split("\\:");
 
-        Location loc = new Location(Bukkit.getWorld(str2loc[0]),0,0,0);
-
-        loc.setX(Double.parseDouble(str2loc[1]));
-        loc.setY(Double.parseDouble(str2loc[2]));
-        loc.setZ(Double.parseDouble(str2loc[3]));
-        loc.setYaw(Float.parseFloat(str2loc[4]));
-        loc.setPitch(Float.parseFloat(str2loc[5]));
-
-        return loc;
+        return new Location(Bukkit.getWorld(str2loc[0]),Double.parseDouble(str2loc[1]),Double.parseDouble(str2loc[2]),Double.parseDouble(str2loc[3]), Float.parseFloat(str2loc[4]), Float.parseFloat(str2loc[5]));
     }
 
     public static String loc2strYAP(Location loc) {
-        return loc.getWorld().getName()+":"+loc.getBlockX()+":"+loc.getBlockY()+":"+loc.getBlockZ()+":"+loc.getYaw()+":"+loc.getPitch();
+        return loc.getWorld().getName() + ":" + loc.getBlockX() + ":" + loc.getBlockY() + ":" + loc.getBlockZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
     }
 
     public static void setNoAI(Entity entity) {
@@ -84,6 +73,22 @@ public class Utils {
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
         return location.getWorld().getEntities().stream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
+    }
+
+    public static String date2str(Date date){
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return f.format(date);
+    }
+
+    public static Date str2date(String date) {
+        DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date d = null;
+        try {
+            d = f.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return d;
     }
 
     public static String[] getSkinFromName(String name) {

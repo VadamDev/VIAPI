@@ -17,10 +17,13 @@ public class PixelParticle {
     private final Color color;
 
     public PixelParticle(double x, double y, int rgb) {
+        this(x, y, new Color(rgb));
+    }
+
+    public PixelParticle(double x, double y, Color color) {
         this.x = x;
         this.y = y;
-
-        this.color = new Color(rgb);
+        this.color = color;
     }
 
     public void render(Location locBase, double offsetX, double offsetY, double offsetZ, double angle) {

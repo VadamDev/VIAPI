@@ -15,11 +15,6 @@ public class VIAPICommand extends Command {
         if(sender instanceof Player) {
             Player player = (Player) sender;
 
-            if(args.length == 0) {
-                sendHelpMessage(player);
-                return true;
-            }
-
             if (!player.hasPermission("viapi.admin")) {
                 player.sendMessage("§cError : You don't have the permission to perform this command !");
                 return true;
@@ -31,9 +26,8 @@ public class VIAPICommand extends Command {
                             "   §6§lVIAPI §f§l- §eCommands List\n" +
                             "   §7Authors: §f§nVadamDev§r §7and §f§nJava_Implements§r\n \n" +
 
-                            "   §6• §7§m/viapi debug (key) : Trigger debug§r\n \n" +
-
                             "   §6• §7/viapi (listDepends or depends) : List all plugins that use VIAPI\n" +
+                            "   §6• §7/viapi integrations : List all present integrations of VIAPI\n" +
                             " §7§l§m-------------------------------");
                 }else if(args[0].equalsIgnoreCase("listDepends") || args[0].equalsIgnoreCase("depends")) {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -41,19 +35,15 @@ public class VIAPICommand extends Command {
                     VIAPI.get().getDependsMap().forEach((pluginName, apiVersion) -> stringBuilder.append("§a" + pluginName + " §7(" + apiVersion.name().replace("_", ".") + ")§f, "));
 
                     player.sendMessage("Depends (" +  VIAPI.get().getDependsMap().size() + "): " + stringBuilder);
-                }
-            }else if(args.length == 2) {
-                if(args[0].equalsIgnoreCase("debug")) {
-                    if(!player.getName().equals("VadamDev") || !player.getName().equals("Java_Implements")) {
-                        player.sendMessage("§6VIAPI §f» §cOnly VIAPI developers can use this command !");
-                        return true;
-                    }
+                }else if(args[0].equalsIgnoreCase("integrations")) {
+                    StringBuilder stringBuilder = new StringBuilder();
 
-                    //TODO: Debug Commands
-                }
-            }
+                    VIAPI.get().getIntegrationManager().getIntegrationsMap().forEach((integrationName, integration) -> stringBuilder.append("§a" + integrationName + " §7(" + integration.getVersion() + " - By " + integration.getAuthor() + ")§f, "));
+
+                    player.sendMessage("Integrations (" +  VIAPI.get().getIntegrationManager().getIntegrationsMap().size() + "): " + stringBuilder);
+                }else sendHelpMessage(sender);
+            }else sendHelpMessage(sender);
         }
-
         return true;
     }
 

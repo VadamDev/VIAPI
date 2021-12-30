@@ -22,14 +22,11 @@ public class ImageDecoder {
         PixelParticle[] buffer = new PixelParticle[image.getWidth() * image.getHeight()];
 
         int i = 0;
-        for(double x = 0; x < image.getWidth(); x++) {
-            for(double y = 0; y < image.getHeight(); y++) {
-                if(image.getRGB((int) x, (int) y) == 0) continue;
+        for(int x = 0; x < image.getWidth(); x++) {
+            for(int y = 0; y < image.getHeight(); y++) {
+                if(image.getRGB(x, y) == 0) continue;
 
-                double ppX = x / PARTICLE_SPACE - image.getWidth() / PARTICLE_SPACE / 2;
-                double ppY = y / PARTICLE_SPACE - image.getHeight() / PARTICLE_SPACE / 2;
-
-                buffer[i] = new PixelParticle(ppX, -ppY, image.getRGB((int) x, (int) y));
+                buffer[i] = new PixelParticle(x / PARTICLE_SPACE - image.getWidth() / PARTICLE_SPACE / 2, -(y / PARTICLE_SPACE - image.getHeight() / PARTICLE_SPACE / 2), image.getRGB(x, y));
                 i++;
             }
         }

@@ -119,9 +119,6 @@ public class Wrapper1_8_R3 implements VersionWrapper {
         }
 
         @Override
-        public void b(EntityHuman entityhuman) {
-        }
-
+        public void b(EntityHuman entityhuman) {}
     }
-
 }

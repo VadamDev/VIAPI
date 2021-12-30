@@ -1,9 +1,9 @@
 package net.vadamdev.viaapi.tools.builders;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -15,7 +15,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -41,6 +40,11 @@ public class ItemBuilder {
 	
 	public ItemBuilder clone() {
 		return new ItemBuilder(is);
+	}
+
+	public ItemBuilder setAmount(int amount) {
+		is.setAmount(amount);
+		return this;
 	}
 	
 	public ItemBuilder setName(String name) {
@@ -145,29 +149,19 @@ public class ItemBuilder {
 		return this;
 	}
 
+	public ItemStack toItemStack() {
+		return is;
+	}
+
 	public static ItemStack setCustomTextureHead(String name, String value) {
-		JsonParser parser = new JsonParser();
-		JsonObject o = parser.parse(new String(Base64.decodeBase64(value))).getAsJsonObject();
-		String skinUrl = o.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
+		String skinUrl = new JsonParser().parse(new String(Base64.decodeBase64(value))).getAsJsonObject().get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
 		ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
 		SkullMeta headMeta = (SkullMeta) head.getItemMeta();
 		headMeta.setDisplayName(name);
 		GameProfile profile = new GameProfile(UUID.randomUUID(), null);
-		byte[] encodedData = Base64.encodeBase64(("{textures:{SKIN:{url:\"" + skinUrl + "\"}}}").getBytes());
-		profile.getProperties().put("textures", new Property("textures", new String(encodedData)));
-		Field profileField = null;
-		try {
-			profileField = headMeta.getClass().getDeclaredField("profile");
-			profileField.setAccessible(true);
-			profileField.set(headMeta, profile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		profile.getProperties().put("textures", new Property("textures", new String(Base64.encodeBase64(("{textures:{SKIN:{url:\"" + skinUrl + "\"}}}").getBytes()))));
+		Reflection.setField(Reflection.getField(headMeta.getClass(), "profile"), headMeta, profile);
 		head.setItemMeta(headMeta);
 		return head;
-	}
-
-	public ItemStack toItemStack() {
-		return is;
 	}
 }
