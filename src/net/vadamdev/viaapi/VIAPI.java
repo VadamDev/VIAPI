@@ -25,7 +25,7 @@ public class VIAPI extends VIPlugin {
     private static Scheduler scheduler;
     private static InventoryManager invManager;
 
-    private Map<String, APIVersion> dependsMap = new HashMap<>();
+    private final Map<String, APIVersion> dependsMap = new HashMap<>();
 
     @Override
     public void onEnable() {

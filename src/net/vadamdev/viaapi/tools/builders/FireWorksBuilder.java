@@ -13,7 +13,7 @@ public class FireworksBuilder {
      * @since 12.10.2020
      */
 
-    private Firework fk;
+    private final Firework fk;
     private FireworkEffect.Builder fke;
 
     public FireworksBuilder(Location loc, FireworkEffect.Type type) {

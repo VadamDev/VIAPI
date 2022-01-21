@@ -16,7 +16,7 @@ public class PotionBuilder {
      * @since 01.07.2021
      */
 
-    private ItemStack is;
+    private final ItemStack is;
 
     public PotionBuilder(ItemStack is){
         this.is = is;

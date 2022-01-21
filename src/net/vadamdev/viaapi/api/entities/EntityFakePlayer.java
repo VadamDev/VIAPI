@@ -19,7 +19,7 @@ public class EntityFakePlayer {
 
     public EntityPlayer fakePlayer;
     private Location loc;
-    private String name, value, signature;
+    private final String name, value, signature;
     private boolean removedFromTab;
 
     public EntityFakePlayer(Location loc, String name, String value, String signature) {

@@ -16,7 +16,7 @@ public abstract class HikariDatabase {
      */
 
     private HikariDataSource hikariDataSource;
-    private int maxPoolSize;
+    private final int maxPoolSize;
     public Connection c;
     public String defaultUsedTab, usedTab, pluginName;
 
@@ -30,7 +30,7 @@ public abstract class HikariDatabase {
      */
 
     public void connect(DatabaseCredential credential, String defaultUsedTab) {
-        connect(credential, new HikariInfo(600000L, 300000L, 300000L, 10000L), defaultUsedTab);
+        connect(credential, new HikariInfo(60000L, 30000L, 0, 10000L), defaultUsedTab);
     }
 
     public void connect(DatabaseCredential credential, HikariInfo hikariInfo, String defaultUsedTab) {

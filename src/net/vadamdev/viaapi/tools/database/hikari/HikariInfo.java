@@ -6,7 +6,7 @@ public class HikariInfo {
      * @since 26.08.2021
      */
 
-    private long maxLifeTime, idleTimeout, leakDetectionThreshold, connectionTimeout;
+    private final long maxLifeTime, idleTimeout, leakDetectionThreshold, connectionTimeout;
 
     public HikariInfo(long maxLifeTime, long idleTimeout, long leakDetectionThreshold, long connectionTimeout) {
         this.maxLifeTime = maxLifeTime;

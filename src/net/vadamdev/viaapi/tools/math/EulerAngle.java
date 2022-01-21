@@ -6,9 +6,7 @@ public class EulerAngle {
      * @since 15.07.2021
      */
 
-    private final double x;
-    private final double y;
-    private final double z;
+    private final double x, y, z;
 
     public EulerAngle(double x, double y, double z) {
         this.x = Math.toRadians(x);

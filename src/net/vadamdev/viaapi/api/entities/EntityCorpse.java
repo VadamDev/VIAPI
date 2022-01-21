@@ -16,9 +16,9 @@ public class EntityCorpse {
 
     private EntityFakePlayer fakePlayer;
 
-    private Player owner;
-    private Location loc;
-    private boolean equipped;
+    private final Player owner;
+    private final Location loc;
+    private final boolean equipped;
     private int id;
 
     public EntityCorpse(Player owner, Location loc, boolean equipped) {

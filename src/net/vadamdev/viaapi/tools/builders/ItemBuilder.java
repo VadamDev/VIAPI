@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ItemBuilder {
-	private ItemStack is;
+	private final ItemStack is;
 
 	public ItemBuilder(Material m) {
 		this(m, 1);

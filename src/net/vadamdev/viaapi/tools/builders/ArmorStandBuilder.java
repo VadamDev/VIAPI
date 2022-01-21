@@ -12,8 +12,8 @@ public class ArmorStandBuilder {
      * @since 15.07.2021
      */
 
-    private ArmorStand armorStand;
-    private Location loc;
+    private final ArmorStand armorStand;
+    private final Location loc;
 
     public ArmorStandBuilder(Location loc) {
         this.loc = loc;

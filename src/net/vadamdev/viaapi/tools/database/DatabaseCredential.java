@@ -6,8 +6,8 @@ public class DatabaseCredential {
      * @since 13.07.2021
      */
 
-    private String host, database, user, password;
-    private int port;
+    private final String host, database, user, password;
+    private final int port;
 
     public DatabaseCredential(String host, int port, String database, String user, String password) {
         this.host = host;
