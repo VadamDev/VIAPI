@@ -1,9 +1,17 @@
 package net.vadamdev.viaapi.tools.images;
 
+import net.vadamdev.viaapi.tools.images.map.ImageMapRenderer;
+import net.vadamdev.viaapi.tools.images.map.MapPoster;
+import net.vadamdev.viaapi.tools.images.map.MapUtils;
 import net.vadamdev.viaapi.tools.images.particle.ParticleImage;
 import net.vadamdev.viaapi.tools.images.particle.PixelParticle;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.map.MapView;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageDecoder {
     /**
@@ -16,6 +24,26 @@ public class ImageDecoder {
     @Deprecated
     public static ParticleImage decode(BufferedImage image) {
         return decodeToParticleImage(image);
+    }
+
+    public static MapPoster decodeToMapPoster(BufferedImage image, World world) {
+        int columns = image.getWidth() / 128;
+        int rows = image.getHeight() / 128;
+
+        List<Short> mapIds = new ArrayList<>();
+
+        MapView map;
+        for(int r = 0; r < rows; r++) {
+            for(int c = 0; c < columns; c++) {
+                map = Bukkit.createMap(world);
+                MapUtils.clearMapRenderers(map);
+                map.setScale(MapView.Scale.FARTHEST);
+                map.addRenderer(new ImageMapRenderer(image.getSubimage(c * 128, r * 128, 128, 128)));
+                mapIds.add(map.getId());
+            }
+        }
+
+        return new MapPoster(image, mapIds, world);
     }
 
     public static ParticleImage decodeToParticleImage(BufferedImage image) {

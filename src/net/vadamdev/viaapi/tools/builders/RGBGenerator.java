@@ -12,6 +12,15 @@ public class RGBGenerator extends BukkitRunnable {
      */
 
     private int r, g, b;
+    private final int n;
+
+    public RGBGenerator() {
+        this(15);
+    }
+
+    public RGBGenerator(int n) {
+        this.n = n;
+    }
 
     public void start(int delay, int period) {
         start(VIAPI.get(), delay, period);
@@ -27,17 +36,17 @@ public class RGBGenerator extends BukkitRunnable {
 
     @Override
     public void run() {
-        if(r < 255 && b <= 0) r += 15;
-        else if(b < 255 && g <= 0) b += 15;
+        if(r < 255 && b <= 0) r += n;
+        else if(b < 255 && g <= 0) b += n;
         else if (r > 0) {
-            r -= 15;
+            r -= n;
             return;
         }
 
-        if(b >= 255 && r <= 0 && g < 255) g += 15;
-        else if(b > 0 && r <= 0 && g >= 255) b -= 15;
-        else if(b <= 0 && r < 255 && g >= 255) r += 15;
-        else if(g > 0 && r >= 255) g -= 15;
+        if(b >= 255 && r <= 0 && g < 255) g += n;
+        else if(b > 0 && r <= 0 && g >= 255) b -= n;
+        else if(b <= 0 && r < 255 && g >= 255) r += n;
+        else if(g > 0 && r >= 255) g -= n;
     }
 
     public Color getLastRGB() {

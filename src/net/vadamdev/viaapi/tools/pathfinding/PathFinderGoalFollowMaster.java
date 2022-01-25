@@ -6,7 +6,7 @@ import net.minecraft.server.v1_8_R3.PathfinderGoal;
 
 public class PathFinderGoalFollowMaster extends PathfinderGoal {
     private final EntityInsentient follower;
-    private EntityLiving owner;
+    private final EntityLiving owner;
 
     private final double speed;
     private final float distance;

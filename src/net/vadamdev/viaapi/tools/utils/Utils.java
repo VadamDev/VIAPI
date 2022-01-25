@@ -47,7 +47,6 @@ public class Utils {
 
     public static Location str2locYAP(String str){
         String[] str2loc = str.split("\\:");
-
         return new Location(Bukkit.getWorld(str2loc[0]),Double.parseDouble(str2loc[1]),Double.parseDouble(str2loc[2]),Double.parseDouble(str2loc[3]), Float.parseFloat(str2loc[4]), Float.parseFloat(str2loc[5]));
     }
 
