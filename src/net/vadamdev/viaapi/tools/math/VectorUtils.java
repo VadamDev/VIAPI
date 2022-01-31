@@ -12,7 +12,6 @@ public class VectorUtils {
     /*
        Vector Rotation
      */
-
     public static Vector rotateAroundAxisX(Vector v, double angle) {
         double cos = MathL.cos(angle);
         double sin = MathL.sin(angle);

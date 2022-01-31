@@ -17,6 +17,7 @@ public enum EnumDirection {
     FLOOR,
     OTHER;
 
+    @Deprecated
     public static EnumDirection getDirection(float yaw) {
         return values()[Math.round(yaw / 45f) & 0x7];
     }

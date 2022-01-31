@@ -14,12 +14,11 @@ public class FireworksBuilder {
      */
 
     private final Firework fk;
-    private FireworkEffect.Builder fke;
+    private final FireworkEffect.Builder fke;
 
     public FireworksBuilder(Location loc, FireworkEffect.Type type) {
         this.fk = (Firework) loc.getWorld().spawnEntity(loc , EntityType.FIREWORK);
-        this.fke = FireworkEffect.builder();
-        this.fke = fke.with(type);
+        this.fke = FireworkEffect.builder().with(type);
     }
 
     public FireworksBuilder setColor(Color color){

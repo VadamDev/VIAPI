@@ -8,7 +8,7 @@ public class ParticleImage {
      * @since 22.07.2021
      */
 
-    private PixelParticle[] buffer;
+    private final PixelParticle[] buffer;
 
     public ParticleImage(PixelParticle[] buffer) {
         this.buffer = buffer;
@@ -18,13 +18,5 @@ public class ParticleImage {
         for (PixelParticle pixelParticle : buffer) {
             if(pixelParticle != null) pixelParticle.render(location, offsetX, offsetY, offsetZ, angle);
         }
-    }
-
-    public PixelParticle[] getBuffer() {
-        return buffer;
-    }
-
-    public void setBuffer(PixelParticle[] buffer) {
-        this.buffer = buffer;
     }
 }

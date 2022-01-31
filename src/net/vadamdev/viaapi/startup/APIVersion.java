@@ -23,5 +23,7 @@ public enum APIVersion {
     V2_4_4,
     V2_4_5,
     V2_4_6,
+    V2_4_7,
+    V2_4_8,
     UNKNOWN
 }

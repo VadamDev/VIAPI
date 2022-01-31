@@ -30,16 +30,15 @@ public class MathUtils {
      * @return returns true in percentage percent of cases
      */
     public static boolean percentageLuck(int percentage) {
-        float rdm = (MathF.random() * 9) + 1;
-        return rdm <= percentage;
+        return new Random().nextInt(101) <= percentage;
     }
 
     /**
      * @return returns true in percentage percent of cases
      */
+    @Deprecated
     public static boolean percentageLuck(float percentage) {
-        float rdm = (MathF.random() * 9) + 0.1f;
-        return rdm <= percentage;
+        return new Random().nextInt(101) <= percentage;
     }
 
     /**

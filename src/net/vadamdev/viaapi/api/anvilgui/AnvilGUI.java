@@ -30,7 +30,7 @@ public class AnvilGUI {
     /**
      * The local {@link VersionWrapper} object for the server's version
      */
-    private static VersionWrapper WRAPPER = new Wrapper1_8_R3();
+    private static final VersionWrapper WRAPPER = new Wrapper1_8_R3();
 
     /**
      * The {@link Plugin} that this anvil GUI is associated with

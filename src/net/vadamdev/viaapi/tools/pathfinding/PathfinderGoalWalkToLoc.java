@@ -8,15 +8,13 @@ import org.bukkit.Location;
 
 public class PathfinderGoalWalkToLoc extends PathfinderGoal {
     private final float speed;
-    private final EntityInsentient entity;
     private final Location loc;
     private final Navigation navigation;
 
     public PathfinderGoalWalkToLoc(float speed, EntityInsentient entity, Location loc) {
         this.speed = speed;
-        this.entity = entity;
         this.loc = loc;
-        this.navigation = (Navigation) this.entity.getNavigation();
+        this.navigation = (Navigation) entity.getNavigation();
     }
 
     @Override
