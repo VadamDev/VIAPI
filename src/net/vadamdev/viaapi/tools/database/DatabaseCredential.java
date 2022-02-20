@@ -1,11 +1,10 @@
 package net.vadamdev.viaapi.tools.database;
 
+/**
+ * @author VadamDev
+ * @since 13.07.2021
+ */
 public class DatabaseCredential {
-    /**
-     * @author VadamDev
-     * @since 13.07.2021
-     */
-
     private final String host, database, user, password;
     private final int port;
 

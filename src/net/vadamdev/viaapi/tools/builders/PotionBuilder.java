@@ -10,12 +10,11 @@ import org.bukkit.potion.PotionEffect;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author VadamDev
+ * @since 01.07.2021
+ */
 public class PotionBuilder {
-    /**
-     * @author VadamDev
-     * @since 01.07.2021
-     */
-
     private final ItemStack is;
 
     public PotionBuilder(ItemStack is){

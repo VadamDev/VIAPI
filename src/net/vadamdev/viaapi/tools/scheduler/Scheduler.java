@@ -5,12 +5,11 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.function.Consumer;
 
+/**
+ * @author VadamDev
+ * @since 14.01.2021 - Updated 29.08.2021
+ */
 public class Scheduler {
-    /**
-     * @author VadamDev
-     * @since 14.01.2021 - Updated 29.08.2021
-     */
-
     public void runTaskLater(Plugin plugin, Consumer<Runnable> r, long delay) {
         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
             @Override

@@ -6,6 +6,9 @@ import org.bukkit.event.Listener;
 
 import java.io.*;
 
+/**
+ * @author VadamDev
+ */
 public abstract class VIAPIIntegration {
     public void onEnable() {};
     public void onDisable() {};

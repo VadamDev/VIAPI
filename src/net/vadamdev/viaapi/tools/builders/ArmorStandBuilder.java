@@ -6,12 +6,11 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.EulerAngle;
 
+/**
+ * @author Implements, edited by VadamDev
+ * @since 15.07.2021
+ */
 public class ArmorStandBuilder {
-    /**
-     * @author Implements, edited by VadamDev
-     * @since 15.07.2021
-     */
-
     private final ArmorStand armorStand;
     private final Location loc;
 
@@ -122,6 +121,11 @@ public class ArmorStandBuilder {
     public ArmorStandBuilder setCustomName(String name){
         armorStand.setCustomName(name);
         armorStand.setCustomNameVisible(true);
+        return this;
+    }
+
+    public ArmorStandBuilder setCustomNameVisible(boolean b){
+        armorStand.setCustomNameVisible(b);
         return this;
     }
 

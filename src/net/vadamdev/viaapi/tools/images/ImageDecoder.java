@@ -13,12 +13,11 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author VadamDev
+ * @since 22.07.2021
+ */
 public class ImageDecoder {
-    /**
-     * @author VadamDev
-     * @since 22.07.2021
-     */
-
     private static final float PARTICLE_SPACE = 8;
 
     @Deprecated

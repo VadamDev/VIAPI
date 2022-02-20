@@ -12,12 +12,11 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+/**
+ * @author VadamDev
+ * @since 22.07.2021
+ */
 public class FileUtil {
-    /**
-     * @author VadamDev
-     * @since 22.07.2021
-     */
-
     public static BufferedImage getImage(String path) throws IOException {
         if(path.startsWith("http://") || path.startsWith("https://")) return ImageIO.read(new URL(path));
         return ImageIO.read(new File(path));

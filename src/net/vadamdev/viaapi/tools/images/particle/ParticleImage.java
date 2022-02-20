@@ -2,12 +2,11 @@ package net.vadamdev.viaapi.tools.images.particle;
 
 import org.bukkit.Location;
 
+/**
+ * @author VadamDev
+ * @since 22.07.2021
+ */
 public class ParticleImage {
-    /**
-     * @author VadamDev
-     * @since 22.07.2021
-     */
-
     private final PixelParticle[] buffer;
 
     public ParticleImage(PixelParticle[] buffer) {

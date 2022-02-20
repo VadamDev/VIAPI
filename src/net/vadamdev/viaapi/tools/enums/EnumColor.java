@@ -5,6 +5,9 @@ import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * @author VadamDev
+ */
 public enum EnumColor {
     WHITE(DyeColor.WHITE),
     ORANGE(DyeColor.ORANGE),

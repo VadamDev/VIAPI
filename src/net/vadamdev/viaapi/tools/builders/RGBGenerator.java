@@ -5,12 +5,11 @@ import org.bukkit.Color;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
+/**
+ * @author VadamDev
+ * @since 31.07.2021
+ */
 public class RGBGenerator extends BukkitRunnable {
-    /**
-     * @author VadamDev
-     * @since 31.07.2021
-     */
-
     private int r, g, b;
     private final int n;
 

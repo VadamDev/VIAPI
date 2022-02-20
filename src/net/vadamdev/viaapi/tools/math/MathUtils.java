@@ -4,12 +4,11 @@ import org.bukkit.Location;
 
 import java.util.Random;
 
+/**
+ * @author VadamDev
+ * @since 03.11.2020
+ */
 public class MathUtils {
-    /**
-     * @author VadamDev
-     * @since 03.11.2020
-     */
-
     public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
 
     public static Location rlap(Location loc, int r, int maxY, boolean negativeY) {

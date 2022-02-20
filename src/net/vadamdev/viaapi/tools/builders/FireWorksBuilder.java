@@ -7,12 +7,11 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
+/**
+ * @author Implements, Edited By VadamDev
+ * @since 12.10.2020
+ */
 public class FireworksBuilder {
-    /**
-     * @author Implements, Edited By VadamDev
-     * @since 12.10.2020
-     */
-
     private final Firework fk;
     private final FireworkEffect.Builder fke;
 

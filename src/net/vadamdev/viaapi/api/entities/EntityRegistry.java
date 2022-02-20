@@ -11,11 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class EntityRegistry {
-    /**
-     * @author VadamDev
-     * @since 03.11.2020
-     */
-
     public static void register(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
         try {
             List<Map<?, ?>> dataMaps = new ArrayList<>();
@@ -27,24 +22,24 @@ public class EntityRegistry {
                 }
             }
 
-            if (dataMaps.get(2).containsKey(Integer.valueOf(id))) {
-                ((Map)dataMaps.get(0)).remove(name);
-                ((Map)dataMaps.get(2)).remove(Integer.valueOf(id));
+            if (dataMaps.get(2).containsKey(id)) {
+                ((Map) dataMaps.get(0)).remove(name);
+                ((Map) dataMaps.get(2)).remove(id);
             }
 
             Method method = EntityTypes.class.getDeclaredMethod("a", new Class[] { Class.class, String.class, int.class });
             method.setAccessible(true);
-            method.invoke(null, new Object[] { customClass, name, Integer.valueOf(id) });
+            method.invoke(null, new Object[] { customClass, name, id });
+
             for (Field f : BiomeBase.class.getDeclaredFields()) {
                 if (f.getType().getSimpleName().equals(BiomeBase.class.getSimpleName()) && f.get(null) != null)
                     for (Field list : BiomeBase.class.getDeclaredFields()) {
                         if (list.getType().getSimpleName().equals(List.class.getSimpleName())) {
                             list.setAccessible(true);
-                            List<BiomeBase.BiomeMeta> metaList = (List<BiomeBase.BiomeMeta>)list.get(f.get(null));
+                            List<BiomeBase.BiomeMeta> metaList = (List<BiomeBase.BiomeMeta>) list.get(f.get(null));
                             for (BiomeBase.BiomeMeta meta : metaList) {
                                 Field clazz = BiomeBase.BiomeMeta.class.getDeclaredFields()[0];
-                                if (clazz.get(meta).equals(nmsClass))
-                                    clazz.set(meta, customClass);
+                                if (clazz.get(meta).equals(nmsClass)) clazz.set(meta, customClass);
                             }
                         }
                     }

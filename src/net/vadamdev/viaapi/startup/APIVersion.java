@@ -1,16 +1,31 @@
 package net.vadamdev.viaapi.startup;
 
+/**
+ * @author VadamDev
+ * @since 13.09.2021
+ *
+ * There're some versions not written here because they are not public version.
+ */
 public enum APIVersion {
-    /**
-     * @author VadamDev
-     * @since 13.09.2021
-     *
-     * There're some versions not written here because they are not public version.
-     */
-
     V2_2_0,
     V2_2_1,
+
+    V2_2_2_INTERNAL,
+    V2_2_3_INTERNAL,
+    V2_2_4_INTERNAL,
+    V2_2_5_INTERNAL,
+    V2_2_6_INTERNAL,
+    V2_2_7_INTERNAL,
+    V2_2_8_INTERNAL,
+    V2_2_9_INTERNAL,
+
     V2_3_0,
+
+    V2_3_1_INTERNAL,
+    V2_3_2_INTERNAL,
+    V2_3_3_INTERNAL,
+    V2_3_4_INTERNAL,
+
     V2_3_5,
     V2_3_6,
     V2_3_7,
@@ -25,5 +40,6 @@ public enum APIVersion {
     V2_4_6,
     V2_4_7,
     V2_4_8,
+    V2_4_9,
     UNKNOWN
 }

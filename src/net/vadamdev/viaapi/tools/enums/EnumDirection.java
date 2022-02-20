@@ -1,11 +1,10 @@
 package net.vadamdev.viaapi.tools.enums;
 
+/**
+ * @author VadamDev
+ * @since 09.10.2020
+ */
 public enum EnumDirection {
-    /**
-     * @author VadamDev
-     * @since 09.10.2020
-     */
-
     NORTH,
     EAST,
     SOUTH,

@@ -20,7 +20,7 @@ public class DiscordWebhook {
 
     //Content
     private String text;
-    private List<EmbedObject> embeds = new ArrayList<>();
+    private final List<EmbedObject> embeds = new ArrayList<>();
 
     /**
      * Constructs a new DiscordWebhook instance
@@ -37,23 +37,26 @@ public class DiscordWebhook {
         this(url, webhookUsername, null);
     }
 
-    public void setWebhookAvatarUrl(String webhookAvatarUrl) {
+    public DiscordWebhook setWebhookAvatarUrl(String webhookAvatarUrl) {
         this.webhookAvatarUrl = webhookAvatarUrl;
+        return this;
     }
 
-    public void addEmbed(EmbedObject embed) {
+    public DiscordWebhook addEmbed(EmbedObject embed) {
         this.embeds.add(embed);
+        return this;
     }
 
-    public void addText(String text) {
+    public DiscordWebhook addText(String text) {
         this.text = text;
+        return this;
     }
 
     public void execute() throws IOException {
-        if (this.text == null && this.embeds.isEmpty()) throw new IllegalArgumentException("Set content or add at least one EmbedObject");
+        if (this.text == null && this.embeds.isEmpty())
+            throw new IllegalArgumentException("Set content or add at least one EmbedObject");
 
         JSONObject json = new JSONObject();
-
         json.put("content", this.text);
         json.put("username", this.webhookUsername);
         json.put("avatar_url", this.webhookAvatarUrl);
@@ -143,40 +146,37 @@ public class DiscordWebhook {
         private final HashMap<String, Object> map = new HashMap<>();
 
         private void put(String key, Object value) {
-            if (value != null) {
-                map.put(key, value);
-            }
+            if (value != null) map.put(key, value);
         }
 
         @Override
         public String toString() {
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder("{");
             Set<Map.Entry<String, Object>> entrySet = map.entrySet();
-            builder.append("{");
 
             int i = 0;
-            for (Map.Entry<String, Object> entry : entrySet) {
+            for(Map.Entry<String, Object> entry : entrySet) {
                 Object val = entry.getValue();
                 builder.append(quote(entry.getKey())).append(":");
 
-                if (val instanceof String) {
+                if (val instanceof String)
                     builder.append(quote(String.valueOf(val)));
-                } else if (val instanceof Integer) {
+                else if (val instanceof Integer)
                     builder.append(Integer.valueOf(String.valueOf(val)));
-                } else if (val instanceof Boolean) {
+                else if (val instanceof Boolean)
                     builder.append(val);
-                } else if (val instanceof JSONObject) {
-                    builder.append(val.toString());
-                } else if (val.getClass().isArray()) {
+                else if (val instanceof JSONObject)
+                    builder.append(val);
+                else if (val.getClass().isArray()) {
                     builder.append("[");
+
                     int len = Array.getLength(val);
-                    for (int j = 0; j < len; j++) {
-                        builder.append(Array.get(val, j).toString()).append(j != len - 1 ? "," : "");
-                    }
+                    for (int j = 0; j < len; j++) builder.append(Array.get(val, j).toString()).append(j != len - 1 ? "," : "");
+
                     builder.append("]");
                 }
 
-                builder.append(++i == entrySet.size() ? "}" : ",");
+                builder.append(i++ == entrySet.size() ? "}" : ",");
             }
 
             return builder.toString();

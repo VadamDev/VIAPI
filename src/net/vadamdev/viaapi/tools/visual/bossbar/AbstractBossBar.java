@@ -8,15 +8,14 @@ import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+/**
+ * @author VadamDev
+ * @since 26.08.2021
+ *
+ * NOT TESTED
+ */
 @Deprecated
 public abstract class AbstractBossBar {
-    /**
-     * @author VadamDev
-     * @since 26.08.2021
-     *
-     * NOT TESTED
-     */
-
     public Player player;
     private EntityWither wither;
 

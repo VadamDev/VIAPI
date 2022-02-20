@@ -5,6 +5,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+/**
+ * @author VadamDev
+ */
 public class VIAPICommand extends Command {
     public VIAPICommand() {
         super("viapi");

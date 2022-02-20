@@ -4,6 +4,9 @@ import net.minecraft.server.v1_8_R3.EntityInsentient;
 import net.minecraft.server.v1_8_R3.EntityLiving;
 import net.minecraft.server.v1_8_R3.PathfinderGoal;
 
+/**
+ * @author VadamDev
+ */
 public class PathFinderGoalFollowMaster extends PathfinderGoal {
     private final EntityInsentient follower;
     private final EntityLiving owner;

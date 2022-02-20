@@ -16,35 +16,35 @@ public class EmbedObject {
     private Image image;
     private final java.util.List<Field> fields = new ArrayList<>();
 
-    public String getTitle() {
+    protected String getTitle() {
         return title;
     }
 
-    public String getDescription() {
+    protected String getDescription() {
         return description;
     }
 
-    public String getUrl() {
+    protected String getUrl() {
         return url;
     }
 
-    public Color getColor() {
+    protected Color getColor() {
         return color;
     }
 
-    public Footer getFooter() {
+    protected Footer getFooter() {
         return footer;
     }
 
-    public Thumbnail getThumbnail() {
+    protected Thumbnail getThumbnail() {
         return thumbnail;
     }
 
-    public Image getImage() {
+    protected Image getImage() {
         return image;
     }
 
-    public List<Field> getFields() {
+    protected List<Field> getFields() {
         return fields;
     }
 

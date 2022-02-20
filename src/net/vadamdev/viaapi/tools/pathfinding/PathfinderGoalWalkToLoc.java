@@ -6,6 +6,9 @@ import net.minecraft.server.v1_8_R3.PathEntity;
 import net.minecraft.server.v1_8_R3.PathfinderGoal;
 import org.bukkit.Location;
 
+/**
+ * @author VadamDev
+ */
 public class PathfinderGoalWalkToLoc extends PathfinderGoal {
     private final float speed;
     private final Location loc;

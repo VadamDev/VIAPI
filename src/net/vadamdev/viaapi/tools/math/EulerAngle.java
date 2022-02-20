@@ -1,11 +1,10 @@
 package net.vadamdev.viaapi.tools.math;
 
+/**
+ * @author VadamDev
+ * @since 15.07.2021
+ */
 public class EulerAngle {
-    /**
-     * @author VadamDev
-     * @since 15.07.2021
-     */
-
     private final double x, y, z;
 
     public EulerAngle(double x, double y, double z) {

@@ -26,7 +26,6 @@ import java.util.function.Consumer;
  * @since 1.0
  */
 public class AnvilGUI {
-
     /**
      * The local {@link VersionWrapper} object for the server's version
      */

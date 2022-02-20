@@ -7,12 +7,11 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutTitle;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+/**
+ * @author VadamDev
+ * @since 22.12.2020
+ */
 public class Titles {
-    /**
-     * @author VadamDev
-     * @since 22.12.2020
-     */
-
     public static void sendTitle(Player player, String title, String subtitle, int ticks){
         EntityPlayer nmsplayer = ((CraftPlayer) player).getHandle();
 

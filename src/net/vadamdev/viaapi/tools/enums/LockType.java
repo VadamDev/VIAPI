@@ -5,6 +5,9 @@ import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftArmorStand;
 import org.bukkit.entity.ArmorStand;
 
+/**
+ * @author VadamDev
+ */
 public enum LockType {
     HELMET(1052688),
     CHESTPLATE(526344),

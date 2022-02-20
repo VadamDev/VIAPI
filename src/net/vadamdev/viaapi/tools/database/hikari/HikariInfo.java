@@ -1,11 +1,10 @@
 package net.vadamdev.viaapi.tools.database.hikari;
 
+/**
+ * @author VadamDev
+ * @since 26.08.2021
+ */
 public class HikariInfo {
-    /**
-     * @author VadamDev
-     * @since 26.08.2021
-     */
-
     private final long maxLifeTime, idleTimeout, leakDetectionThreshold, connectionTimeout;
 
     public HikariInfo(long maxLifeTime, long idleTimeout, long leakDetectionThreshold, long connectionTimeout) {

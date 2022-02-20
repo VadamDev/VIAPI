@@ -4,17 +4,18 @@ import net.minecraft.server.v1_8_R3.MinecraftServer;
 import net.vadamdev.viaapi.startup.APIVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 
+
+/**
+ * @author VadamDev
+ * @since 09.10.2020 - Updated 13.09.2021
+ */
 public class VIPlugin extends JavaPlugin {
     public APIVersion apiVersion;
-
-    /**
-     * @author VadamDev
-     * @since 09.10.2020 - Updated 13.09.2021
-     */
 
     @Override
     public void onEnable() {
@@ -28,6 +29,10 @@ public class VIPlugin extends JavaPlugin {
 
     public void registerCommand(Command cmd) {
         MinecraftServer.getServer().server.getCommandMap().register(cmd.getName(), this.getName(), cmd);
+    }
+
+    public void registerListener(Listener listener) {
+        getServer().getPluginManager().registerEvents(listener, this);
     }
 
     public void saveResource(String path) {

@@ -2,12 +2,14 @@ package net.vadamdev.viaapi.tools.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import net.minecraft.server.v1_8_R3.AxisAlignedBB;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,12 +22,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @author Implements & VadamDev
+ * @since 30.12.2020
+ */
 public class Utils {
-    /**
-     * @author Implements & VadamDev
-     * @since 30.12.2020
-     */
-
     public static String color(String str){
         return ChatColor.translateAlternateColorCodes('&', str);
     }
@@ -54,6 +55,17 @@ public class Utils {
         return loc.getWorld().getName() + ":" + loc.getBlockX() + ":" + loc.getBlockY() + ":" + loc.getBlockZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
     }
 
+    public static void setPersistenceRequired(Entity entity) {
+        net.minecraft.server.v1_8_R3.Entity nmsEntity = ((CraftEntity) entity).getHandle();
+
+        NBTTagCompound tag = nmsEntity.getNBTTag();
+        if (tag == null) tag = new NBTTagCompound();
+
+        nmsEntity.c(tag);
+        tag.setInt("PersistenceRequired", 1);
+        nmsEntity.f(tag);
+    }
+
     public static void setNoAI(Entity entity) {
         net.minecraft.server.v1_8_R3.Entity nmsEntity = ((CraftEntity) entity).getHandle();
 
@@ -74,6 +86,12 @@ public class Utils {
         return location.getWorld().getEntities().stream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
     }
 
+    public static List<Player> getPlayersAroundPoint(Location location, double radius) {
+        List<Player> players = new ArrayList<>();
+        Utils.getEntitiesAroundPoint(location, radius).stream().filter(entity -> entity instanceof Player).forEach(player -> players.add((Player) player));
+        return players;
+    }
+
     public static String date2str(Date date){
         DateFormat f = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         return f.format(date);
@@ -88,6 +106,18 @@ public class Utils {
             e.printStackTrace();
         }
         return d;
+    }
+
+    public static boolean isInEntityBoundingBox(Location location, Entity entity) {
+        AxisAlignedBB bb = ((CraftEntity) entity).getHandle().getBoundingBox();
+
+        double x = location.getX();
+        double y = location.getY();
+        double z = location.getZ();
+
+        return x >= bb.a && x <= bb.d &&
+                y >= bb.b && y <= bb.e &&
+                z >= bb.c && z <= bb.f;
     }
 
     public static String[] getSkinFromName(String name) {

@@ -9,12 +9,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author VadamDev
+ * @since 13.07.2021
+ */
 public abstract class HikariDatabase {
-    /**
-     * @author VadamDev
-     * @since 13.07.2021
-     */
-
     private HikariDataSource hikariDataSource;
     private final int maxPoolSize;
     public Connection c;

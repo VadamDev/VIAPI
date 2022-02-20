@@ -30,4 +30,17 @@ public class BungeeUtils {
 
         player.sendPluginMessage(VIAPI.get(), "BungeeCord", b.toByteArray());
     }
+
+    public static void kickPlayer(Player player, String s) {
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        DataOutput out = new DataOutputStream(b);
+
+        try {
+            out.writeUTF("KickPlayer");
+            out.writeUTF(player.getName());
+            out.writeUTF(s);
+        } catch (IOException e) { e.printStackTrace(); }
+
+        player.sendPluginMessage(VIAPI.get(), "BungeeCord", b.toByteArray());
+    }
 }

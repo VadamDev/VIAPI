@@ -10,7 +10,6 @@ import org.bukkit.inventory.Inventory;
  * @since 1.0
  */
 public interface VersionWrapper {
-
     /**
      * Gets the next available NMS container id for the player
      *

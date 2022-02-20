@@ -7,12 +7,11 @@ import org.bukkit.util.Vector;
 
 import java.awt.*;
 
+/**
+ * @author VadamDev
+ * @since 22.07.2021
+ */
 public class PixelParticle {
-    /**
-     * @author VadamDev
-     * @since 22.07.2021
-     */
-
     private final double x, y;
     private final Color color;
 

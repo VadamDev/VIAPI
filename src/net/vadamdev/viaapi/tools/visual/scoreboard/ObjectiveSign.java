@@ -5,8 +5,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
-public class ObjectiveSign extends VObjective
-{
+public class ObjectiveSign extends VObjective {
     public HashMap<Integer, String> lines;
 
     /**

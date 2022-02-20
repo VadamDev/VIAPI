@@ -12,12 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * @author VadamDev & Implements
+ * @since 09.10.2020
+ */
 public class VIAPI extends VIPlugin {
-    /**
-     * @author VadamDev & Implements
-     * @since 09.10.2020
-     */
-
     private static VIAPI api;
 
     private IntegrationManager integrationManager;

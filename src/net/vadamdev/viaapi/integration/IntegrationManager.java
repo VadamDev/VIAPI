@@ -13,6 +13,9 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+/**
+ * @author VadamDev
+ */
 public class IntegrationManager {
     private static final Set<MethodSignature> INTEGRATION_METHODS = Arrays.stream(VIAPIIntegration.class.getDeclaredMethods())
             .filter(method -> Modifier.isAbstract(method.getModifiers()))

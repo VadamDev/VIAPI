@@ -3,12 +3,11 @@ package net.vadamdev.viaapi.tools.math;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
+/**
+ * @author VadamDev
+ * @since 09.11.2021
+ */
 public class VectorUtils {
-    /**
-     * @author VadamDev
-     * @since 09.11.2021
-     */
-
     /*
        Vector Rotation
      */
