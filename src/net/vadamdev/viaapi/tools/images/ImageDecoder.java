@@ -17,7 +17,7 @@ import java.util.List;
  * @author VadamDev
  * @since 22.07.2021
  */
-public class ImageDecoder {
+public final class ImageDecoder {
     private static final float PARTICLE_SPACE = 8;
 
     @Deprecated

@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
  * @author VadamDev
  * @since 25.01.22
  */
-public class ImageMapRenderer extends MapRenderer {
+public final class ImageMapRenderer extends MapRenderer {
     private boolean shouldRender;
     private final BufferedImage image;
 

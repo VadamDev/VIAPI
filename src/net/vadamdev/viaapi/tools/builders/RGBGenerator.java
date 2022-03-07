@@ -29,10 +29,6 @@ public class RGBGenerator extends BukkitRunnable {
         this.runTaskTimerAsynchronously(plugin, delay, period);
     }
 
-    public void cancel() {
-        super.cancel();
-    }
-
     @Override
     public void run() {
         if(r < 255 && b <= 0) r += n;

@@ -4,7 +4,7 @@ package net.vadamdev.viaapi.tools.math;
  * @author VadamDev
  * @since 15.07.2021
  */
-public class EulerAngle {
+public final class EulerAngle {
     private final double x, y, z;
 
     public EulerAngle(double x, double y, double z) {

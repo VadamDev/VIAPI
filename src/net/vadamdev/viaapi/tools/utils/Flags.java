@@ -12,8 +12,8 @@ import java.util.Map;
  * @author VadamDev
  * @since 16.02.2022
  */
-public class Flags {
-    private static Map<String, List<String>> flags = new HashMap<>();
+public final class Flags {
+    private static final Map<String, List<String>> flags = new HashMap<>();
 
     public static void addTemporaryFlag(Player player, String flag, long ticks) {
         if(flags.containsKey(player.getName())) {

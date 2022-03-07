@@ -1,6 +1,6 @@
 package net.vadamdev.viaapi.tools.math;
 
-public class MathF {
+public final class MathF {
     public static final float PI = 3.14159265358979323846264338327950288419716939937510582f;
 
     public static float min(float a, float b) {

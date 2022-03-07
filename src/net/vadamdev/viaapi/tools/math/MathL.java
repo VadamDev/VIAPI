@@ -1,6 +1,6 @@
 package net.vadamdev.viaapi.tools.math;
 
-public class MathL {
+public final class MathL {
     private static final int SIN_BITS, SIN_MASK, SIN_COUNT;
     private static final double radFull, radToIndex;
     private static final double degFull, degToIndex;

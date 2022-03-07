@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Reflection {
+public final class Reflection {
     /**
      * @author ?, edited by Implements
      */

@@ -1,7 +1,7 @@
 name: VIAPI
-version: 2.4.9
+version: 2.4.10
 authors: [VadamDev, Implements]
-website: vadamdev.fr
+website:  https://github.com/VadamDev/VIAPI or https://vadamdev.fr
 
 main: net.vadamdev.viaapi.VIAPI
 load: STARTUP

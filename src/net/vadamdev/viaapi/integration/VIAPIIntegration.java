@@ -5,13 +5,14 @@ import org.bukkit.command.Command;
 import org.bukkit.event.Listener;
 
 import java.io.*;
+import java.util.logging.Logger;
 
 /**
  * @author VadamDev
  */
 public abstract class VIAPIIntegration {
-    public void onEnable() {};
-    public void onDisable() {};
+    public void onEnable() {}
+    public void onDisable() {}
 
     public abstract String getName();
     public abstract String getAuthor();
@@ -37,13 +38,13 @@ public abstract class VIAPIIntegration {
         InputStream in = source.getResourceAsStream("/" + resourcePath);
         if(in == null) throw new IllegalArgumentException("The resource `" + resourcePath + "` cannot be found in plugin jar");
 
-        if(!getDataFolder().exists() && !getDataFolder().mkdir()) System.out.println("Faild to make directory");
+        if(!getDataFolder().exists() && !getDataFolder().mkdir()) VIAPI.get().getLogger().warning("Failed to make directory");
 
         File outFile = new File(getDataFolder(), outoutpath);
 
         try {
             if(!outFile.exists()){
-                System.out.println("The `" + resourcePath + "` was not found, creation in progress...");
+                VIAPI.get().getLogger().info("The `" + resourcePath + "` was not found, creation in progress...");
 
                 OutputStream out = new FileOutputStream(outFile);
                 byte[] buf = new byte[1024];
@@ -59,5 +60,9 @@ public abstract class VIAPIIntegration {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Logger getLogger() {
+        return VIAPI.get().getLogger();
     }
 }
