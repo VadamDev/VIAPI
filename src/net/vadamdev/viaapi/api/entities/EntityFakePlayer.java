@@ -14,7 +14,7 @@ import java.util.UUID;
 public class EntityFakePlayer {
     /**
      * @author VadamDev
-     * @since 21.12.2020 - Updated 07.09.2021
+     * @since 21/12/2020
      */
 
     public EntityPlayer fakePlayer;

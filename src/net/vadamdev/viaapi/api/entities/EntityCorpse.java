@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class EntityCorpse {
     /**
      * @author VadamDev
-     * @since 28.08.2021 - Updated 07.09.2021
+     * @since 28/08/2021
      */
 
     private EntityFakePlayer fakePlayer;
@@ -62,6 +62,7 @@ public class EntityCorpse {
 
     public void removeWithPacket(Player player) {
         fakePlayer.removeWithPacket(player);
+        player.sendBlockChange(loc.clone().subtract(0, loc.getY(), 0), Material.BEDROCK, (byte) 0);
     }
 
     public Location getLoc() {

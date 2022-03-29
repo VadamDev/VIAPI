@@ -22,9 +22,9 @@ public class EntityRegistry {
                 }
             }
 
-            if (dataMaps.get(2).containsKey(id)) {
-                ((Map) dataMaps.get(0)).remove(name);
-                ((Map) dataMaps.get(2)).remove(id);
+            if(dataMaps.get(2).containsKey(id)) {
+                dataMaps.get(0).remove(name);
+                dataMaps.get(2).remove(id);
             }
 
             Method method = EntityTypes.class.getDeclaredMethod("a", new Class[] { Class.class, String.class, int.class });
