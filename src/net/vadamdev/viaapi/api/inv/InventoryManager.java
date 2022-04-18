@@ -21,15 +21,14 @@ import java.util.*;
 import java.util.logging.Level;
 
 public class InventoryManager {
+    private final JavaPlugin plugin;
+    private final PluginManager pluginManager;
 
-    private JavaPlugin plugin;
-    private PluginManager pluginManager;
+    private final Map<UUID, SmartInventory> inventories;
+    private final Map<UUID, InventoryContents> contents;
 
-    private Map<UUID, SmartInventory> inventories;
-    private Map<UUID, InventoryContents> contents;
-
-    private List<InventoryOpener> defaultOpeners;
-    private List<InventoryOpener> openers;
+    private final List<InventoryOpener> defaultOpeners;
+    private final List<InventoryOpener> openers;
 
     public InventoryManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -257,7 +256,6 @@ public class InventoryManager {
     }
 
     class InvTask extends BukkitRunnable {
-
         @Override
         public void run() {
             new HashMap<>(inventories).forEach((uuid, inv) -> {

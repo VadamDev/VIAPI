@@ -8,12 +8,11 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 
+/**
+ * @author VadamDev
+ * @since 28/08/2021
+ */
 public class EntityCorpse {
-    /**
-     * @author VadamDev
-     * @since 28/08/2021
-     */
-
     private EntityFakePlayer fakePlayer;
 
     private final Player owner;

@@ -23,7 +23,10 @@ public enum LockType {
     }
 
     public void setToArmorStand(ArmorStand armorStand) {
-        EntityArmorStand entityArmorStand = ((CraftArmorStand) armorStand).getHandle();
+        setToArmorStand(((CraftArmorStand) armorStand).getHandle());
+    }
+
+    public void setToArmorStand(EntityArmorStand entityArmorStand) {
         Reflection.setField(Reflection.getField(entityArmorStand.getClass(), "bi"), entityArmorStand, value);
     }
 }

@@ -26,6 +26,6 @@ public class PixelParticle {
     }
 
     public void render(Location locBase, double offsetX, double offsetY, double offsetZ, double angle) {
-        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(color.getRed(), color.getGreen(), color.getBlue()), VectorUtils.combineVector(VectorUtils.rotateAroundAxisY(new Vector(x + offsetX, y + offsetY, offsetZ), angle), locBase));
+        ParticleEffect.REDSTONE.display(new ParticleEffect.OrdinaryColor(color.getRed(), color.getGreen(), color.getBlue()), VectorUtils.combineVector(VectorUtils.rotateAroundAxisY(new Vector(x + offsetX, y + offsetY, offsetZ), angle), locBase), 32);
     }
 }

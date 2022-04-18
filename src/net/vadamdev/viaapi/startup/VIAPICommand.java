@@ -27,10 +27,24 @@ public class VIAPICommand extends Command {
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage(" §7§l§m-------------------------------\n§r" +
                             "   §6§lVIAPI §f§l- §eCommands List\n" +
-                            "   §7Authors: §f§nVadamDev§r §7and §f§nJava_Implements§r\n \n" +
+                            "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
 
                             "   §6• §7/viapi (listDepends or depends) : List all plugins that use VIAPI\n" +
                             "   §6• §7/viapi integrations : List all present integrations of VIAPI\n" +
+                            "   §6• §7/viapi credits for some credits\n" +
+                            " §7§l§m-------------------------------");
+                }else if(args[0].equalsIgnoreCase("credits")) {
+                    sender.sendMessage(" §7§l§m-------------------------------\n§r" +
+                            "   §6§lVIAPI §f§l- §eCredits\n" +
+                            "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
+
+                            "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
+                            "   §6• §eThanks to §6Wesley Smith §efor making §6AnvilGUI§r\n" +
+                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
+
+                            "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
+
+                            "   §6• §eSee /viapi help for a command list\n" +
                             " §7§l§m-------------------------------");
                 }else if(args[0].equalsIgnoreCase("listDepends") || args[0].equalsIgnoreCase("depends")) {
                     StringBuilder stringBuilder = new StringBuilder();
@@ -53,7 +67,7 @@ public class VIAPICommand extends Command {
     private void sendHelpMessage(CommandSender sender) {
         sender.sendMessage(" §7§l§m-------------------------------\n§r" +
                 "   §6§lVIAPI §f§l- §eInformations\n" +
-                "   §7Authors: §f§nVadamDev§r §7and §f§nJava_Implements§r\n \n" +
+                "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
 
                 "   §6∎ §eVIAPI is a huge toolkit for plugin developers\n" +
                 "   §6➥ §eVIAPI is required for (almost) all VadamDev plugins\n \n" +

@@ -3,6 +3,7 @@ package net.vadamdev.viaapi.tools.builders;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftFirework;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
@@ -20,45 +21,53 @@ public class FireworksBuilder {
         this.fke = FireworkEffect.builder().with(type);
     }
 
-    public FireworksBuilder setColor(Color color){
+    public FireworksBuilder setColor(Color color) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffect(fke.withColor(color).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireworksBuilder setPower(int power){
+    public FireworksBuilder setPower(int power) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.setPower(power);
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireworksBuilder setFlicker(boolean flicker){
+    public FireworksBuilder setFlicker(boolean flicker) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFlicker().flicker(flicker).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireworksBuilder setTrail(boolean trail){
+    public FireworksBuilder setTrail(boolean trail) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withTrail().trail(trail).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireworksBuilder withFade(Color color){
+    public FireworksBuilder withFade(Color color) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFade(color).build());
         fk.setFireworkMeta(fkm);
         return this;
     }
 
-    public FireworksBuilder withFade(Color... color){
+    public FireworksBuilder withFade(Color... color) {
         FireworkMeta fkm = fk.getFireworkMeta();
         fkm.addEffects(fke.withFade(color).build());
         fk.setFireworkMeta(fkm);
         return this;
+    }
+
+    public void detonate() {
+        ((CraftFirework) fk).getHandle().expectedLifespan = 1;
+    }
+
+    public Firework getFirework() {
+        return fk;
     }
 }

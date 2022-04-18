@@ -9,18 +9,18 @@ import java.util.Random;
  * @since 03.11.2020
  */
 public class MathUtils {
+    private static final Random random = new Random();
+
     public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
 
     public static Location rlap(Location loc, int r, int maxY, boolean negativeY) {
-        Random rdm = new Random();
-
-        double x = rdm.nextInt(r);
-        double y = rdm.nextInt(maxY);
+        double x = random.nextInt(r);
+        double y = random.nextInt(maxY);
         double z = Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
 
-        if(rdm.nextBoolean()) x = oabs(x);
-        if(negativeY && rdm.nextBoolean()) y = oabs(y);
-        if(rdm.nextBoolean()) z = oabs(z);
+        if(random.nextBoolean()) x = oabs(x);
+        if(negativeY && random.nextBoolean()) y = oabs(y);
+        if(random.nextBoolean()) z = oabs(z);
 
         return loc.clone().add(x, y, z);
     }
@@ -29,7 +29,7 @@ public class MathUtils {
      * @return returns true in percentage percent of cases
      */
     public static boolean percentageLuck(int percentage) {
-        return new Random().nextInt(101) <= percentage;
+        return random.nextInt(101) <= percentage;
     }
 
     /**
@@ -37,7 +37,7 @@ public class MathUtils {
      */
     @Deprecated
     public static boolean percentageLuck(float percentage) {
-        return new Random().nextInt(101) <= percentage;
+        return random.nextInt(101) <= percentage;
     }
 
     /**

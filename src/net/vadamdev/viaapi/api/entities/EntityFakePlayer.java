@@ -3,7 +3,6 @@ package net.vadamdev.viaapi.api.entities;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.server.v1_8_R3.*;
-import net.vadamdev.viaapi.VIAPI;
 import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
@@ -18,7 +17,7 @@ public class EntityFakePlayer {
      */
 
     public EntityPlayer fakePlayer;
-    private Location loc;
+    private final Location loc;
     private final String name, value, signature;
     private boolean removedFromTab;
 
@@ -47,7 +46,8 @@ public class EntityFakePlayer {
         Reflection.sendPacket(player, new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, fakePlayer));
         Reflection.sendPacket(player, new PacketPlayOutNamedEntitySpawn(fakePlayer));
 
-        if(removedFromTab) VIAPI.getScheduler().runTaskLaterAsynchronously(VIAPI.get(), r -> Reflection.sendPacket(player, new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, fakePlayer)), 10);
+        if(removedFromTab)
+            Reflection.sendPacket(player, new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.REMOVE_PLAYER, fakePlayer));
     }
 
     public void removeWithPacket(Player player) {

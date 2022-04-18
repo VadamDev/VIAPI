@@ -103,7 +103,7 @@ public class ArmorStandBuilder {
         return this;
     }
 
-    public ArmorStandBuilder setVisible(boolean visible){
+    public ArmorStandBuilder setVisible(boolean visible) {
         armorStand.setVisible(visible);
         return this;
     }

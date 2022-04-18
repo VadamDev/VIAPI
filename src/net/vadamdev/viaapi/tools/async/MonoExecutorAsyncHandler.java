@@ -16,11 +16,11 @@ public class MonoExecutorAsyncHandler {
     }
 
     public void scheduleAtFixedRate(Runnable runnable, int period, TimeUnit timeUnit) {
-        executorService.scheduleAtFixedRate(runnable, period, period, timeUnit);
+        executorService.scheduleAtFixedRate(runnable, 1, period, timeUnit);
     }
 
     public void scheduleWithFixedDelay(Runnable runnable, int period, TimeUnit timeUnit) {
-        executorService.scheduleWithFixedDelay(runnable, period, period, timeUnit);
+        executorService.scheduleWithFixedDelay(runnable, 1, period, timeUnit);
     }
 
     public void executeAfter(Runnable runnable, int delay, TimeUnit timeUnit) {

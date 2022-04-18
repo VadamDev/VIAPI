@@ -32,7 +32,7 @@ public abstract class VIAPIIntegration {
         return file;
     }
 
-    public void saveResource(Class<?> source, String resourcePath, String outoutpath){
+    public void saveResource(Class<?> source, String resourcePath, String outputPath) {
         if(resourcePath == null || resourcePath.isEmpty()) throw new IllegalArgumentException("ResourcePath cannot be null or empty");
 
         InputStream in = source.getResourceAsStream("/" + resourcePath);
@@ -40,7 +40,7 @@ public abstract class VIAPIIntegration {
 
         if(!getDataFolder().exists() && !getDataFolder().mkdir()) VIAPI.get().getLogger().warning("Failed to make directory");
 
-        File outFile = new File(getDataFolder(), outoutpath);
+        File outFile = new File(getDataFolder(), outputPath);
 
         try {
             if(!outFile.exists()){

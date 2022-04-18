@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.function.Consumer;
 
 public class ClickableItem {
-
     private ItemStack item;
     private Consumer<InventoryClickEvent> consumer;
 

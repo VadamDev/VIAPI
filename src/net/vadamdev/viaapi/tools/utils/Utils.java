@@ -83,12 +83,12 @@ public class Utils {
     }
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
-        return location.getWorld().getEntities().stream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
+        return location.getWorld().getEntities().parallelStream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
     }
 
     public static List<Player> getPlayersAroundPoint(Location location, double radius) {
         List<Player> players = new ArrayList<>();
-        Utils.getEntitiesAroundPoint(location, radius).stream().filter(entity -> entity instanceof Player).forEach(player -> players.add((Player) player));
+        Utils.getEntitiesAroundPoint(location, radius).stream().filter(Player.class::isInstance).forEach(player -> players.add((Player) player));
         return players;
     }
 
@@ -128,7 +128,7 @@ public class Utils {
             return new String[] {textureProperty.get("value").getAsString(), textureProperty.get("signature").getAsString()};
         }catch (IOException e) {
             e.printStackTrace();
-            return null;
+            return new String[0];
         }
     }
 }

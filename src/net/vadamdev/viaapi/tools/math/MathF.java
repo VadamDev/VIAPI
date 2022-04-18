@@ -4,13 +4,11 @@ public final class MathF {
     public static final float PI = 3.14159265358979323846264338327950288419716939937510582f;
 
     public static float min(float a, float b) {
-        if (a < b) return a;
-        return b;
+        return Math.min(a, b);
     }
 
     public static float max(float a, float b) {
-        if (a > b) return a;
-        return b;
+        return Math.max(a, b);
     }
 
     public static float clamp(float min, float max, float value) {

@@ -7,7 +7,7 @@ package net.vadamdev.viaapi.startup;
  * There're some versions not written here because they are not public version.
  */
 public enum APIVersion {
-    V2_2_0,
+    V2_2_0, //First Public Release
     V2_2_1,
 
     V2_2_2_INTERNAL,
@@ -43,5 +43,6 @@ public enum APIVersion {
     V2_4_9,
     V2_4_10,
     V2_4_11,
+    V2_4_12,
     UNKNOWN
 }

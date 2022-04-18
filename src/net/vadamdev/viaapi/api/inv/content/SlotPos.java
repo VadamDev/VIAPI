@@ -1,7 +1,6 @@
 package net.vadamdev.viaapi.api.inv.content;
 
 public class SlotPos {
-
     private final int row;
     private final int column;
 

@@ -15,10 +15,8 @@ public class ParticlePolygons {
         Vector v1 = loc1.toVector();
         Vector f = loc2.toVector().clone().subtract(v1).normalize().multiply(space);
 
-        for(double length = 0; length < loc1.distance(loc2); v1.add(f)) {
-            particle.display(0, 0, 0, 0.2f, 1, new Location(loc1.getWorld(), v1.getX(), v1.getY(), v1.getZ()));
-            length += space;
-        }
+        for(double length = 0; length < loc1.distance(loc2); v1.add(f), length += space)
+            particle.display(0, 0, 0, 0.2f, 1, v1.toLocation(loc1.getWorld()));
     }
 
     public static void drawCycle(ParticleEffect particle, Location center, float radius, EnumDirection direction) {
@@ -57,7 +55,7 @@ public class ParticlePolygons {
             y += radius / 2;
             double z = radius * Math.cos(phi);
 
-            particle.display(0, 0, 0, 1, 1, center.clone().add(x, y, z));
+            particle.display(0, 0, 0, 1, 1, center.clone().add(x, y, z), 32);
         }
     }
 
