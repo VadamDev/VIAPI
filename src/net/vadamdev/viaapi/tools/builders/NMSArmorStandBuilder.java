@@ -1,6 +1,7 @@
 package net.vadamdev.viaapi.tools.builders;
 
 import net.minecraft.server.v1_8_R3.EntityArmorStand;
+import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.Vector3f;
 import net.vadamdev.viaapi.tools.enums.LockType;
 import net.vadamdev.viaapi.tools.packet.Reflection;
@@ -21,6 +22,7 @@ public class NMSArmorStandBuilder {
 
     public NMSArmorStandBuilder(Location loc) {
         this.armorStand = new EntityArmorStand(((CraftWorld) loc.getWorld()).getHandle());
+        this.armorStand.setPosition(loc.getX(), loc.getY(), loc.getZ());
         this.loc = loc;
     }
 
@@ -29,22 +31,22 @@ public class NMSArmorStandBuilder {
      */
 
     public NMSArmorStandBuilder setHelmet(ItemStack items) {
-        armorStand.setEquipment(1, CraftItemStack.asNMSCopy(items));
+        armorStand.setEquipment(4, CraftItemStack.asNMSCopy(items));
         return this;
     }
 
     public NMSArmorStandBuilder setChestplate(ItemStack items){
-        armorStand.setEquipment(2, CraftItemStack.asNMSCopy(items));
-        return this;
-    }
-
-    public NMSArmorStandBuilder setLeggings(ItemStack items){
         armorStand.setEquipment(3, CraftItemStack.asNMSCopy(items));
         return this;
     }
 
+    public NMSArmorStandBuilder setLeggings(ItemStack items){
+        armorStand.setEquipment(2, CraftItemStack.asNMSCopy(items));
+        return this;
+    }
+
     public NMSArmorStandBuilder setBoots(ItemStack items){
-        armorStand.setEquipment(4, CraftItemStack.asNMSCopy(items));
+        armorStand.setEquipment(1, CraftItemStack.asNMSCopy(items));
         return this;
     }
 
@@ -101,12 +103,7 @@ public class NMSArmorStandBuilder {
     Setters
      */
     public NMSArmorStandBuilder setBasePlate(boolean basePlate){
-        armorStand.setBasePlate(basePlate);
-        return this;
-    }
-
-    public NMSArmorStandBuilder setGravity(boolean gravity){
-        armorStand.setGravity(gravity);
+        armorStand.setBasePlate(!basePlate);
         return this;
     }
 
@@ -122,6 +119,17 @@ public class NMSArmorStandBuilder {
 
     public NMSArmorStandBuilder setSmall(boolean small) {
         armorStand.setSmall(small);
+        return this;
+    }
+
+    public NMSArmorStandBuilder setAsMarker() {
+        NBTTagCompound tag = armorStand.getNBTTag();
+        if (tag == null) tag = new NBTTagCompound();
+
+        armorStand.c(tag);
+        tag.setInt("Marker", 1);
+        armorStand.f(tag);
+
         return this;
     }
 

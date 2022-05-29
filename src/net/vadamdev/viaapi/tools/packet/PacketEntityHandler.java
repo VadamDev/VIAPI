@@ -5,31 +5,40 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class PacketEntityHandler {
-    private final EntityLiving livingEntity;
+@Deprecated
+/**
+ * @author VadamDev
+ * Legacy PacketEntityHandler class, may still useful
+ */
+public final class PacketEntityHandler {
+    private final EntityLiving entityLiving;
     private final int id;
     private final boolean shouldDisplayArmor;
 
-    public PacketEntityHandler(EntityLiving livingEntity) {
-        this(livingEntity, true);
+    private float yaw;
+
+    public PacketEntityHandler(EntityLiving entityLiving) {
+        this(entityLiving, true);
     }
 
-    public PacketEntityHandler(EntityLiving livingEntity, boolean shouldDisplayArmor) {
-        this.livingEntity = livingEntity;
-        this.id = livingEntity.getId();
+    public PacketEntityHandler(EntityLiving entityLiving, boolean shouldDisplayArmor) {
+        this.entityLiving = entityLiving;
+        this.id = entityLiving.getId();
         this.shouldDisplayArmor = shouldDisplayArmor;
+
+        this.yaw = 0;
     }
 
     public void spawn(Player player) {
-        Reflection.sendPacket(player, new PacketPlayOutSpawnEntityLiving(livingEntity));
-        Reflection.sendPacket(player, new PacketPlayOutEntityMetadata(id, livingEntity.getDataWatcher(), true));
+        Reflection.sendPacket(player, new PacketPlayOutSpawnEntityLiving(entityLiving));
+        Reflection.sendPacket(player, new PacketPlayOutEntityHeadRotation(entityLiving, (byte) ((yaw * 256f) / 360f)));
 
         if(shouldDisplayArmor) {
-            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 4, livingEntity.getEquipment()[4]));
-            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 3, livingEntity.getEquipment()[3]));
-            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 2, livingEntity.getEquipment()[2]));
-            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 1, livingEntity.getEquipment()[1]));
-            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 0, livingEntity.getEquipment()[0]));
+            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 4, entityLiving.getEquipment()[4]));
+            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 3, entityLiving.getEquipment()[3]));
+            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 2, entityLiving.getEquipment()[2]));
+            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 1, entityLiving.getEquipment()[1]));
+            Reflection.sendPacket(player, new PacketPlayOutEntityEquipment(id, 0, entityLiving.getEquipment()[0]));
         }
     }
 
@@ -63,5 +72,13 @@ public class PacketEntityHandler {
 
     public void teleportForEveryone(Location loc) {
         Bukkit.getOnlinePlayers().forEach(player -> teleport(player, loc));
+    }
+
+    public void setYaw(float yaw) {
+        this.yaw = yaw;
+    }
+
+    public EntityLiving getEntityLiving() {
+        return entityLiving;
     }
 }

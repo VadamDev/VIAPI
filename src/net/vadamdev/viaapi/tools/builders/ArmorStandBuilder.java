@@ -118,6 +118,11 @@ public class ArmorStandBuilder {
         return this;
     }
 
+    public ArmorStandBuilder setMarker(boolean marker){
+        armorStand.setMarker(marker);
+        return this;
+    }
+
     public ArmorStandBuilder setCustomName(String name){
         armorStand.setCustomName(name);
         armorStand.setCustomNameVisible(true);
