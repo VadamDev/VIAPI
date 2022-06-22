@@ -108,6 +108,11 @@ public class Utils {
         return d;
     }
 
+    /**
+     * @param location
+     * @param entity
+     * @return True if the provided Location is in the Entity bounding box
+     */
     public static boolean isInEntityBoundingBox(Location location, Entity entity) {
         AxisAlignedBB bb = ((CraftEntity) entity).getHandle().getBoundingBox();
 

@@ -20,11 +20,6 @@ import java.util.List;
 public final class ImageDecoder {
     private static final float PARTICLE_SPACE = 8;
 
-    @Deprecated
-    public static ParticleImage decode(BufferedImage image) {
-        return decodeToParticleImage(image);
-    }
-
     public static MapPoster decodeToMapPoster(BufferedImage image, World world) {
         int columns = image.getWidth() / 128;
         int rows = image.getHeight() / 128;

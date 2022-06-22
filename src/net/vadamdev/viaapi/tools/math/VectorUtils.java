@@ -62,18 +62,10 @@ public class VectorUtils {
      */
 
     public static Vector randomVector() {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random());
-        v.setY(Math.random());
-        v.setZ(Math.random() - Math.random());
-        return v;
+        return new Vector(Math.random() - Math.random(), Math.random(), Math.random() - Math.random());
     }
 
-    public static Vector randomVector(float multiply) {
-        Vector v = new Vector();
-        v.setX(Math.random() - Math.random()).multiply(multiply);
-        v.setY(Math.random()).multiply(multiply);
-        v.setZ(Math.random() - Math.random()).multiply(multiply);
-        return v;
+    public static Vector randomVector(float multiplier) {
+        return randomVector().multiply(multiplier);
     }
 }

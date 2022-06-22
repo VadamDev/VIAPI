@@ -8,7 +8,8 @@ import org.bukkit.entity.Player;
 @Deprecated
 /**
  * @author VadamDev
- * Legacy PacketEntityHandler class, may still useful
+ * Legacy PacketEntityHandler class, you can now use the new PacketEntityHandler, RadiusPacketEntityHandler or RangePacketEntityHandler.
+ *
  */
 public final class PacketEntityHandler {
     private final EntityLiving entityLiving;
@@ -17,10 +18,12 @@ public final class PacketEntityHandler {
 
     private float yaw;
 
+    @Deprecated
     public PacketEntityHandler(EntityLiving entityLiving) {
         this(entityLiving, true);
     }
 
+    @Deprecated
     public PacketEntityHandler(EntityLiving entityLiving, boolean shouldDisplayArmor) {
         this.entityLiving = entityLiving;
         this.id = entityLiving.getId();
@@ -29,6 +32,7 @@ public final class PacketEntityHandler {
         this.yaw = 0;
     }
 
+    @Deprecated
     public void spawn(Player player) {
         Reflection.sendPacket(player, new PacketPlayOutSpawnEntityLiving(entityLiving));
         Reflection.sendPacket(player, new PacketPlayOutEntityHeadRotation(entityLiving, (byte) ((yaw * 256f) / 360f)));
@@ -42,42 +46,52 @@ public final class PacketEntityHandler {
         }
     }
 
+    @Deprecated
     public void delete(Player player) {
         Reflection.sendPacket(player, new PacketPlayOutEntityDestroy(id));
     }
 
+    @Deprecated
     public void teleport(Player player, Location loc) {
         Reflection.sendPacket(player, new PacketPlayOutEntityTeleport(id, loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), (byte) loc.getYaw(), (byte) loc.getPitch(), true));
     }
 
+    @Deprecated
     public void spawnWithRadius(Location center, int radius) {
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.getLocation().distanceSquared(center) <= radius * radius).forEach(this::spawn);
     }
 
+    @Deprecated
     public void deleteWithRadius(Location center, int radius) {
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.getLocation().distanceSquared(center) <= radius * radius).forEach(this::delete);
     }
 
+    @Deprecated
     public void teleportWithRadius(Location loc, Location center, int radius) {
         Bukkit.getOnlinePlayers().parallelStream().filter(player -> player.getLocation().distanceSquared(center) <= radius * radius).forEach(player -> teleport(player, loc));
     }
 
+    @Deprecated
     public void spawnForEveryone() {
         Bukkit.getOnlinePlayers().forEach(this::spawn);
     }
 
+    @Deprecated
     public void deleteForEveryone() {
         Bukkit.getOnlinePlayers().forEach(this::delete);
     }
 
+    @Deprecated
     public void teleportForEveryone(Location loc) {
         Bukkit.getOnlinePlayers().forEach(player -> teleport(player, loc));
     }
 
+    @Deprecated
     public void setYaw(float yaw) {
         this.yaw = yaw;
     }
 
+    @Deprecated
     public EntityLiving getEntityLiving() {
         return entityLiving;
     }

@@ -40,7 +40,8 @@ public class VIAPICommand extends Command {
 
                             "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
                             "   §6• §eThanks to §6Wesley Smith §efor making §6AnvilGUI§r\n" +
-                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
+                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n" +
+                            "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n \n" +
 
                             "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
 

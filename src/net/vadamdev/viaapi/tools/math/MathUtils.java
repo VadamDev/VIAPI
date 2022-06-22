@@ -11,18 +11,28 @@ import java.util.Random;
 public class MathUtils {
     private static final Random random = new Random();
 
-    public static Location rlap(Location loc, int r, boolean negativeY) { return rlap(loc, r, r, negativeY); }
+    /**
+     * Generate a random location in a circle
+     * @param center of the circle
+     * @param radius of the circle
+     * @return
+     */
+    public static Location rlap(Location center, double radius) {
+        double t = 2 * Math.PI * Math.random();
+        double r = Math.sqrt(Math.random()) * radius;
+        return center.clone().add(r * Math.cos(t), 0, r * Math.sin(t));
+    }
 
-    public static Location rlap(Location loc, int r, int maxY, boolean negativeY) {
-        double x = random.nextInt(r);
-        double y = random.nextInt(maxY);
-        double z = Math.sqrt(Math.pow(r, 2) - Math.pow(x, 2));
-
-        if(random.nextBoolean()) x = oabs(x);
-        if(negativeY && random.nextBoolean()) y = oabs(y);
-        if(random.nextBoolean()) z = oabs(z);
-
-        return loc.clone().add(x, y, z);
+    /**
+     * Generate a random location on a ring
+     * @param center of the ring
+     * @param radius of the ring
+     * @return
+     */
+    public static Location rlop(Location center, double radius) {
+        double t = 2 * Math.PI * Math.random();
+        double r = Math.sqrt(radius);
+        return center.clone().add(r * Math.cos(t), 0, r * Math.sin(t));
     }
 
     /**
@@ -40,16 +50,9 @@ public class MathUtils {
         return random.nextInt(101) <= percentage;
     }
 
-    /**
-     * @return The opposite of Math.abs
-     */
-    public static double oabs(double a) {
-        return -Math.abs(a);
-    }
 
     /**
      * Transform a fraction in a percentage
-     *
      * @return percentage
      */
     public static int percentage(double max, double d) {

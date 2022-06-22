@@ -6,7 +6,6 @@ import net.vadamdev.viaapi.startup.APIVersion;
 import net.vadamdev.viaapi.startup.VIAPICommand;
 import net.vadamdev.viaapi.tools.bungeecord.BungeeUtils;
 import net.vadamdev.viaapi.tools.scheduler.Scheduler;
-import org.bukkit.event.Listener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,10 +50,6 @@ public class VIAPI extends VIPlugin {
         if(getConfig().getBoolean("bungeecord")) BungeeUtils.registerOutgoingPluginChannel(this, "BungeeCord");
 
         invManager = new InventoryManager(this).init();
-    }
-
-    public void registerListener(Listener listener) {
-        getServer().getPluginManager().registerEvents(listener, this);
     }
 
     public static VIAPI get() { return api; }

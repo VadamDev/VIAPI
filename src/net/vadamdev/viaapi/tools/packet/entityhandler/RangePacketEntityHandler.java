@@ -15,59 +15,76 @@ import java.util.List;
  * @author VadamDev
  * @since 10/05/2022
  */
-public final class RangePacketEntityHandler extends PacketEntityHandler {
-    private final int viewingRadius, updateDelay;
+public final class RangePacketEntityHandler {
+    private final IEntityHandler entityHandler;
 
+    private final int viewingRadius, updateDelay;
     private final List<Player> viewers;
 
     private PacketEntityHandlerUpdater updater;
 
-    public RangePacketEntityHandler(EntityLiving entity, int viewingRadius, int updateDelay) {
-        super(entity);
-        this.viewingRadius = viewingRadius * viewingRadius;
+    public RangePacketEntityHandler(IEntityHandler entityHandler, int viewingRadius, int updateDelay) {
+        this.entityHandler = entityHandler;
+
+        this.viewingRadius = viewingRadius;
         this.updateDelay = updateDelay;
 
         this.viewers = new ArrayList<>();
     }
 
+    public RangePacketEntityHandler(EntityLiving entity, int viewingRadius, int updateDelay) {
+        this(new PacketEntityHandler(entity), viewingRadius, updateDelay);
+    }
+
+    /**
+     * Start the updater that check if a player is able to see the packet entity
+     */
     public void spawn() {
         updater = new PacketEntityHandlerUpdater(updateDelay);
     }
 
+    /**
+     * Stop the updater and delete the packet entity for every viewer
+     */
     public void delete() {
         updater.cancel();
 
         viewers.parallelStream()
                 .filter(Player::isOnline)
-                .forEach(this::delete);
+                .forEach(entityHandler::delete);
 
         viewers.clear();
     }
 
+    /**
+     * Change the entity equipment for every viewer and change the local equipment
+     * @param slot
+     * @param itemStack
+     */
     public void updateEquipmentForViewers(int slot, ItemStack itemStack) {
-        updateLocalEquipment(slot, itemStack);
-        viewers.forEach(player -> updateEquipment(player, slot, itemStack));
+        entityHandler.updateLocalEquipment(slot, itemStack);
+        viewers.forEach(player -> entityHandler.updateEquipment(player, slot, itemStack));
     }
 
+    /**
+     * Teleport the entity for every viewer and change the local location
+     * @param location
+     */
     public void teleportForViewers(Location location) {
-        updateLocalPosition(location);
-        viewers.forEach(p -> teleport(p, location));
+        entityHandler.updateLocalPosition(location);
+        viewers.forEach(p -> entityHandler.teleport(p, location));
     }
 
-    public void addViewer(Player player) {
-        viewers.add(player);
-    }
-
-    public void deleteViewer(Player player) {
-        viewers.remove(player);
-    }
-
+    /**
+     * @param player
+     * @return true if the player is viewing (/ closeEnough) the packet entity
+     */
     public boolean isViewing(Player player) {
         return viewers.contains(player);
     }
 
     private boolean isCloseEnough(Player player) {
-        return player.getLocation().distanceSquared(entityLocation) <= viewingRadius && player.getWorld().equals(entityLocation.getWorld());
+        return player.getLocation().distanceSquared(entityHandler.getLocation()) <= viewingRadius * viewingRadius && player.getWorld().equals(entityHandler.getLocation().getWorld());
     }
 
     private class PacketEntityHandlerUpdater extends BukkitRunnable {
@@ -79,22 +96,22 @@ public final class RangePacketEntityHandler extends PacketEntityHandler {
         public void run() {
             new ArrayList<>(viewers).parallelStream()
                     .filter(player -> !player.isOnline())
-                    .forEach(RangePacketEntityHandler.this::deleteViewer);
+                    .forEach(viewers::remove);
 
             Bukkit.getOnlinePlayers().parallelStream()
                     .filter(p -> !RangePacketEntityHandler.this.isViewing(p))
                     .filter(RangePacketEntityHandler.this::isCloseEnough)
                     .forEach(player -> {
-                        spawn(player);
-                        addViewer(player);
+                        entityHandler.spawn(player);
+                        viewers.add(player);
                     });
 
             Bukkit.getOnlinePlayers().parallelStream()
                     .filter(RangePacketEntityHandler.this::isViewing)
                     .filter(p -> !RangePacketEntityHandler.this.isCloseEnough(p))
                     .forEach(player -> {
-                        delete(player);
-                        deleteViewer(player);
+                        entityHandler.delete(player);
+                        viewers.remove(player);
                     });
         }
     }

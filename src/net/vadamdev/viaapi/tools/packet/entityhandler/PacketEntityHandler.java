@@ -1,7 +1,6 @@
 package net.vadamdev.viaapi.tools.packet.entityhandler;
 
 import net.minecraft.server.v1_8_R3.*;
-import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -10,12 +9,12 @@ import org.bukkit.entity.Player;
  * @author VadamDev
  * @since 10/05/2022
  */
-public class PacketEntityHandler {
+public class PacketEntityHandler implements IEntityHandler {
     protected final EntityLiving entity;
     protected final int id;
     private final boolean shouldDisplayArmor;
 
-    protected Location entityLocation;
+    private Location entityLocation;
     private float yaw;
 
     public PacketEntityHandler(EntityLiving entity) {
@@ -31,51 +30,65 @@ public class PacketEntityHandler {
         this.yaw = 0;
     }
 
+    @Override
     public void spawn(Player player) {
-        sendPacket(player, new PacketPlayOutSpawnEntityLiving(entity));
-        sendPacket(player, new PacketPlayOutEntityHeadRotation(entity, (byte) ((yaw * 256f) / 360f)));
+        PlayerConnection playerConnection = getPlayerConnection(player);
+
+        playerConnection.sendPacket(new PacketPlayOutSpawnEntityLiving(entity));
+        playerConnection.sendPacket(new PacketPlayOutEntityHeadRotation(entity, (byte) ((yaw * 256f) / 360f)));
 
         if(shouldDisplayArmor) {
-            sendPacket(player, new PacketPlayOutEntityEquipment(id, 4, entity.getEquipment()[4]));
-            sendPacket(player, new PacketPlayOutEntityEquipment(id, 3, entity.getEquipment()[3]));
-            sendPacket(player, new PacketPlayOutEntityEquipment(id, 2, entity.getEquipment()[2]));
-            sendPacket(player, new PacketPlayOutEntityEquipment(id, 1, entity.getEquipment()[1]));
-            sendPacket(player, new PacketPlayOutEntityEquipment(id, 0, entity.getEquipment()[0]));
+            for(int i = 0; i < entity.getEquipment().length; i++) {
+                if(entity.getEquipment()[i] == null) continue;
+                playerConnection.sendPacket(new PacketPlayOutEntityEquipment(id, i, entity.getEquipment()[i]));
+            }
         }
     }
 
+    @Override
     public void updateLocalEquipment(int slot, ItemStack itemStack) {
         entity.setEquipment(slot, itemStack);
     }
 
+
+    @Override
     public void updateEquipment(Player player, int slot, ItemStack itemStack) {
-        sendPacket(player, new PacketPlayOutEntityEquipment(id, slot, itemStack));
+        getPlayerConnection(player).sendPacket(new PacketPlayOutEntityEquipment(id, slot, itemStack));
     }
 
+    @Override
     public void updateLocalPosition(Location location) {
         this.entityLocation = location;
-        entity.setPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ());
+        entity.setPosition(location.getX(), location.getY(), location.getZ());
     }
 
+    @Override
     public void teleport(Player player, Location location) {
-        int x = MathHelper.floor(location.getX() * 32D);
-        int y = MathHelper.floor(location.getY() * 32D);
-        int z = MathHelper.floor(location.getZ() * 32D);
-        byte yaw = (byte) ((int)(location.getYaw() * 256.0F / 360.0F));
-        byte pitch = (byte) ((int)(location.getPitch() * 256.0F / 360.0F));
+        byte yaw = (byte) ((int) (location.getYaw() * 256.0F / 360.0F));
+        byte pitch = (byte) ((int) (location.getPitch() * 256.0F / 360.0F));
 
-        sendPacket(player, new PacketPlayOutEntityTeleport(id, x, y, z, yaw, pitch, false));
+        getPlayerConnection(player).sendPacket(new PacketPlayOutEntityTeleport(id,
+                MathHelper.floor(location.getX() * 32D), MathHelper.floor(location.getY() * 32D), MathHelper.floor(location.getZ() * 32D),
+                yaw, pitch,
+                false));
     }
 
+    @Override
     public void delete(Player player) {
-        Reflection.sendPacket(player, new PacketPlayOutEntityDestroy(id));
+        getPlayerConnection(player).sendPacket(new PacketPlayOutEntityDestroy(id));
     }
 
+    @Override
     public void setYaw(float yaw) {
         this.yaw = yaw;
     }
 
-    protected void sendPacket(Player player, Packet packet) {
-        ((CraftPlayer) player).getHandle().playerConnection.sendPacket(packet);
+    @Override
+    public Location getLocation() {
+        return entityLocation;
+    }
+
+    protected PlayerConnection getPlayerConnection(Player player) {
+        return ((CraftPlayer) player).getHandle().playerConnection;
     }
 }

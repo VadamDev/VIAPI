@@ -39,7 +39,7 @@ public class EntityRegistry {
                             List<BiomeBase.BiomeMeta> metaList = (List<BiomeBase.BiomeMeta>) list.get(f.get(null));
                             for (BiomeBase.BiomeMeta meta : metaList) {
                                 Field clazz = BiomeBase.BiomeMeta.class.getDeclaredFields()[0];
-                                if (clazz.get(meta).equals(nmsClass)) clazz.set(meta, customClass);
+                                if (clazz.get(meta).equals(nmsClass)) clazz.set(meta, nmsClass); //customClass
                             }
                         }
                     }
