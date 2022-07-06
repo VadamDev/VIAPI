@@ -5,6 +5,7 @@ import net.vadamdev.viaapi.integration.IntegrationManager;
 import net.vadamdev.viaapi.startup.APIVersion;
 import net.vadamdev.viaapi.startup.VIAPICommand;
 import net.vadamdev.viaapi.tools.bungeecord.BungeeUtils;
+import net.vadamdev.viaapi.tools.nametag.NametagManager;
 import net.vadamdev.viaapi.tools.scheduler.Scheduler;
 
 import java.util.HashMap;
@@ -31,6 +32,7 @@ public class VIAPI extends VIPlugin {
 
         saveDefaultConfig();
 
+        registerListener(new NametagManager());
         registerCommand(new VIAPICommand());
 
         setupTools();

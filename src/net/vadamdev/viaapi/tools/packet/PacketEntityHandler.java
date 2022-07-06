@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 /**
  * @author VadamDev
  * Legacy PacketEntityHandler class, you can now use the new PacketEntityHandler, RadiusPacketEntityHandler or RangePacketEntityHandler.
- *
+ * NOTE: This class will be removed soon.
  */
 public final class PacketEntityHandler {
     private final EntityLiving entityLiving;
