@@ -82,6 +82,10 @@ public class Utils {
         if(!e.R()) e.b(true);
     }
 
+    public static void setSilent(Entity entity, boolean flag) {
+        ((CraftEntity) entity).getHandle().b(flag);
+    }
+
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
         return location.getWorld().getEntities().parallelStream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
     }

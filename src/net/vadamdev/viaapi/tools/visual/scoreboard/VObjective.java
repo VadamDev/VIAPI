@@ -212,9 +212,7 @@ public class VObjective
         else
         {
             this.receivers.stream().filter(OfflinePlayer::isOnline).forEach(op ->
-            {
-                RawObjective.updateScoreObjective(op.getPlayer(), this, false);
-            });
+                    RawObjective.updateScoreObjective(op.getPlayer(), this, false));
         }
     }
 

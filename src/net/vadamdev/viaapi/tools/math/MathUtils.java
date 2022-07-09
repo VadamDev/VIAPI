@@ -43,15 +43,6 @@ public class MathUtils {
     }
 
     /**
-     * @return returns true in percentage percent of cases
-     */
-    @Deprecated
-    public static boolean percentageLuck(float percentage) {
-        return random.nextInt(101) <= percentage;
-    }
-
-
-    /**
      * Transform a fraction in a percentage
      * @return percentage
      */

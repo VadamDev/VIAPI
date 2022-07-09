@@ -67,7 +67,7 @@ public final class MathF {
     }
 
     public static float round(float a) {
-        return (float) Math.round(a);
+        return Math.round(a);
     }
 
     public static float random() {

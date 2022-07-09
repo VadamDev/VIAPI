@@ -68,12 +68,9 @@ public class PacketFloatingItem implements IEntityHandler {
 
     @Override
     public void teleport(Player player, Location location) {
-        byte yaw = (byte) ((int) (location.getYaw() * 256.0F / 360.0F));
-        byte pitch = (byte) ((int) (location.getPitch() * 256.0F / 360.0F));
-
         getPlayerConnection(player).sendPacket(new PacketPlayOutEntityTeleport(armorStandId,
                 MathHelper.floor(location.getX() * 32D), MathHelper.floor(location.getY() * 32D), MathHelper.floor(location.getZ() * 32D),
-                yaw, pitch,
+                (byte) 0, (byte) 0,
                 false));
     }
 

@@ -38,10 +38,14 @@ public class RGBGenerator extends BukkitRunnable {
             return;
         }
 
-        if(b >= 255 && r <= 0 && g < 255) g += n;
-        else if(b > 0 && r <= 0 && g >= 255) b -= n;
-        else if(b <= 0 && r < 255 && g >= 255) r += n;
-        else if(g > 0 && r >= 255) g -= n;
+        if(b >= 255 && r <= 0 && g < 255)
+            g += n;
+        else if(b > 0 && r <= 0 && g >= 255)
+            b -= n;
+        else if(b <= 0 && r < 255 && g >= 255)
+            r += n;
+        else if(g > 0 && r >= 255)
+            g -= n;
     }
 
     public Color getLastRGB() {

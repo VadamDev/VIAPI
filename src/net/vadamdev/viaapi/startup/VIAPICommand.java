@@ -22,7 +22,6 @@ public class VIAPICommand extends Command {
                 player.sendMessage("§cError : You don't have the permission to perform this command !");
                 return true;
             }
-
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage(" §7§l§m-------------------------------\n§r" +
@@ -38,10 +37,10 @@ public class VIAPICommand extends Command {
                             "   §6§lVIAPI §f§l- §eCredits\n" +
                             "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
 
-                            "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n \n" +
+                            "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n" +
                             "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
                             "   §6• §eThanks to §6Wesley Smith §efor making §6AnvilGUI§r\n" +
-                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n" +
+                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
 
                             "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
 
@@ -59,10 +58,15 @@ public class VIAPICommand extends Command {
                     VIAPI.get().getIntegrationManager().getIntegrationsMap().forEach((integrationName, integration) -> stringBuilder.append("§a" + integrationName + " §7(" + integration.getVersion() + " - By " + integration.getAuthor() + ")§f, "));
 
                     player.sendMessage("Integrations (" +  VIAPI.get().getIntegrationManager().getIntegrationsMap().size() + "): " + stringBuilder);
-                }else sendHelpMessage(sender);
-            }else sendHelpMessage(sender);
+                }else
+                    sendHelpMessage(sender);
+            }else
+                sendHelpMessage(sender);
+
+            return true;
         }
-        return true;
+
+        return false;
     }
 
     private void sendHelpMessage(CommandSender sender) {

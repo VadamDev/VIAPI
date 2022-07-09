@@ -25,6 +25,11 @@ public class RadiusPacketEntityHandler {
         this(new PacketEntityHandler(entity));
     }
 
+    /**
+     * Spawn the packet entity for nearby players
+     * @param center Basically the location of the packetentity
+     * @param radius Visibility radius
+     */
     public void spawnWithRadius(Location center, int radius) {
         Bukkit.getOnlinePlayers().parallelStream()
                 .filter(p -> !viewers.contains(p))
@@ -35,6 +40,9 @@ public class RadiusPacketEntityHandler {
                 });
     }
 
+    /**
+     * Delete the packet entity for every viewer
+     */
     public void delete() {
         viewers.stream().filter(Player::isOnline).forEach(entityHandler::delete);
         viewers.clear();

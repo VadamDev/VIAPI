@@ -37,7 +37,7 @@ public class ItemBuilder {
 	public ItemBuilder(Material m, int amount, short meta){
 		is = new ItemStack(m, amount, meta);
 	}
-	
+
 	public ItemBuilder clone() {
 		return new ItemBuilder(is);
 	}
@@ -111,7 +111,7 @@ public class ItemBuilder {
 		return this;
 	}
 
-	public ItemBuilder setLore(List lore) {
+	public ItemBuilder setLore(List<String> lore) {
 		ItemMeta im = is.getItemMeta();
 		im.setLore(lore);
 		is.setItemMeta(im);

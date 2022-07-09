@@ -29,6 +29,7 @@ public class ObjectiveSign extends VObjective {
      *
      * @param offlinePlayer Player
      */
+    @Override
     public boolean addReceiver(OfflinePlayer offlinePlayer)
     {
         if(!offlinePlayer.isOnline())
