@@ -1,6 +1,10 @@
 package net.vadamdev.viaapi.startup;
 
 import net.vadamdev.viaapi.VIAPI;
+import net.vadamdev.viaapi.tools.entitystructure.impl.RangeEntityStructure;
+import net.vadamdev.viaapi.tools.entitystructure.impl.WrappedEntityStructure;
+import net.vadamdev.viaapi.tools.math.Cuboid;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +17,8 @@ public class VIAPICommand extends Command {
         super("viapi");
     }
 
+    private Location firstloc, secondLoc;
+
     @Override
     public boolean execute(CommandSender sender, String label, String[] args) {
         if(sender instanceof Player) {
@@ -23,6 +29,27 @@ public class VIAPICommand extends Command {
                 return true;
             }
             if(args.length == 1) {
+                if(args[0].equalsIgnoreCase("d1")) {
+                    firstloc = player.getLocation();
+                    return true;
+                }else if(args[0].equalsIgnoreCase("d2")) {
+                    secondLoc = player.getLocation();
+                    return true;
+                }else if(args[0].equalsIgnoreCase("finish")) {
+                    Cuboid cuboid = new Cuboid(firstloc, secondLoc);
+                    WrappedEntityStructure entityStructure = new WrappedEntityStructure(firstloc, player.getLocation(), cuboid.getBlocks());
+
+                    RangeEntityStructure rangeEntityStructure = new RangeEntityStructure(entityStructure, 16, 20);
+                    rangeEntityStructure.spawn();
+
+                    VIAPI.getScheduler().runTaskTimerAsynchronously(VIAPI.get(), r -> {
+                        rangeEntityStructure.updateLocalRotationAroundAxisZ(0.05);
+                        rangeEntityStructure.updateLocationAndRotationForViewers();
+                    }, 20, 2);
+
+                    return true;
+                }
+
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage(" §7§l§m-------------------------------\n§r" +
                             "   §6§lVIAPI §f§l- §eCommands List\n" +

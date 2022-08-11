@@ -15,7 +15,7 @@ import java.util.List;
  * @author VadamDev
  * @since 10/05/2022
  */
-public final class RangePacketEntityHandler {
+public class RangePacketEntityHandler {
     private final IEntityHandler entityHandler;
 
     private final int viewingRadius, updateDelay;

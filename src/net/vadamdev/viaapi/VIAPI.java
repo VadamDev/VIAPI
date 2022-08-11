@@ -32,7 +32,9 @@ public class VIAPI extends VIPlugin {
 
         saveDefaultConfig();
 
-        registerListener(new NametagManager());
+        if(getConfig().getBoolean("nametag"))
+            registerListener(new NametagManager());
+
         registerCommand(new VIAPICommand());
 
         setupTools();

@@ -16,7 +16,7 @@ public class EntityFakePlayer {
      * @since 21/12/2020
      */
 
-    public EntityPlayer fakePlayer;
+    protected EntityPlayer fakePlayer;
     private final Location loc;
     private final String name, value, signature;
     private boolean removedFromTab;

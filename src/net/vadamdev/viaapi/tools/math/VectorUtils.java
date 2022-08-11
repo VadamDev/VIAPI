@@ -53,6 +53,7 @@ public class VectorUtils {
        Combiner
      */
 
+    @Deprecated
     public static Location combineVector(Vector vector, Location location) {
         return location.clone().add(vector.getX(), vector.getY(), vector.getZ());
     }

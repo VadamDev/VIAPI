@@ -1,4 +1,4 @@
-package net.vadamdev.viaapi.api.entities;
+package net.vadamdev.viaapi.tools.entities;
 
 import net.minecraft.server.v1_8_R3.BiomeBase;
 import net.minecraft.server.v1_8_R3.EntityInsentient;
@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Deprecated
 public class EntityRegistry {
-    @Deprecated
-    public static void register(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
+    public static void registerCustomEntity(String name, int id, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> customClass) {
         try {
             List<Map<?, ?>> dataMaps = new ArrayList<>();
 

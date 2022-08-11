@@ -54,10 +54,7 @@ public class PacketFloatingItem implements IEntityHandler {
 
     @Override
     public void delete(Player player) {
-        PlayerConnection playerConnection = getPlayerConnection(player);
-
-        playerConnection.sendPacket(new PacketPlayOutEntityDestroy(itemId));
-        playerConnection.sendPacket(new PacketPlayOutEntityDestroy(armorStandId));
+        getPlayerConnection(player).sendPacket(new PacketPlayOutEntityDestroy(itemId, armorStandId));
     }
 
     @Override
