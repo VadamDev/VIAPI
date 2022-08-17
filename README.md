@@ -21,10 +21,11 @@ This project is helped by [Jetbrains](https://www.jetbrains.com/) with their ope
 More informations [here](https://jb.gg/OpenSourceSupport)
 
 I use these products:
+
 <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/IntelliJ_IDEA_icon.png" width="50" height="50">  <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/DataGrip_icon.png" width="50" height="50">  <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/CodeWithMe_icon.png" width="50" height="50"> <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/Toolbox_icon.png" width="45" height="52">
 
 ## Credits
-> Thanks to **DarkBlade12** for making [ParticleEffect](https://github.com/DarkBlade12/ParticleEffect)
-> Thanks to **MinusKube** for making [SmartInvs](https://github.com/MinusKube/SmartInvs)
-> Thanks to **WesJD** for making [AnvilGUI](https://github.com/WesJD/AnvilGUI)
-> Thanks to **Jaxon Brown** for making [GuardianBeamAPI](https://github.com/jaxnb/GuardianBeamAPI)
+>Thanks to **DarkBlade12** for making [ParticleEffect](https://github.com/DarkBlade12/ParticleEffect)
+>Thanks to **MinusKube** for making [SmartInvs](https://github.com/MinusKube/SmartInvs)
+>Thanks to **WesJD** for making [AnvilGUI](https://github.com/WesJD/AnvilGUI)
+>Thanks to **Jaxon Brown** for making [GuardianBeamAPI](https://github.com/jaxnb/GuardianBeamAPI)
