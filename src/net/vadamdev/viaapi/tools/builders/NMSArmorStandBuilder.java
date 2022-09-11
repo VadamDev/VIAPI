@@ -4,13 +4,10 @@ import net.minecraft.server.v1_8_R3.EntityArmorStand;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.Vector3f;
 import net.vadamdev.viaapi.tools.enums.LockType;
-import net.vadamdev.viaapi.tools.packet.Reflection;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
-
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author VadamDev
@@ -90,12 +87,7 @@ public class NMSArmorStandBuilder {
     }
 
     public NMSArmorStandBuilder setRotation(float yaw, float pitch) {
-        try {
-            Reflection.getMethod(armorStand.getClass().getSuperclass().getSuperclass(), "setYawPitch", Float.class, Float.class).invoke(armorStand, yaw, pitch);
-        }catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-
+        armorStand.setPositionRotation(loc.getX(), loc.getY(), loc.getZ(), yaw, pitch);
         return this;
     }
 

@@ -30,6 +30,7 @@ public class RadiusEntityStructure {
     public void spawnWithRadius(Location center, int radius) {
         List<Player> toAdd = Bukkit.getOnlinePlayers().parallelStream()
                 .filter(p -> !viewers.contains(p))
+                .filter(player -> player.getLocation().getWorld().equals(center.getWorld()))
                 .filter(player -> player.getLocation().distanceSquared(center) <= radius * radius)
                 .collect(Collectors.toList());
 

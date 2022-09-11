@@ -83,8 +83,19 @@ public class RangePacketEntityHandler {
         return viewers.contains(player);
     }
 
+    public List<Player> getViewers() {
+        return viewers;
+    }
+
     private boolean isCloseEnough(Player player) {
+        if(!player.getLocation().getWorld().equals(entityHandler.getLocation().getWorld()))
+            return false;
+
         return player.getLocation().distanceSquared(entityHandler.getLocation()) <= viewingRadius * viewingRadius && player.getWorld().equals(entityHandler.getLocation().getWorld());
+    }
+
+    public Location getLocation() {
+        return entityHandler.getLocation();
     }
 
     private class PacketEntityHandlerUpdater extends BukkitRunnable {

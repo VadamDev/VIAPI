@@ -33,6 +33,7 @@ public class RadiusPacketEntityHandler {
     public void spawnWithRadius(Location center, int radius) {
         Bukkit.getOnlinePlayers().parallelStream()
                 .filter(p -> !viewers.contains(p))
+                .filter(player -> player.getLocation().getWorld().equals(center.getWorld()))
                 .filter(player -> player.getLocation().distanceSquared(center) <= radius * radius)
                 .forEach(player -> {
                     entityHandler.spawn(player);

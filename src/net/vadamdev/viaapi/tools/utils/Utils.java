@@ -4,9 +4,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.server.v1_8_R3.AxisAlignedBB;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
+import net.vadamdev.viaapi.tools.enums.EnumAxis;
+import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -20,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -87,7 +91,10 @@ public class Utils {
     }
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
-        return location.getWorld().getEntities().parallelStream().filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius).collect(Collectors.toList());
+        return location.getWorld().getEntities().parallelStream()
+                .filter(entity -> entity.getLocation().getWorld().equals(location.getWorld()))
+                .filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius)
+                .collect(Collectors.toList());
     }
 
     public static List<Player> getPlayersAroundPoint(Location location, double radius) {
@@ -110,6 +117,52 @@ public class Utils {
             e.printStackTrace();
         }
         return d;
+    }
+
+    public static void shuffleArray(Object[] array, Random random) {
+        final int arrayLength = array.length;
+
+        for (int i = 0; i < arrayLength; i++) {
+            int randomIndexToSwap = random.nextInt(arrayLength);
+            Object temp = array[randomIndexToSwap];
+            array[randomIndexToSwap] = array[i];
+            array[i] = temp;
+        }
+    }
+
+    public static List<Block> getBlocksWithPattern(Location origin, String[][] pattern, EnumAxis structureAxis, int depth, boolean negativeExpansion) {
+        ArrayUtils.reverse(pattern);
+
+        List<Block> blocks = new ArrayList<>();
+
+        for(int i = 0; i < pattern.length; i++) {
+            for(int j = 0; j < pattern[i].length; j++) {
+                if(pattern[i][j].equals(" "))
+                    continue;
+
+                switch(structureAxis) {
+                    case X:
+                        for(int k = 0; k < depth; k++)
+                            blocks.add(origin.clone().add(negativeExpansion ? -k : k, i, j).getBlock());
+
+                        break;
+                    case Y:
+                        for(int k = 0; k < depth; k++)
+                            blocks.add(origin.clone().add(i, negativeExpansion ? -k : k, j).getBlock());
+
+                        break;
+                    case Z:
+                        for(int k = 0; k < depth; k++)
+                            blocks.add(origin.clone().add(-j, i, negativeExpansion ? -k : k).getBlock());
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        return blocks;
     }
 
     /**

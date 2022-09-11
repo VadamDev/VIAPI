@@ -1,55 +1,24 @@
 package net.vadamdev.viaapi.startup;
 
 import net.vadamdev.viaapi.VIAPI;
-import net.vadamdev.viaapi.tools.entitystructure.impl.RangeEntityStructure;
-import net.vadamdev.viaapi.tools.entitystructure.impl.WrappedEntityStructure;
-import net.vadamdev.viaapi.tools.math.Cuboid;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
+import net.vadamdev.viaapi.tools.commands.PermissionCommand;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 /**
  * @author VadamDev
  */
-public class VIAPICommand extends Command {
+public class VIAPICommand extends PermissionCommand {
     public VIAPICommand() {
         super("viapi");
     }
 
-    private Location firstloc, secondLoc;
-
     @Override
-    public boolean execute(CommandSender sender, String label, String[] args) {
+    public boolean executePermissionCommand(CommandSender sender, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
 
-            if (!player.hasPermission("viapi.admin")) {
-                player.sendMessage("§cError : You don't have the permission to perform this command !");
-                return true;
-            }
             if(args.length == 1) {
-                if(args[0].equalsIgnoreCase("d1")) {
-                    firstloc = player.getLocation();
-                    return true;
-                }else if(args[0].equalsIgnoreCase("d2")) {
-                    secondLoc = player.getLocation();
-                    return true;
-                }else if(args[0].equalsIgnoreCase("finish")) {
-                    Cuboid cuboid = new Cuboid(firstloc, secondLoc);
-                    WrappedEntityStructure entityStructure = new WrappedEntityStructure(firstloc, player.getLocation(), cuboid.getBlocks());
-
-                    RangeEntityStructure rangeEntityStructure = new RangeEntityStructure(entityStructure, 16, 20);
-                    rangeEntityStructure.spawn();
-
-                    VIAPI.getScheduler().runTaskTimerAsynchronously(VIAPI.get(), r -> {
-                        rangeEntityStructure.updateLocalRotationAroundAxisZ(0.05);
-                        rangeEntityStructure.updateLocationAndRotationForViewers();
-                    }, 20, 2);
-
-                    return true;
-                }
-
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage(" §7§l§m-------------------------------\n§r" +
                             "   §6§lVIAPI §f§l- §eCommands List\n" +
@@ -66,7 +35,7 @@ public class VIAPICommand extends Command {
 
                             "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n" +
                             "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
-                            "   §6• §eThanks to §6Wesley Smith §efor making §6AnvilGUI§r\n" +
+                            "   §6• §eThanks to §6WesJD §efor making §6AnvilGUI§r\n" +
                             "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
 
                             "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
@@ -106,5 +75,10 @@ public class VIAPICommand extends Command {
 
                 "   §6∎ §eSee /viapi help for a command list\n" +
                 " §7§l§m-------------------------------");
+    }
+
+    @Override
+    public String getGlobalPermission() {
+        return "viapi.admin";
     }
 }

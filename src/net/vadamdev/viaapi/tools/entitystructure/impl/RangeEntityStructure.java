@@ -86,7 +86,14 @@ public class RangeEntityStructure {
     }
 
     private boolean isCloseEnough(Player player) {
+        if(!player.getLocation().getWorld().equals(entityStructure.getLocation().getWorld()))
+            return false;
+
         return player.getLocation().distanceSquared(entityStructure.getLocation()) <= viewingRadius * viewingRadius && player.getWorld().equals(entityStructure.getLocation().getWorld());
+    }
+
+    public Location getLocation() {
+        return entityStructure.getLocation();
     }
 
     private class PacketEntityHandlerUpdater extends BukkitRunnable {
