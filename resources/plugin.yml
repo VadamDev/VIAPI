@@ -2,7 +2,7 @@ name: VIAPI
 version: 2.4.17
 authors: [VadamDev, Java_Implements]
 description: VIAPI is a huge toolkit for plugin developers
-website:  https://github.com/VadamDev/VIAPI or https://vadamdev.fr
+website:  https://github.com/VadamDev/VIAPI
 
 softdepend: [ProtocolLib]
 main: net.vadamdev.viaapi.VIAPI
