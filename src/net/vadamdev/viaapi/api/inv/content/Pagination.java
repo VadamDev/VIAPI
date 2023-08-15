@@ -5,7 +5,6 @@ import net.vadamdev.viaapi.api.inv.ClickableItem;
 import java.util.Arrays;
 
 public interface Pagination {
-
     ClickableItem[] getPageItems();
 
     int getPage();
@@ -26,7 +25,6 @@ public interface Pagination {
 
 
     class Impl implements Pagination {
-
         private int currentPage;
 
         private ClickableItem[] items = new ClickableItem[0];
@@ -112,7 +110,5 @@ public interface Pagination {
             this.itemsPerPage = itemsPerPage;
             return this;
         }
-
     }
-
 }

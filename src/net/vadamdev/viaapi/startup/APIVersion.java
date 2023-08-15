@@ -50,6 +50,7 @@ public enum APIVersion {
     V2_4_15,
     V2_4_16,
     V2_4_17,
+    V2_4_18,
 
     UNKNOWN
 }

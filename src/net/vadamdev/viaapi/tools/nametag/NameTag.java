@@ -69,7 +69,7 @@ public class NameTag {
     }
 
     public boolean shouldShowNametag() {
-        return !player.getGameMode().equals(GameMode.SPECTATOR) && !player.hasPotionEffect(PotionEffectType.INVISIBILITY);
+        return !player.getGameMode().equals(GameMode.SPECTATOR) || !player.hasPotionEffect(PotionEffectType.INVISIBILITY);
     }
 
     public Player getPlayer() {

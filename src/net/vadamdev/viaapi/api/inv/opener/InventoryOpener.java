@@ -8,7 +8,6 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 
 public interface InventoryOpener {
-
     Inventory open(SmartInventory inv, Player player);
     boolean supports(InventoryType type);
 
@@ -22,5 +21,4 @@ public interface InventoryOpener {
             }
         }
     }
-
 }

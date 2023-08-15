@@ -11,7 +11,6 @@ import org.bukkit.inventory.Inventory;
 import java.util.List;
 
 public class SpecialInventoryOpener implements InventoryOpener {
-
     private static final List<InventoryType> SUPPORTED = ImmutableList.of(
             InventoryType.FURNACE,
             InventoryType.WORKBENCH,

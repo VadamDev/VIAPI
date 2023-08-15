@@ -1,5 +1,6 @@
 package net.vadamdev.viaapi.tools.nametag;
 
+import net.vadamdev.viaapi.VIAPI;
 import org.bukkit.entity.Player;
 
 /**
@@ -16,6 +17,11 @@ public class NameTagEditor {
     }
 
     public static void changeNametag(Player player, String prefix, String suffix) {
+        if(prefix.length() >= 16 || suffix.length() >= 16) {
+            VIAPI.get().getLogger().warning("Failed to apply custom nametag to " + player.getName() + " (pl: " + prefix.length() + " | sl: " + suffix.length() + ")");
+            return;
+        }
+
         NameTag nameTag = new NameTag(player, prefix, suffix);
 
         if(nameTag.shouldShowNametag() && !nameTag.isHidden())

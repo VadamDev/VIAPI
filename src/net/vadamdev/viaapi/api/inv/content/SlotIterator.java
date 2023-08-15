@@ -37,7 +37,6 @@ public interface SlotIterator {
 
 
     class Impl implements SlotIterator {
-
         private InventoryContents contents;
         private SmartInventory inv;
 

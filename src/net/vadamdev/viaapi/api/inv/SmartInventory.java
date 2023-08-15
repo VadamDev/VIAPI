@@ -103,7 +103,6 @@ public class SmartInventory {
     public static Builder builder() { return new Builder(); }
 
     public static final class Builder {
-
         private String id = "unknown";
         private String title = "";
         private InventoryType type = InventoryType.CHEST;

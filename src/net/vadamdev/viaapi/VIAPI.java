@@ -4,6 +4,7 @@ import net.vadamdev.viaapi.api.inv.InventoryManager;
 import net.vadamdev.viaapi.integration.IntegrationManager;
 import net.vadamdev.viaapi.startup.APIVersion;
 import net.vadamdev.viaapi.startup.VIAPICommand;
+import net.vadamdev.viaapi.startup.VIAPIListener;
 import net.vadamdev.viaapi.tools.bungeecord.BungeeUtils;
 import net.vadamdev.viaapi.tools.nametag.NametagManager;
 import net.vadamdev.viaapi.tools.scheduler.Scheduler;
@@ -35,6 +36,7 @@ public class VIAPI extends VIPlugin {
         if(getConfig().getBoolean("nametag"))
             registerListener(new NametagManager());
 
+        registerListener(new VIAPIListener(getConfig().getBoolean("egg-replacer")));
         registerCommand(new VIAPICommand());
 
         setupTools();

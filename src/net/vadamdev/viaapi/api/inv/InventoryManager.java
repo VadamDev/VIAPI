@@ -118,7 +118,6 @@ public class InventoryManager {
 
     @SuppressWarnings("unchecked")
     class InvListener implements Listener {
-
         @EventHandler(priority = EventPriority.LOW)
         public void onInventoryClick(InventoryClickEvent e) {
             Player p = (Player) e.getWhoClicked();
