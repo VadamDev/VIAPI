@@ -5,6 +5,7 @@ package net.vadamdev.viapi.tools.enums;
  * @since 04/08/2022
  */
 public enum EnumDirection {
+    UP,
     NORTH(-180),
     EAST(-90),
     SOUTH(0),
@@ -13,9 +14,13 @@ public enum EnumDirection {
     NORTH_WEST(0),
     SOUTH_EAST(0),
     SOUTH_WEST(0),
-    FLOOR(0);
+    DOWN;
 
     private final float yaw;
+
+    EnumDirection() {
+        this(0);
+    }
 
     EnumDirection(float yaw) {
         this.yaw = yaw;
@@ -23,6 +28,8 @@ public enum EnumDirection {
 
     public EnumDirection getOpposite() {
         switch(this) {
+            case UP:
+                return DOWN;
             case NORTH:
                 return SOUTH;
             case SOUTH:
@@ -39,6 +46,8 @@ public enum EnumDirection {
                 return NORTH_WEST;
             case SOUTH_WEST:
                 return NORTH_EAST;
+            case DOWN:
+                return UP;
             default:
                 return null;
         }
@@ -49,20 +58,20 @@ public enum EnumDirection {
     }
 
     public static EnumDirection getCardinalDirection(float yaw) {
-        double rotation = (yaw - 180) % 360;
+        double rot = (yaw - 180) % 360;
 
-        if (rotation < 0)
-            rotation += 360.0;
+        if (rot < 0)
+            rot += 360;
 
-        if (0 <= rotation && rotation < 67.5)
+        if (0 <= rot && rot < 67.5)
             return EnumDirection.NORTH;
-        else if (67.5 <= rotation && rotation < 157.5)
+        else if (67.5 <= rot && rot < 157.5)
             return EnumDirection.EAST;
-        else if (157.5 <= rotation && rotation < 247.5)
+        else if (157.5 <= rot && rot < 247.5)
             return EnumDirection.SOUTH;
-        else if (247.5 <= rotation && rotation < 337.5)
+        else if (247.5 <= rot && rot < 337.5)
             return EnumDirection.WEST;
-        else if (337.5 <= rotation && rotation < 360.0)
+        else if (337.5 <= rot && rot < 360.0)
             return EnumDirection.NORTH;
 
         return null;
@@ -72,7 +81,7 @@ public enum EnumDirection {
         double rot = yaw - 180;
 
         if (rot < 0)
-            rot += 360.0;
+            rot += 360;
 
         if (22.5 <= rot && rot < 67.5)
             return EnumDirection.NORTH_EAST;

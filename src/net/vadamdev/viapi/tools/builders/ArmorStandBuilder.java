@@ -3,7 +3,6 @@ package net.vadamdev.viapi.tools.builders;
 import net.minecraft.server.v1_8_R3.EntityArmorStand;
 import net.minecraft.server.v1_8_R3.NBTTagCompound;
 import net.minecraft.server.v1_8_R3.Vector3f;
-import net.vadamdev.viapi.tools.enums.LockType;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
@@ -164,7 +163,7 @@ public final class ArmorStandBuilder {
             return this;
         }
 
-        public BukkitArmorStandBuilder lockSlot(LockType lockType) {
+        public BukkitArmorStandBuilder lockSlot(ArmorStandLocker lockType) {
             lockType.apply(armorStand);
             return this;
         }
@@ -298,7 +297,7 @@ public final class ArmorStandBuilder {
             return this;
         }
 
-        public NMSArmorStandBuilder lockSlot(LockType lockType) {
+        public NMSArmorStandBuilder lockSlot(ArmorStandLocker lockType) {
             lockType.apply(armorStand);
             return this;
         }

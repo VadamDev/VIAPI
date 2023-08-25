@@ -1,8 +1,9 @@
 package net.vadamdev.viapi;
 
 import fr.minuskube.inv.InventoryManager;
-import net.vadamdev.viapi.internal.VIAPIPlugin;
+import net.vadamdev.viapi.tools.nametag.NametagEditor;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
 /**
@@ -12,9 +13,22 @@ import java.util.Map;
 public interface VIAPI {
     InventoryManager getInventoryManager();
 
+    @Nullable
+    NametagEditor getNametagEditor();
+
     Map<String, APIVersion> getDependsMap();
 
-    static VIAPI get() {
-        return VIAPIPlugin.instance;
+    final class Provider {
+        private static VIAPI api;
+
+        private Provider() {}
+
+        public static VIAPI get() {
+            return api;
+        }
+
+        public static void set(VIAPI api) {
+            Provider.api = api;
+        }
     }
 }

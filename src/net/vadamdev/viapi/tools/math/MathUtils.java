@@ -8,8 +8,10 @@ import java.util.Random;
  * @author VadamDev
  * @since 03/11/2020
  */
-public class MathUtils {
+public final class MathUtils {
     private static final Random random = new Random();
+
+    private MathUtils() {}
 
     /**
      * Generate a random location in a circle

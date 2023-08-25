@@ -25,9 +25,13 @@ public enum EnumColor {
     GREEN(DyeColor.GREEN),
     RED(DyeColor.RED),
     BLACK(DyeColor.BLACK),
-    ALL(DyeColor.WHITE);
+    ALL;
 
     private final DyeColor dyeColor;
+
+    EnumColor() {
+        this(DyeColor.WHITE);
+    }
 
     EnumColor(DyeColor dyeColor) {
         this.dyeColor = dyeColor;
@@ -41,7 +45,7 @@ public enum EnumColor {
         return dyeColor.getDyeData();
     }
 
-    public ItemStack getItem() {
+    public ItemStack createRepresentativeItem() {
         if(equals(ALL))
             return ItemBuilder.skull("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzgzZmQzZDExOTUzOWEyNDI1ZjdkYzczMzNkNDJmYWQ2OTRlNjJmNWY0Mzg4MjM1MjQ3MzE5ZDU5NjNkNTY3NyJ9fX0=")
                     .setName("§8» §4M§cu§6l§et§2i§ac§bo§3l§1o§9r")

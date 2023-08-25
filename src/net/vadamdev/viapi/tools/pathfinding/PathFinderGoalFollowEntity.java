@@ -10,7 +10,6 @@ import net.minecraft.server.v1_8_R3.PathfinderGoal;
 public class PathFinderGoalFollowEntity extends PathfinderGoal {
     private final EntityInsentient follower;
     private final EntityLiving owner;
-
     private final double speed;
     private final float distance;
 
@@ -18,9 +17,9 @@ public class PathFinderGoalFollowEntity extends PathfinderGoal {
 
     public PathFinderGoalFollowEntity(EntityInsentient follower, double speed, float distance) {
         this.follower = follower;
+        this.owner = follower.getGoalTarget();
         this.speed = speed;
         this.distance = distance;
-        this.owner = follower.getGoalTarget();
 
         this.a(3);
     }

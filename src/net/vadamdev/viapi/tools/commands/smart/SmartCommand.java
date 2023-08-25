@@ -29,10 +29,14 @@ public abstract class SmartCommand extends Command {
         if(!testPermission(sender))
             return true;
 
+        SmartCommandInteraction interaction = smartCommandData.retrieveCommandInteraction(sender, args);
+
         //TODO: execute command
 
         return false;
     }
+
+    public abstract boolean execute(CommandSender sender, SmartCommandInteraction interaction);
 
     public abstract SmartCommandData createSmartCommandData();
 }

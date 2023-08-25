@@ -14,7 +14,6 @@ import org.bukkit.inventory.Inventory;
  * @since 1.0
  */
 public class Wrapper1_8_R3 implements VersionWrapper {
-
     /**
      * {@inheritDoc}
      */
@@ -122,7 +121,6 @@ public class Wrapper1_8_R3 implements VersionWrapper {
      * Modifications to ContainerAnvil that makes it so you don't have to have xp to use this anvil
      */
     private class AnvilContainer extends ContainerAnvil {
-
         public AnvilContainer(EntityHuman entityhuman) {
             super(entityhuman.inventory, entityhuman.world, new BlockPosition(0, 0, 0), entityhuman);
         }

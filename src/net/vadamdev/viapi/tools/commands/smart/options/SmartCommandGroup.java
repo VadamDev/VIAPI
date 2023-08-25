@@ -1,6 +1,4 @@
-package net.vadamdev.viapi.tools.commands.smart;
-
-import net.vadamdev.viapi.tools.commands.smart.options.IOption;
+package net.vadamdev.viapi.tools.commands.smart.options;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +8,7 @@ import java.util.List;
  * @author VadamDev
  * @since 15/08/2023
  */
-public class SmartCommandGroup implements IOption {
+public class SmartCommandGroup {
     private final String name;
     private final List<SubSmartCommand> subCommands;
 

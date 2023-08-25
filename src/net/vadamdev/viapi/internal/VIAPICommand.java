@@ -2,7 +2,8 @@ package net.vadamdev.viapi.internal;
 
 import net.vadamdev.viapi.APIVersion;
 import net.vadamdev.viapi.VIAPI;
-import org.bukkit.command.Command;
+import net.vadamdev.viapi.tools.commands.PermissionCommand;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -11,19 +12,42 @@ import java.util.Map;
 /**
  * @author VadamDev
  */
-public class VIAPICommand extends Command {
+public class VIAPICommand extends PermissionCommand {
     public VIAPICommand() {
         super("viapi");
-        setPermission("viapi.admin");
+        setPermission("viapi.command");
     }
 
     @Override
-    public boolean execute(CommandSender sender, String label, String[] args) {
-        if(!testPermission(sender))
-            return true;
-
+    protected boolean executePermissionCommand(CommandSender sender, String label, String[] args) {
         if(sender instanceof Player) {
             Player player = (Player) sender;
+
+            if(args.length == 2 && args[0].equalsIgnoreCase("debug")) {
+
+                switch(args[1]) {
+                    case "vadam":
+                        VIAPI.Provider.get().getNametagEditor().setPrefix(Bukkit.getPlayer("VadamDev"), "§cCool :D §7");
+
+                        break;
+                    case "vadan":
+                        VIAPI.Provider.get().getNametagEditor().setPrefix(Bukkit.getPlayer("VadanDaiv"), "§bNice §7");
+
+                        break;
+                    case "vadamr":
+                        VIAPI.Provider.get().getNametagEditor().resetNametag(Bukkit.getPlayer("VadamDev"));
+
+                        break;
+                    case "vadanr":
+                        VIAPI.Provider.get().getNametagEditor().resetNametag(Bukkit.getPlayer("VadanDaiv"));
+
+                        break;
+                    default:
+                        break;
+                }
+
+                return true;
+            }
 
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("help")) {
@@ -44,7 +68,8 @@ public class VIAPICommand extends Command {
                             "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n" +
                             "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
                             "   §6• §eThanks to §6WesJD §efor making §6AnvilGUI§r\n" +
-                            "   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
+                            "   §6• §eThanks to §6SamaGames §efor making §6SamaGamesAPI§r\n \n" +
+                            //"   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
 
                             "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
 
@@ -54,7 +79,7 @@ public class VIAPICommand extends Command {
                     return true;
                 }else if(args[0].equalsIgnoreCase("listDepends") || args[0].equalsIgnoreCase("depends")) {
                     final StringBuilder message = new StringBuilder();
-                    final Map<String, APIVersion> dependsMap = VIAPI.get().getDependsMap();
+                    final Map<String, APIVersion> dependsMap = VIAPIPlugin.instance.getDependsMap();
 
                     dependsMap.forEach((pluginName, apiVersion) -> message.append("§a" + pluginName + " §7(" + apiVersion.name().replace("_", ".") + ")§f, "));
 

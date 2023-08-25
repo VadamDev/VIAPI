@@ -6,7 +6,9 @@ import org.bukkit.util.Vector;
  * @author VadamDev
  * @since 09/11/2021
  */
-public class VectorUtils {
+public final class VectorUtils {
+    private VectorUtils() {}
+
     /*
        Vector Rotation
      */

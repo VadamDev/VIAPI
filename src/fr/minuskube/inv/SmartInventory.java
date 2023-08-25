@@ -147,7 +147,7 @@ public class SmartInventory {
         private final List<InventoryListener<? extends Event>> listeners = new ArrayList<>();
 
         private Builder() {
-            this.manager = VIAPI.get().getInventoryManager();
+            this.manager = VIAPI.Provider.get().getInventoryManager();
         }
 
         public Builder id(String id) {
@@ -200,7 +200,7 @@ public class SmartInventory {
             if(provider == null)
                 throw new IllegalStateException("The provider of the SmartInventory.Builder must be set.");
 
-            SmartInventory inv = new SmartInventory(this.manager != null ? this.manager : VIAPI.get().getInventoryManager());
+            SmartInventory inv = new SmartInventory(this.manager != null ? this.manager : VIAPI.Provider.get().getInventoryManager());
             inv.id = this.id;
             inv.title = this.title;
             inv.type = this.type;
