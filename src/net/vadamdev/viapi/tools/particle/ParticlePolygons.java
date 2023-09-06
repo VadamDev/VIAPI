@@ -2,6 +2,7 @@ package net.vadamdev.viapi.tools.particle;
 
 import net.vadamdev.viapi.tools.enums.EnumDirection;
 import net.vadamdev.viapi.tools.math.MathF;
+import net.vadamdev.viapi.tools.utils.TriConsumer;
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
 
@@ -112,10 +113,5 @@ public final class ParticlePolygons {
         }
 
         return consumer;
-    }
-
-    @FunctionalInterface
-    private interface TriConsumer<T, U, V> {
-        void accept(T t, U u, V v);
     }
 }

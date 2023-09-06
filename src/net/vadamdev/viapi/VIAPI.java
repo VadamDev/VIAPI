@@ -3,6 +3,7 @@ package net.vadamdev.viapi;
 import fr.minuskube.inv.InventoryManager;
 import net.vadamdev.viapi.tools.nametag.NametagEditor;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Map;
 
@@ -23,11 +24,12 @@ public interface VIAPI {
 
         private Provider() {}
 
+        @Nonnull
         public static VIAPI get() {
             return api;
         }
 
-        public static void set(VIAPI api) {
+        public static void set(@Nonnull VIAPI api) {
             Provider.api = api;
         }
     }

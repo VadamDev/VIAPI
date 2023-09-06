@@ -43,9 +43,14 @@ public final class VectorUtils {
     }
 
     public static Vector rotateVector(Vector v, double angleX, double angleY, double angleZ) {
-        v = rotateAroundAxisX(v, angleX);
-        v = rotateAroundAxisY(v, angleY);
-        v = rotateAroundAxisZ(v, angleZ);
+        if(angleX != 0)
+            v = rotateAroundAxisX(v, angleX);
+
+        if(angleY != 0)
+            v = rotateAroundAxisY(v, angleY);
+
+        if(angleZ != 0)
+            v = rotateAroundAxisZ(v, angleZ);
 
         return v;
     }

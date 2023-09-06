@@ -11,6 +11,8 @@ import java.util.logging.Logger;
  * @since 24/08/2023
  */
 public class HikariDatabase extends AbstractHikariDatabase {
+    public static final HikariInfo DEFAULT_INFO = new HikariInfo(60000L, 30000L, 0, 10000L);
+
     public HikariDatabase(Logger logger, int maxPoolSize) {
         super(logger, maxPoolSize);
     }

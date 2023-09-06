@@ -1,9 +1,7 @@
 package net.vadamdev.viapi.internal;
 
 import net.vadamdev.viapi.APIVersion;
-import net.vadamdev.viapi.VIAPI;
 import net.vadamdev.viapi.tools.commands.PermissionCommand;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -23,39 +21,13 @@ public class VIAPICommand extends PermissionCommand {
         if(sender instanceof Player) {
             Player player = (Player) sender;
 
-            if(args.length == 2 && args[0].equalsIgnoreCase("debug")) {
-
-                switch(args[1]) {
-                    case "vadam":
-                        VIAPI.Provider.get().getNametagEditor().setPrefix(Bukkit.getPlayer("VadamDev"), "§cCool :D §7");
-
-                        break;
-                    case "vadan":
-                        VIAPI.Provider.get().getNametagEditor().setPrefix(Bukkit.getPlayer("VadanDaiv"), "§bNice §7");
-
-                        break;
-                    case "vadamr":
-                        VIAPI.Provider.get().getNametagEditor().resetNametag(Bukkit.getPlayer("VadamDev"));
-
-                        break;
-                    case "vadanr":
-                        VIAPI.Provider.get().getNametagEditor().resetNametag(Bukkit.getPlayer("VadanDaiv"));
-
-                        break;
-                    default:
-                        break;
-                }
-
-                return true;
-            }
-
             if(args.length == 1) {
                 if(args[0].equalsIgnoreCase("help")) {
                     sender.sendMessage("§7§l§m-------------------------------\n§r" +
-                            "   §6§lVIAPI §f§l- §eCommands List\n" +
+                            "   §6§lVIAPI §f§l- §eHelp\n" +
                             "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
 
-                            "   §6• §7/viapi (depends / listDepends) : List all plugins that currently uses VIAPI\n" +
+                            "   §6• §7/viapi depends : List all plugins that currently uses VIAPI\n" +
                             "   §6• §7/viapi credits for some credits\n" +
                             " §7§l§m-------------------------------");
 
@@ -65,11 +37,10 @@ public class VIAPICommand extends PermissionCommand {
                             "   §6§lVIAPI §f§l- §eCredits\n" +
                             "   §6Authors: §e§nVadamDev§r §6and §e§nJava_Implements§r\n \n" +
 
-                            "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n" +
                             "   §6• §eThanks to §6MinusKube §efor making §6SmartInvs§r\n" +
                             "   §6• §eThanks to §6WesJD §efor making §6AnvilGUI§r\n" +
+                            "   §6• §eThanks to §6DarkBlade12 §efor making §6ParticleEffect§r\n" +
                             "   §6• §eThanks to §6SamaGames §efor making §6SamaGamesAPI§r\n \n" +
-                            //"   §6• §eThanks to §6Jaxon Brown §efor making §6GuardianBeamAPI§r\n \n" +
 
                             "   §6• §eA huge thanks to §6JetBrains §efor their free license\n \n" +
 
@@ -77,7 +48,7 @@ public class VIAPICommand extends PermissionCommand {
                             " §7§l§m-------------------------------");
 
                     return true;
-                }else if(args[0].equalsIgnoreCase("listDepends") || args[0].equalsIgnoreCase("depends")) {
+                }else if(args[0].equalsIgnoreCase("depends")) {
                     final StringBuilder message = new StringBuilder();
                     final Map<String, APIVersion> dependsMap = VIAPIPlugin.instance.getDependsMap();
 
