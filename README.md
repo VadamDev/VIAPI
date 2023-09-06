@@ -27,6 +27,9 @@ I use these products:
 ## Credits
 
 >Thanks to **MinusKube** for making [SmartInvs](https://github.com/MinusKube/SmartInvs)
+
 >Thanks to **WesJD** for making [AnvilGUI](https://github.com/WesJD/AnvilGUI)
+
 >Thanks to **DarkBlade12** for making [ParticleEffect](https://github.com/DarkBlade12/ParticleEffect)
+
 >Thanks to **SamaGames** for making [SamaGamesAPI](https://github.com/SamaGames/SamaGamesAPI)
