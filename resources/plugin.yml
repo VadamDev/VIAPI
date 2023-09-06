@@ -4,6 +4,5 @@ authors: [VadamDev, Java_Implements]
 description: A huge toolkit for plugin developers
 website: https://github.com/VadamDev/VIAPI
 
-softdepend: [ProtocolLib]
 main: net.vadamdev.viapi.internal.VIAPIPlugin
 load: STARTUP
