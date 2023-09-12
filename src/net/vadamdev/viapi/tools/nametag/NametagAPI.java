@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
  * @author VadamDev
  * @since 25/08/2023
  */
-public interface NametagEditor {
+public interface NametagAPI {
     void setCustomNametag(Player player, String prefix, String suffix);
     void updateCustomNametag(Player player, String prefix, String suffix);
     void resetNametag(Player player);

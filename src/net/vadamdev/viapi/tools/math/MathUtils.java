@@ -20,8 +20,8 @@ public final class MathUtils {
      * @return
      */
     public static Location rlap(Location center, double radius) {
-        double t = 2 * Math.PI * Math.random();
-        double r = Math.sqrt(Math.random()) * radius;
+        final double t = 2 * Math.PI * Math.random();
+        final double r = Math.sqrt(Math.random()) * radius;
         return center.clone().add(r * Math.cos(t), 0, r * Math.sin(t));
     }
 
@@ -32,8 +32,8 @@ public final class MathUtils {
      * @return
      */
     public static Location rlop(Location center, double radius) {
-        double t = 2 * Math.PI * Math.random();
-        double r = Math.sqrt(radius);
+        final double t = 2 * Math.PI * Math.random();
+        final double r = Math.sqrt(radius);
         return center.clone().add(r * Math.cos(t), 0, r * Math.sin(t));
     }
 

@@ -1,4 +1,4 @@
-package net.vadamdev.viapi.tools.nametag;
+package net.vadamdev.viapi.internal.nametag;
 
 import net.minecraft.server.v1_8_R3.PacketPlayOutScoreboardTeam;
 import net.minecraft.server.v1_8_R3.Scoreboard;

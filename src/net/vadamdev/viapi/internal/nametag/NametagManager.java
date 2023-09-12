@@ -1,7 +1,9 @@
-package net.vadamdev.viapi.tools.nametag;
+package net.vadamdev.viapi.internal.nametag;
 
+import net.vadamdev.viapi.tools.nametag.NametagAPI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author VadamDev
  * @since 25/08/2023
  */
-public class NametagManager implements NametagEditor, Listener {
+public class NametagManager implements NametagAPI, Listener {
     private final Map<String, NameTag> nametags;
 
     private final ScheduledExecutorService executor;
@@ -80,14 +82,14 @@ public class NametagManager implements NametagEditor, Listener {
        Events
      */
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerJoin(PlayerJoinEvent event) {
         final Player player = event.getPlayer();
 
         nametags.values().forEach(nametag -> nametag.show(player));
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerQuit(PlayerQuitEvent event) {
         final String playerName = event.getPlayer().getName();
 

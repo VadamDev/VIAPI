@@ -23,9 +23,7 @@ public final class Flags {
     }
 
     public static void addFlag(String key, String flag) {
-        final List<String> fs = flags.computeIfAbsent(key, playerName -> new ArrayList<>());
-        fs.add(flag);
-        flags.replace(key, fs);
+        flags.computeIfAbsent(key, k -> new ArrayList<>()).add(flag);
     }
 
     public static boolean hasFlag(String key, String flag) {
@@ -36,8 +34,6 @@ public final class Flags {
         if(!flags.containsKey(key))
             return;
 
-        final List<String> fs = flags.get(key);
-        fs.remove(flag);
-        flags.replace(key, fs);
+        flags.get(key).remove(flag);
     }
 }

@@ -12,10 +12,10 @@ import java.util.Collection;
  * @author VadamDev
  * @since 03/09/2023
  */
-public class PacketCorpseEntity extends PacketFakePlayer {
+public class SleepingFakePlayer extends PacketFakePlayer {
     protected final Location bedLocation;
 
-    public PacketCorpseEntity(Location location, String name, String value, String signature, boolean showCape) {
+    public SleepingFakePlayer(Location location, String name, String value, String signature, boolean showCape) {
         super(location, name, value, signature, showCape);
 
         this.location.setYaw(0);

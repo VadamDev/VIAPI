@@ -1,7 +1,8 @@
 package net.vadamdev.viapi;
 
 import fr.minuskube.inv.InventoryManager;
-import net.vadamdev.viapi.tools.nametag.NametagEditor;
+import net.vadamdev.viapi.tools.bossbar.BossBarAPI;
+import net.vadamdev.viapi.tools.nametag.NametagAPI;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,7 +16,10 @@ public interface VIAPI {
     InventoryManager getInventoryManager();
 
     @Nullable
-    NametagEditor getNametagEditor();
+    NametagAPI getNameTagAPI();
+
+    @Nullable
+    BossBarAPI getBossBarAPI();
 
     Map<String, APIVersion> getDependsMap();
 

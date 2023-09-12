@@ -1,8 +1,10 @@
-package net.vadamdev.viapi.internal;
+package net.vadamdev.viapi.internal.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,6 +28,14 @@ public class EggListener implements Listener {
         final EntityType entityType = getTypeByData(item.getData().getData());
         if(entityType == null)
             return;
+
+        final Player player = event.getPlayer();
+        if(!player.getGameMode().equals(GameMode.CREATIVE)) {
+            if(item.getAmount() == 1)
+                player.setItemInHand(new ItemStack(Material.AIR));
+            else
+                item.setAmount(item.getAmount() - 1);
+        }
 
         final Location location = event.getClickedBlock().getRelative(event.getBlockFace()).getLocation();
         location.getWorld().spawnEntity(location.clone().add(0.5f, 0, 0.5f), entityType);

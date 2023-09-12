@@ -14,8 +14,11 @@ public final class MathF {
     }
 
     public static float clamp(float min, float max, float value) {
-        if (value < min) value = min;
-        if (value > max) value = max;
+        if(value < min)
+            value = min;
+
+        if(value > max)
+            value = max;
 
         return value;
     }

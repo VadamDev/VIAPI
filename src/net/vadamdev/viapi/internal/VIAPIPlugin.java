@@ -4,8 +4,11 @@ import fr.minuskube.inv.InventoryManager;
 import net.vadamdev.viapi.APIVersion;
 import net.vadamdev.viapi.VIAPI;
 import net.vadamdev.viapi.VIPlugin;
-import net.vadamdev.viapi.tools.nametag.NametagEditor;
-import net.vadamdev.viapi.tools.nametag.NametagManager;
+import net.vadamdev.viapi.internal.listeners.EggListener;
+import net.vadamdev.viapi.internal.bossbar.BossBarManager;
+import net.vadamdev.viapi.internal.nametag.NametagManager;
+import net.vadamdev.viapi.tools.bossbar.BossBarAPI;
+import net.vadamdev.viapi.tools.nametag.NametagAPI;
 import net.vadamdev.viapi.tools.utils.BungeeUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.spigotmc.SpigotConfig;
@@ -19,8 +22,13 @@ public class VIAPIPlugin extends VIPlugin implements VIAPI {
 
     private InventoryManager inventoryManager;
     private NametagManager nametagManager;
+    private BossBarManager bossBarManager;
 
-    private final Map<String, APIVersion> dependsMap = new HashMap<>();
+    private final Map<String, APIVersion> dependsMap;
+
+    public VIAPIPlugin() {
+        this.dependsMap = new HashMap<>();
+    }
 
     @Override
     public void onEnable() {
@@ -30,9 +38,14 @@ public class VIAPIPlugin extends VIPlugin implements VIAPI {
 
         final FileConfiguration config = getConfig();
 
-        if(config.getBoolean("nametag")) {
+        if(config.getBoolean("nametag-api")) {
             nametagManager = new NametagManager();
             registerListener(nametagManager);
+        }
+
+        if(config.getBoolean("bossbar-api")) {
+            bossBarManager = new BossBarManager();
+            registerListener(bossBarManager);
         }
 
         if(config.getBoolean("egg-replacer"))
@@ -61,8 +74,14 @@ public class VIAPIPlugin extends VIPlugin implements VIAPI {
 
     @Nullable
     @Override
-    public NametagEditor getNametagEditor() {
+    public NametagAPI getNameTagAPI() {
         return nametagManager;
+    }
+
+    @Nullable
+    @Override
+    public BossBarAPI getBossBarAPI() {
+        return bossBarManager;
     }
 
     @Override
