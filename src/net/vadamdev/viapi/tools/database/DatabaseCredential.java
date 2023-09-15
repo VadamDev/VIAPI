@@ -33,7 +33,7 @@ public class DatabaseCredential {
     }
 
     public String toURL() {
-        StringBuilder url = new StringBuilder("jdbc:mysql://" + host + ":" + port + "/" + database);
+        final StringBuilder url = new StringBuilder("jdbc:mysql://" + host + ":" + port + "/" + database);
 
         if(!tlsProtocol.equals(TLSProtocol.DEFAULT))
             url.append("?enabledTLSProtocols=" + tlsProtocol.getArgument());

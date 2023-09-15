@@ -38,8 +38,7 @@ public abstract class PermissionCommand extends Command {
             if(permissionMessage == null) {
                 target.sendMessage(ChatColor.RED + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.");
             }else if (permissionMessage.length() != 0) {
-                String[] split = permissionMessage.replace("<permission>", permission).split("\n");
-
+                final String[] split = permissionMessage.replace("<permission>", permission).split("\n");
                 for (String line : split)
                     target.sendMessage(line);
             }

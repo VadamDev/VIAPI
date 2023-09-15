@@ -14,7 +14,7 @@ public final class EntityRegistry {
 
     public static void registerCustomEntity(String name, int id, Class<? extends EntityInsentient> customClass) {
         try {
-            List<Map<?, ?>> dataMaps = new ArrayList<>();
+            final List<Map<?, ?>> dataMaps = new ArrayList<>();
 
             for(Field f : EntityTypes.class.getDeclaredFields()) {
                 if(f.getType().isAssignableFrom(Map.class)) {
@@ -28,7 +28,7 @@ public final class EntityRegistry {
                 dataMaps.get(2).remove(id);
             }
 
-            Method method = EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
+            final Method method = EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
             method.setAccessible(true);
             method.invoke(null, customClass, name, id);
         }catch (Exception e) {

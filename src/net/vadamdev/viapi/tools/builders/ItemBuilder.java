@@ -260,7 +260,7 @@ public final class ItemBuilder {
         }
     }
 
-    private static final class ItemstackBuilder extends BasicBuilder<ItemstackBuilder> {
+    public static final class ItemstackBuilder extends BasicBuilder<ItemstackBuilder> {
         private ItemstackBuilder(ItemStack itemStack) {
             super(itemStack);
         }

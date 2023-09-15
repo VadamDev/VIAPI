@@ -13,8 +13,8 @@ public final class VectorUtils {
        Vector Rotation
      */
     public static Vector rotateAroundAxisX(Vector v, double angle) {
-        double cos = MathL.cos(angle);
-        double sin = MathL.sin(angle);
+        final double cos = MathL.cos(angle);
+        final double sin = MathL.sin(angle);
 
         double y = v.getY() * cos - v.getZ() * sin;
         double z = v.getY() * sin + v.getZ() * cos;
@@ -23,8 +23,8 @@ public final class VectorUtils {
     }
 
     public static Vector rotateAroundAxisY(Vector v, double angle) {
-        double cos = MathL.cos(angle);
-        double sin = MathL.sin(angle);
+        final double cos = MathL.cos(angle);
+        final double sin = MathL.sin(angle);
 
         double x = v.getX() * cos + v.getZ() * sin;
         double z = v.getX() * -sin + v.getZ() * cos;
@@ -33,8 +33,8 @@ public final class VectorUtils {
     }
 
     public static Vector rotateAroundAxisZ(Vector v, double angle) {
-        double cos = MathL.cos(angle);
-        double sin = MathL.sin(angle);
+        final double cos = MathL.cos(angle);
+        final double sin = MathL.sin(angle);
 
         double x = v.getX() * cos - v.getY() * sin;
         double y = v.getX() * sin + v.getY() * cos;

@@ -54,7 +54,7 @@ public class NameTag {
     }
 
     protected void show(Player viewer) {
-        ScoreboardTeam team = new ScoreboardTeam(new Scoreboard(), "VTAG_" + viewer.getEntityId() + "-" + player.getEntityId());
+        final ScoreboardTeam team = new ScoreboardTeam(new Scoreboard(), "VTAG_" + viewer.getEntityId() + "-" + player.getEntityId());
         team.setCanSeeFriendlyInvisibles(false);
         team.setAllowFriendlyFire(true);
         team.setPrefix(prefix);
@@ -82,7 +82,7 @@ public class NameTag {
 
     private PacketPlayOutScoreboardTeam completeHidePacket(PacketPlayOutScoreboardTeam packet, Player viewer) {
         try {
-            Field a = packet.getClass().getDeclaredField("a");
+            final Field a = packet.getClass().getDeclaredField("a");
             a.setAccessible(true);
             a.set(packet, "VTAG_" + viewer.getEntityId() + "-" + player.getEntityId());
 
@@ -97,7 +97,7 @@ public class NameTag {
         try {
             final PacketPlayOutScoreboardTeam packet = new PacketPlayOutScoreboardTeam();
 
-            Field h = packet.getClass().getDeclaredField("h");
+            final Field h = packet.getClass().getDeclaredField("h");
             h.setAccessible(true);
             h.set(packet, 1);
 

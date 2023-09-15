@@ -2,7 +2,6 @@ package net.vadamdev.viapi.internal;
 
 import net.vadamdev.viapi.APIVersion;
 import net.vadamdev.viapi.tools.commands.PermissionCommand;
-import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginDescriptionFile;
 
@@ -19,41 +18,6 @@ public class VIAPICommand extends PermissionCommand {
         setPermission("viapi.command");
 
         this.pluginDesc = VIAPIPlugin.instance.getDescription();
-    }
-
-    private int cooldown = 0;
-    private int ipCharIndex = 0;
-    private String colorTEXT() {
-        String ip = "Custom Bossbar";
-
-        if (cooldown > 0) {
-            cooldown--;
-            return ChatColor.YELLOW + ip;
-        }
-
-        StringBuilder formattedIp = new StringBuilder();
-
-        if (ipCharIndex > 0) {
-            formattedIp.append(ip, 0, ipCharIndex - 1);
-            formattedIp.append(ChatColor.GOLD).append(ip.substring(ipCharIndex - 1, ipCharIndex));
-        }else
-            formattedIp.append(ip, 0, ipCharIndex);
-
-        formattedIp.append(ChatColor.RED).append(ip.charAt(ipCharIndex));
-
-        if (ipCharIndex + 1 < ip.length()) {
-            formattedIp.append(ChatColor.GOLD).append(ip.charAt(ipCharIndex + 1));
-
-            if (ipCharIndex + 2 < ip.length())
-                formattedIp.append(ChatColor.YELLOW).append(ip.substring(ipCharIndex + 2));
-
-            ipCharIndex++;
-        }else {
-            ipCharIndex = 0;
-            cooldown = 15;
-        }
-
-        return ChatColor.YELLOW + formattedIp.toString();
     }
 
     @Override
@@ -87,7 +51,7 @@ public class VIAPICommand extends PermissionCommand {
                 final StringBuilder message = new StringBuilder();
 
                 final Map<String, APIVersion> dependsMap = VIAPIPlugin.instance.getDependsMap();
-                dependsMap.forEach((pluginName, apiVersion) -> message.append("§a" + pluginName + " §7(" + apiVersion.name().replace("_", ".") + ")§f, "));
+                dependsMap.forEach((pluginName, apiVersion) -> message.append((apiVersion.isLatest() ? "§a" : "§e") + pluginName + " §7(" + apiVersion.name().replace("_", ".") + ")§f, "));
 
                 sender.sendMessage("Depends (" +  dependsMap.size() + "): " + message);
 
