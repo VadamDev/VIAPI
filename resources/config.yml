@@ -1,3 +1,8 @@
-bungeecord: true
-nametag: true
+#Enable the built-in nametag api. Disable it if you want to use another nametag changer plugin.
+nametag-api: true
+
+#Enable the built-in bossbar api.
+bossbar-api: true
+
+#Enable a listener that will replace minecraft's spawn egg to prevent them from spawning custom entities instead of the vanilla ones.
 egg-replacer: true
