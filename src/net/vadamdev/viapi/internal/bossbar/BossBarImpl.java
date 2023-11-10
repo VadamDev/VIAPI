@@ -51,12 +51,10 @@ public class BossBarImpl implements BossBar {
             final Location playerLocation = player.getLocation();
             final Vector transform = playerLocation.getDirection().multiply(ENTITY_DISTANCE).add(playerLocation.toVector());
 
-            final PacketPlayOutEntityTeleport packet = new PacketPlayOutEntityTeleport(viewers.get(player).getId(),
+            getPlayerConnection(player).sendPacket(new PacketPlayOutEntityTeleport(viewers.get(player).getId(),
                     MathHelper.floor(transform.getX() * 32D), MathHelper.floor(transform.getY() * 32D), MathHelper.floor(transform.getZ() * 32D),
                     (byte) 0, (byte) 0,
-                    false);
-
-            getPlayerConnection(player).sendPacket(packet);
+                    false));
         }else {
             destroyCurrentEntity(player);
             viewers.replace(player, spawnNewEntity(player));

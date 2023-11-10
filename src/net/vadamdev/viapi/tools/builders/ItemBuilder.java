@@ -143,27 +143,27 @@ public final class ItemBuilder {
     }
 
     public static BasicBuilder<?> skull(String value) {
-        final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
         final String skinUrl = PARSER.parse(new String(Base64.decodeBase64(value))).getAsJsonObject()
                 .get("textures").getAsJsonObject()
                 .get("SKIN").getAsJsonObject()
                 .get("url").getAsString();
 
-        profile.getProperties().put("textures", new Property("textures", new String(Base64.encodeBase64(("{textures:{SKIN:{url:" + skinUrl + "}}}").getBytes()))));
+        final GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        profile.getProperties().put("textures", new Property("textures", new String(Base64.encodeBase64(("{textures:{SKIN:{url:\"" + skinUrl + "\"}}}").getBytes()))));
 
         final ItemStack itemStack = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-        final SkullMeta headMeta = (SkullMeta) itemStack.getItemMeta();
+        final SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
 
         try {
-            Field profileField = headMeta.getClass().getDeclaredField("profile");
-            profileField.setAccessible(true);
-            profileField.set(headMeta, profile);
+            Field field = skullMeta.getClass().getDeclaredField("profile");
+            field.setAccessible(true);
+            field.set(skullMeta, profile);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
         }
 
-        itemStack.setItemMeta(headMeta);
+        itemStack.setItemMeta(skullMeta);
 
         return new BasicBuilder<>(itemStack);
     }

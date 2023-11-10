@@ -45,11 +45,11 @@ public class PacketFakePlayer implements IPacketEntity, IEquipmentHolder {
 
     @Override
     public void spawn(Collection<Player> players) {
-        final List<Packet<PacketListenerPlayOut>> packets = new ArrayList<>();
-
-        packets.add(new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, entityPlayer));
-        packets.add(new PacketPlayOutNamedEntitySpawn(entityPlayer));
-        packets.add(new PacketPlayOutEntityHeadRotation(entityPlayer, (byte) ((int) (location.getYaw() * 256.0F / 360.0F))));
+        final List<Packet<PacketListenerPlayOut>> packets = Arrays.asList(
+                new PacketPlayOutPlayerInfo(PacketPlayOutPlayerInfo.EnumPlayerInfoAction.ADD_PLAYER, entityPlayer),
+                new PacketPlayOutNamedEntitySpawn(entityPlayer),
+                new PacketPlayOutEntityHeadRotation(entityPlayer, (byte) ((int) (location.getYaw() * 256.0F / 360.0F)))
+        );
 
         for (Player player : players) {
             final PlayerConnection playerConnection = getPlayerConnection(player);

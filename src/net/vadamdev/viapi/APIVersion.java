@@ -45,6 +45,7 @@ public enum APIVersion {
      */
 
     V3_0_0(true), //Complete Rewrite
+    V3_0_1, //Internal Changes
 
     UNKNOWN;
 

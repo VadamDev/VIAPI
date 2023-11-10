@@ -10,8 +10,8 @@ import java.util.function.Consumer;
  * @since 15/08/2023
  */
 public final class ConsumerCommand<T extends CommandSender> extends Command {
-    private final Consumer<T> action;
     private final Class<T> clazz;
+    private final Consumer<T> action;
 
     public ConsumerCommand(Class<T> clazz, String name, Consumer<T> action) {
         super(name);

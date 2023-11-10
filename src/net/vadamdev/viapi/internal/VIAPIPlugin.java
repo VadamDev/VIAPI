@@ -20,9 +20,9 @@ import java.util.Map;
 public class VIAPIPlugin extends VIPlugin implements VIAPI {
     public static VIAPIPlugin instance;
 
-    private InventoryManager inventoryManager;
     private NametagManager nametagManager;
     private BossBarManager bossBarManager;
+    private InventoryManager inventoryManager;
 
     private final Map<String, APIVersion> dependsMap;
 

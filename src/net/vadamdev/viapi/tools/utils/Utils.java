@@ -58,7 +58,7 @@ public class Utils {
     }
 
     public static String loc2strYAP(Location loc) {
-        return loc.getWorld().getName() + ":" + loc.getBlockX() + ":" + loc.getBlockY() + ":" + loc.getBlockZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
+        return loc.getWorld().getName() + ":" + loc.getX() + ":" + loc.getY() + ":" + loc.getZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
     }
 
     public static void setPersistenceRequired(Entity entity) {

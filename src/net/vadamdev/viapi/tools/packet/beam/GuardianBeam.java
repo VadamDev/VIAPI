@@ -10,10 +10,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author VadamDev
@@ -36,9 +33,9 @@ public class GuardianBeam implements IPacketEntity {
 
         this.armorStand = ArmorStandBuilder.nms(endingPosition)
                 .setAsMarker()
+                .lockSlot(new ArmorStandLocker().lockAll())
                 .setVisible(false)
                 .build();
-        new ArmorStandLocker().lockAll().apply(armorStand);
 
         this.guardianId = guardian.getId();
         this.armorStandId = armorStand.getId();
@@ -53,10 +50,10 @@ public class GuardianBeam implements IPacketEntity {
 
     @Override
     public void spawn(Collection<Player> players) {
-        final List<Packet<PacketListenerPlayOut>> packets = new ArrayList<>();
-
-        packets.add(new PacketPlayOutSpawnEntityLiving(guardian));
-        packets.add(new PacketPlayOutSpawnEntityLiving(armorStand));
+        final List<PacketPlayOutSpawnEntityLiving> packets = Arrays.asList(
+                new PacketPlayOutSpawnEntityLiving(guardian),
+                new PacketPlayOutSpawnEntityLiving(armorStand)
+        );
 
         for(Player player : players) {
             PlayerConnection playerConnection = getPlayerConnection(player);
@@ -120,16 +117,17 @@ public class GuardianBeam implements IPacketEntity {
     public void teleport(Location location, Collection<Player> players) {
         final Location endingPosition = location.clone().add(this.endingPosition.toVector().subtract(this.startingPosition.toVector()));
 
-        final List<Packet<PacketListenerPlayOut>> packets = new ArrayList<>();
+        final List<PacketPlayOutEntityTeleport> packets = Arrays.asList(
+                new PacketPlayOutEntityTeleport(guardianId,
+                        MathHelper.floor(location.getX() * 32D), MathHelper.floor(location.getY() * 32D), MathHelper.floor(location.getZ() * 32D),
+                        (byte) 0, (byte) 0,
+                        false),
 
-        packets.add(new PacketPlayOutEntityTeleport(guardianId,
-                MathHelper.floor(location.getX() * 32D), MathHelper.floor(location.getY() * 32D), MathHelper.floor(location.getZ() * 32D),
-                (byte) 0, (byte) 0,
-                false));
-        packets.add(new PacketPlayOutEntityTeleport(armorStandId,
-                MathHelper.floor(endingPosition.getX() * 32D), MathHelper.floor(endingPosition.getY() * 32D), MathHelper.floor(endingPosition.getZ() * 32D),
-                (byte) 0, (byte) 0,
-                false));
+                new PacketPlayOutEntityTeleport(armorStandId,
+                        MathHelper.floor(endingPosition.getX() * 32D), MathHelper.floor(endingPosition.getY() * 32D), MathHelper.floor(endingPosition.getZ() * 32D),
+                        (byte) 0, (byte) 0,
+                        false)
+        );
 
         for(Player player : players) {
             final PlayerConnection playerConnection = getPlayerConnection(player);
