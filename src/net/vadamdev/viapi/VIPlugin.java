@@ -44,10 +44,7 @@ public class VIPlugin extends JavaPlugin {
     }
 
     public void registerListeners(Listener... listeners) {
-        final PluginManager pluginManager = getServer().getPluginManager();
-
-        for (Listener listener : listeners)
-            pluginManager.registerEvents(listener, this);
+        for (Listener listener : listeners) registerListener(listener);
     }
 
     public void saveResource(String ioPath) {
