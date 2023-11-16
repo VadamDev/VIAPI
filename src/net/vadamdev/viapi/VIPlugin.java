@@ -32,11 +32,7 @@ public class VIPlugin extends JavaPlugin {
     }
 
     public void registerCommands(Command... commands) {
-        final SimpleCommandMap commandMap = MinecraftServer.getServer().server.getCommandMap();
-        final String pluginName = getName();
-
-        for(Command command : commands)
-            commandMap.register(command.getName(), pluginName, command);
+        for (Command command : commands) registerCommand(command);
     }
 
     public void registerListener(Listener listener) {
