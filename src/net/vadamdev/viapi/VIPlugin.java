@@ -20,7 +20,7 @@ public class VIPlugin extends JavaPlugin {
         VIAPI.Provider.get().getDependsMap().put(getName(), apiVersion);
 
         if(!apiVersion.isLatest() && !apiVersion.equals(APIVersion.UNKNOWN))
-            getLogger().warning("I'm using the " + apiVersion.name() + " which is not the latest version !");
+            getLogger().warning("I'm using the " + apiVersion.name() + " which is not the latest version of the VIAPI !");
         else if(apiVersion.isLatest())
             getLogger().info("I'm using the latest version of the VIAPI ! (" + apiVersion.name() + ")");
         else
@@ -32,7 +32,8 @@ public class VIPlugin extends JavaPlugin {
     }
 
     public void registerCommands(Command... commands) {
-        for (Command command : commands) registerCommand(command);
+        for (Command command : commands)
+            registerCommand(command);
     }
 
     public void registerListener(Listener listener) {
@@ -40,7 +41,8 @@ public class VIPlugin extends JavaPlugin {
     }
 
     public void registerListeners(Listener... listeners) {
-        for (Listener listener : listeners) registerListener(listener);
+        for (Listener listener : listeners)
+            registerListener(listener);
     }
 
     public void saveResource(String ioPath) {
