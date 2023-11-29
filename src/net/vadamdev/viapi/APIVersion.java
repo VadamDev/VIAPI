@@ -1,11 +1,10 @@
 package net.vadamdev.viapi;
 
 /**
+ * Represents all public versions of the VIAPI
+ *
  * @author VadamDev
  * @since 13/09/2021
- *
- * Represents all public version of the VIAPI
- * There are some versions not written here because they are not public version.
  */
 public enum APIVersion {
     /*
@@ -44,8 +43,9 @@ public enum APIVersion {
        3.x.x
      */
 
-    V3_0_0(true), //Complete Rewrite
+    V3_0_0, //Complete Rewrite
     V3_0_1, //Internal Changes
+    V3_1_0(true), //INamedPacketEntity, Particle Videos, Improved EnumDirection...
 
     UNKNOWN;
 

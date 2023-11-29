@@ -10,10 +10,10 @@ public enum EnumDirection {
     EAST(-90),
     SOUTH(0),
     WEST(90),
-    NORTH_EAST(0),
-    NORTH_WEST(0),
-    SOUTH_EAST(0),
-    SOUTH_WEST(0),
+    NORTH_EAST(-135),
+    NORTH_WEST(135),
+    SOUTH_EAST(-45),
+    SOUTH_WEST(45),
     DOWN;
 
     private final float yaw;

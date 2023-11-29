@@ -2,15 +2,13 @@ package net.vadamdev.viapi;
 
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.command.Command;
-import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.event.Listener;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 
 /**
- * @author VadamDev
+ * @author VadamDev & Estxbxn
  * @since 05/08/2023
  */
 public class VIPlugin extends JavaPlugin {
@@ -20,7 +18,7 @@ public class VIPlugin extends JavaPlugin {
         VIAPI.Provider.get().getDependsMap().put(getName(), apiVersion);
 
         if(!apiVersion.isLatest() && !apiVersion.equals(APIVersion.UNKNOWN))
-            getLogger().warning("I'm using the " + apiVersion.name() + " which is not the latest version of the VIAPI !");
+            getLogger().warning("I'm using the " + apiVersion.name() + " of the VIAPI which is not the latest version !");
         else if(apiVersion.isLatest())
             getLogger().info("I'm using the latest version of the VIAPI ! (" + apiVersion.name() + ")");
         else

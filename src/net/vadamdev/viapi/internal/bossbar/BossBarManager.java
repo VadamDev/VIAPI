@@ -73,7 +73,7 @@ public class BossBarManager implements BossBarAPI, Listener {
         final Player player = event.getPlayer();
 
         if(bossBars.containsKey(player)) {
-            bossBars.get(player).forEach(bossBar -> bossBar.removePlayer(player));
+            new ArrayList<>(bossBars.get(player)).forEach(bossBar -> bossBar.removePlayer(player));
             bossBars.remove(player);
         }
     }

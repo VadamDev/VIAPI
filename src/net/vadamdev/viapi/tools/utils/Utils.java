@@ -88,15 +88,16 @@ public class Utils {
     }
 
     public static List<Entity> getEntitiesAroundPoint(Location location, double radius) {
-        return location.getWorld().getEntities().parallelStream()
+        return location.getWorld().getEntities().stream()
                 .filter(entity -> entity.getWorld().equals(location.getWorld()))
                 .filter(entity -> entity.getLocation().distanceSquared(location) <= radius * radius)
                 .collect(Collectors.toList());
     }
 
     public static List<Player> getPlayersAroundPoint(Location location, double radius) {
-        return Utils.getEntitiesAroundPoint(location, radius).stream()
-                .map(Player.class::cast)
+        return Bukkit.getOnlinePlayers().stream()
+                .filter(player -> player.getWorld().equals(location.getWorld()))
+                .filter(player -> player.getLocation().distanceSquared(location) <= radius * radius)
                 .collect(Collectors.toList());
     }
 

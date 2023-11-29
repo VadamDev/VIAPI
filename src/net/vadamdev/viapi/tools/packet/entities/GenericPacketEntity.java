@@ -2,6 +2,7 @@ package net.vadamdev.viapi.tools.packet.entities;
 
 import net.minecraft.server.v1_8_R3.*;
 import net.vadamdev.viapi.tools.packet.IEquipmentHolder;
+import net.vadamdev.viapi.tools.packet.INamedPacketEntity;
 import net.vadamdev.viapi.tools.packet.IPacketEntity;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author VadamDev
  * @since 02/09/2023
  */
-public class GenericPacketEntity implements IPacketEntity, IEquipmentHolder {
+public class GenericPacketEntity implements IPacketEntity, INamedPacketEntity, IEquipmentHolder {
     protected final EntityLiving entity;
     protected final int entityId;
     protected final boolean displayArmor;
@@ -87,6 +88,22 @@ public class GenericPacketEntity implements IPacketEntity, IEquipmentHolder {
     }
 
     @Override
+    public void updateCustomName(Collection<Player> players) {
+        final PacketPlayOutEntityMetadata packet = new PacketPlayOutEntityMetadata(entityId, entity.getDataWatcher(), false);
+        players.forEach(player -> getPlayerConnection(player).sendPacket(packet));
+    }
+
+    @Override
+    public void setCustomNameLocal(String name) {
+        entity.setCustomName(name);
+    }
+
+    @Override
+    public void setCustomNameVisibleLocal(boolean flag) {
+        entity.setCustomNameVisible(flag);
+    }
+
+    @Override
     public void updateLocalEquipment(int slot, ItemStack itemStack) {
         entity.setEquipment(slot, itemStack);
     }
@@ -97,6 +114,11 @@ public class GenericPacketEntity implements IPacketEntity, IEquipmentHolder {
 
         for (Player player : players)
             getPlayerConnection(player).sendPacket(packet);
+    }
+
+    @Override
+    public ItemStack getLocalEquipment(int slot) {
+        return entity.getEquipment(slot);
     }
 
     @Override

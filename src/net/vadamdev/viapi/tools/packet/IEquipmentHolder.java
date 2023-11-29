@@ -17,4 +17,6 @@ public interface IEquipmentHolder {
     default void updateEquipment(int slot, ItemStack itemStack, Player player) {
         updateEquipment(slot, itemStack, Collections.singleton(player));
     }
+
+    ItemStack getLocalEquipment(int slot);
 }

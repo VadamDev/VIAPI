@@ -4,6 +4,7 @@ import net.minecraft.server.v1_8_R3.EntityLiving;
 import net.minecraft.server.v1_8_R3.ItemStack;
 import net.vadamdev.viapi.internal.VIAPIPlugin;
 import net.vadamdev.viapi.tools.packet.IEquipmentHolder;
+import net.vadamdev.viapi.tools.packet.INamedPacketEntity;
 import net.vadamdev.viapi.tools.packet.IPacketEntity;
 import net.vadamdev.viapi.tools.packet.entities.GenericPacketEntity;
 import org.bukkit.Bukkit;
@@ -63,6 +64,24 @@ public class DynamicPacketEntityHandler implements IPacketEntityHandler {
     public void teleport(Location location) {
         packetEntity.teleportLocal(location);
         packetEntity.teleport(location, viewers);
+    }
+
+    public void setCustomName(String name) {
+        if(!(packetEntity instanceof INamedPacketEntity))
+            throw new UnsupportedOperationException("");
+
+        final INamedPacketEntity namedPacketEntity = (INamedPacketEntity) packetEntity;
+        namedPacketEntity.setCustomNameLocal(name);
+        namedPacketEntity.updateCustomName(viewers);
+    }
+
+    public void setCustomNameVisible(boolean flag) {
+        if(!(packetEntity instanceof INamedPacketEntity))
+            throw new UnsupportedOperationException("");
+
+        final INamedPacketEntity namedPacketEntity = (INamedPacketEntity) packetEntity;
+        namedPacketEntity.setCustomNameVisibleLocal(flag);
+        namedPacketEntity.updateCustomName(viewers);
     }
 
     public void updateEquipment(int slot, ItemStack itemStack) {

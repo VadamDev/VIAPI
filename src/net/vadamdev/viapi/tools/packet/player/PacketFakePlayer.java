@@ -118,6 +118,11 @@ public class PacketFakePlayer implements IPacketEntity, IEquipmentHolder {
     }
 
     @Override
+    public ItemStack getLocalEquipment(int slot) {
+        return entityPlayer.getEquipment(slot);
+    }
+
+    @Override
     public Location getLocalLocation() {
         return location;
     }
