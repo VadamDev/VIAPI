@@ -77,6 +77,9 @@ public final class InventorySerializer {
     }
 
     public static ItemStack[] itemStackArrayFromBase64(String data) {
+        if(data == null)
+            System.out.println("Data is null");
+
         try {
             final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(new ByteArrayInputStream(Base64Coder.decodeLines(data)));
 

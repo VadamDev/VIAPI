@@ -23,15 +23,14 @@ public interface VIAPI {
 
     Map<String, APIVersion> getDependsMap();
 
+    static VIAPI get() {
+        return Provider.api;
+    }
+
     final class Provider {
         private static VIAPI api;
 
         private Provider() {}
-
-        @Nonnull
-        public static VIAPI get() {
-            return api;
-        }
 
         public static void set(@Nonnull VIAPI api) {
             Provider.api = api;

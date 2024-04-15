@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 public interface NametagAPI {
     void setCustomNametag(Player player, String prefix, String suffix);
     void updateCustomNametag(Player player, String prefix, String suffix);
+
     void resetNametag(Player player);
+
     boolean hasCustomNametag(Player player);
 
     default void setPrefix(Player player, String prefix) {

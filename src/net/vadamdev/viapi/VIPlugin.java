@@ -15,7 +15,7 @@ public class VIPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         final APIVersion apiVersion = getAPIVersion();
-        VIAPI.Provider.get().getDependsMap().put(getName(), apiVersion);
+        VIAPI.get().getDependsMap().put(getName(), apiVersion);
 
         if(!apiVersion.isLatest() && !apiVersion.equals(APIVersion.UNKNOWN))
             getLogger().warning("I'm using the " + apiVersion.name() + " of the VIAPI which is not the latest version !");
