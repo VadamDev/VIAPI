@@ -10,7 +10,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -95,13 +95,11 @@ public class PacketFallingBlock implements IPacketEntity {
     }
 
     public List<Packet<PacketListenerPlayOut>> createSpawnPackets() {
-        final List<Packet<PacketListenerPlayOut>> packets = new ArrayList<>();
-
-        packets.add(new PacketPlayOutSpawnEntity(fallingBlock, 70, blockId | (blockData << 0xC)));
-        packets.add(new PacketPlayOutSpawnEntityLiving(armorStand));
-        packets.add(new PacketPlayOutAttachEntity(0, fallingBlock, armorStand));
-
-        return packets;
+        return Arrays.asList(
+                new PacketPlayOutSpawnEntity(fallingBlock, 70, blockId | (blockData << 0xC)),
+                new PacketPlayOutSpawnEntityLiving(armorStand),
+                new PacketPlayOutAttachEntity(0, fallingBlock, armorStand)
+        );
     }
 
     public PacketPlayOutEntityTeleport createTeleportPacket(Location location) {

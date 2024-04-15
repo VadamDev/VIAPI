@@ -12,7 +12,7 @@ import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,13 +52,13 @@ public class PacketFloatingItem implements IPacketEntity {
 
     @Override
     public void spawn(Collection<Player> players) {
-        final List<Packet<PacketListenerPlayOut>> packets = new ArrayList<>();
+        final List<Packet<PacketListenerPlayOut>> packets = Arrays.asList(
+                new PacketPlayOutSpawnEntityLiving(armorStand),
+                new PacketPlayOutSpawnEntity(entityItem, 2),
+                new PacketPlayOutEntityMetadata(itemId, entityItem.getDataWatcher(), true),
 
-        packets.add(new PacketPlayOutSpawnEntityLiving(armorStand));
-        packets.add(new PacketPlayOutSpawnEntity(entityItem, 2));
-        packets.add(new PacketPlayOutEntityMetadata(itemId, entityItem.getDataWatcher(), true));
-
-        packets.add(new PacketPlayOutAttachEntity(0, entityItem, armorStand));
+                new PacketPlayOutAttachEntity(0, entityItem, armorStand)
+        );
 
         for (Player player : players) {
             final PlayerConnection playerConnection = getPlayerConnection(player);

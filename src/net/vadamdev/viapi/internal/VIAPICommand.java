@@ -56,7 +56,17 @@ public class VIAPICommand extends PermissionCommand {
                 sender.sendMessage("Depends (" +  dependsMap.size() + "): " + message);
 
                 return true;
+            }else if(args[0].equalsIgnoreCase("ram") || args[0].equalsIgnoreCase("mem")) {
+                final long[] memory = getMemoryData(false);
+                sender.sendMessage("§7[§aUsed §7/ §aTotal §7/ §aFree§7] : §a" + memory[0] + " §7MB / §a" + memory[1] + " §7MB / §a" + memory[2] + " §7MB");
+
+                return true;
             }
+        }else if(args.length == 2 && (args[0].equalsIgnoreCase("ram") || args[0].equalsIgnoreCase("mem")) && (args[1].equalsIgnoreCase("-gc") || args[1].equalsIgnoreCase("gc"))) {
+            final long[] memory = getMemoryData(true);
+            sender.sendMessage("§7[§aUsed §7/ §aTotal §7/ §aFree§7] - §cGC §7: §a" + memory[0] + " §7MB / §a" + memory[1] + " §7MB / §a" + memory[2] + " §7MB");
+
+            return true;
         }
 
         sendHelpMessage(sender);
@@ -66,7 +76,7 @@ public class VIAPICommand extends PermissionCommand {
     private void sendHelpMessage(CommandSender sender) {
         sender.sendMessage(
                 "§7§m-------------§r §fInformations §7§m-------------\n§r" +
-                "   §7∎ §fAuthors: §7§nVadamDev§r §fand §7§nJava_Implements§r\n \n" +
+                "   §7∎ §fAuthors: §7§nVadamDev§r§f, §7§nJava_Implements§r§f, §7§nEstxbxn§r\n \n" +
 
                 "   §7• §fVersion: §7" + pluginDesc.getVersion() + "\n" +
                 "   §7• §fGithub: §7§n" + pluginDesc.getWebsite() + "§r\n \n" +
@@ -74,5 +84,17 @@ public class VIAPICommand extends PermissionCommand {
                 "   §7∎ §fSee /viapi help for a command list\n" +
                 "§7§m-------------------------------------"
         );
+    }
+
+    private long[] getMemoryData(boolean gc) {
+        final Runtime runtime = Runtime.getRuntime();
+
+        if(gc)
+            runtime.gc();
+
+        final long total = runtime.totalMemory() / 1048576;
+        final long free = runtime.freeMemory() / 1048576;
+
+        return new long[] { total - free, total, free };
     }
 }

@@ -13,10 +13,19 @@ import java.lang.reflect.Field;
  * @since 24/08/2023
  */
 public class ArmorStandLocker {
+    private static final ArmorStandLocker ALL_LOCKED = new AllLockedArmorStandLocker();
+    public static ArmorStandLocker lockAll() {
+        return ALL_LOCKED;
+    }
+
     private int value;
 
+    public ArmorStandLocker(int value) {
+        this.value = value;
+    }
+
     public ArmorStandLocker() {
-        this.value = 0;
+        this(0);
     }
 
     public ArmorStandLocker addParameter(EnumPart part, LockType... lockTypes) {
@@ -40,23 +49,18 @@ public class ArmorStandLocker {
         return this;
     }
 
-    public ArmorStandLocker lockAll() {
-        value = 2039583;
-        return this;
+    public void apply(EntityArmorStand armorStand) {
+        try {
+            final Field bi = armorStand.getClass().getDeclaredField("bi");
+            bi.setAccessible(true);
+            bi.set(armorStand, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 
     public void apply(ArmorStand armorStand) {
         apply(((CraftArmorStand) armorStand).getHandle());
-    }
-
-    public void apply(EntityArmorStand armorStand) {
-        try {
-            Field field = armorStand.getClass().getDeclaredField("bi");
-            field.setAccessible(true);
-            field.set(armorStand, value);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
     private int getPartIndex(EnumPart part) {
@@ -71,6 +75,17 @@ public class ArmorStandLocker {
                 return 4;
             default:
                 return 0;
+        }
+    }
+
+    private static final class AllLockedArmorStandLocker extends ArmorStandLocker {
+        private AllLockedArmorStandLocker() {
+            super(2039583);
+        }
+
+        @Override
+        public ArmorStandLocker addParameter(EnumPart part, LockType... lockTypes) {
+            throw new UnsupportedOperationException("Can't add parameter when everything is already locked");
         }
     }
 }

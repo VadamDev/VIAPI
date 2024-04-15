@@ -1,26 +1,24 @@
 package net.vadamdev.viapi.tools.enums;
 
+import org.bukkit.entity.Entity;
+
 /**
  * @author VadamDev
  * @since 04/08/2022
  */
 public enum EnumDirection {
-    UP,
+    UP(0),
     NORTH(-180),
     EAST(-90),
     SOUTH(0),
     WEST(90),
-    NORTH_EAST(0),
-    NORTH_WEST(0),
-    SOUTH_EAST(0),
-    SOUTH_WEST(0),
-    DOWN;
+    NORTH_EAST(-135),
+    NORTH_WEST(135),
+    SOUTH_EAST(-45),
+    SOUTH_WEST(45),
+    DOWN(0);
 
     private final float yaw;
-
-    EnumDirection() {
-        this(0);
-    }
 
     EnumDirection(float yaw) {
         this.yaw = yaw;
@@ -30,8 +28,6 @@ public enum EnumDirection {
         switch(this) {
             case UP:
                 return DOWN;
-            case NORTH:
-                return SOUTH;
             case SOUTH:
                 return NORTH;
             case EAST:
@@ -49,7 +45,7 @@ public enum EnumDirection {
             case DOWN:
                 return UP;
             default:
-                return null;
+                return SOUTH;
         }
     }
 
@@ -58,7 +54,7 @@ public enum EnumDirection {
     }
 
     public static EnumDirection getCardinalDirection(float yaw) {
-        double rot = (yaw - 180) % 360;
+        float rot = (yaw - 180) % 360;
 
         if (rot < 0)
             rot += 360;
@@ -77,8 +73,12 @@ public enum EnumDirection {
         return null;
     }
 
+    public static EnumDirection getCardinalDirection(Entity entity) {
+        return getCardinalDirection(entity.getLocation().getYaw());
+    }
+
     public static EnumDirection getPreciseDirection(float yaw) {
-        double rot = yaw - 180;
+        float rot = yaw - 180;
 
         if (rot < 0)
             rot += 360;
@@ -99,5 +99,9 @@ public enum EnumDirection {
             return EnumDirection.NORTH_WEST;
         else
             return EnumDirection.NORTH;
+    }
+
+    public static EnumDirection getPreciseDirection(Entity entity) {
+        return getPreciseDirection(entity.getLocation().getYaw());
     }
 }

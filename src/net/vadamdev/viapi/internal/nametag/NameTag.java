@@ -85,12 +85,11 @@ public class NameTag {
             final Field a = packet.getClass().getDeclaredField("a");
             a.setAccessible(true);
             a.set(packet, "VTAG_" + viewer.getEntityId() + "-" + player.getEntityId());
-
-            return packet;
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return packet;
     }
 
     private PacketPlayOutScoreboardTeam prepareHidePacket() {
