@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -89,6 +90,7 @@ public class PacketFallingBlock implements IPacketEntity {
         return destroyPacket;
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return location;

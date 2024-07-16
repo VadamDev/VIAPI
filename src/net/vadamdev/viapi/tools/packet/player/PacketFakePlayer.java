@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
@@ -122,6 +123,7 @@ public class PacketFakePlayer implements IPacketEntity, IEquipmentHolder {
         return entityPlayer.getEquipment(slot);
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return location;

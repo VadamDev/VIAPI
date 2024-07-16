@@ -6,10 +6,11 @@ import net.vadamdev.viapi.tools.database.DatabaseCredential;
 
 import javax.annotation.Nullable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.logging.Logger;
 
@@ -57,10 +58,11 @@ public abstract class AbstractHikariDatabase {
        Requests
      */
 
-    public void executeUpdate(String query) {
+    public void executeUpdate(String query, Consumer<PreparedStatement> consumer) {
         try {
-            final Statement statement = connection.createStatement();
-            statement.executeUpdate(query);
+            final PreparedStatement statement = connection.prepareStatement(query);
+            consumer.accept(statement);
+            statement.executeUpdate();
             statement.close();
         }catch (SQLException e) {
             e.printStackTrace();
@@ -68,12 +70,13 @@ public abstract class AbstractHikariDatabase {
     }
 
     @Nullable
-    public <T> T executeQuery(String query, Function<ResultSet, T> mapper) {
+    public <T> T executeQuery(String query, Consumer<PreparedStatement> consumer, Function<ResultSet, T> mapper) {
         T object = null;
 
         try {
-            final Statement statement = connection.createStatement();
-            final ResultSet result = statement.executeQuery(query);
+            final PreparedStatement statement = connection.prepareStatement(query);
+            consumer.accept(statement);
+            final ResultSet result = statement.executeQuery();
 
             object = mapper.apply(result);
 

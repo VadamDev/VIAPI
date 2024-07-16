@@ -19,25 +19,40 @@ public class HikariDatabase extends AbstractHikariDatabase {
 
     @Override
     public void set(String a, String b, Object object, String column, String table) {
-        executeUpdate("UPDATE " + table + " SET " + column + " = " + object + " WHERE " + a + " = " + b);
+        executeUpdate("UPDATE " + table + " SET " + column + " = ? WHERE " + a + " = ?", q -> {
+            try {
+                q.setString(1, object.toString());
+                q.setString(2, b);
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     @Nullable
     @Override
     public Object get(String a, String b, String column, String table) {
-        return executeQuery("SELECT " + column + " FROM " + table + " WHERE " + a + " = " + b, rs -> {
-            try {
-                return rs.next() ? rs.getObject(column) : null;
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return null;
-            }
-        });
+        return executeQuery("SELECT " + column + " FROM " + table + " WHERE " + a + " = ?",
+                q -> {
+                    try {
+                        q.setString(1, b);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                },
+                rs -> {
+                    try {
+                        return rs.next() ? rs.getObject(column) : null;
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                });
     }
 
     @Override
     public List<Object> takeAll(String column, String table) {
-        return executeQuery("SELECT * FROM " + table, rs -> {
+        return executeQuery("SELECT * FROM " + table, q -> {}, rs -> {
             List<Object> list = new ArrayList<>();
 
             try {

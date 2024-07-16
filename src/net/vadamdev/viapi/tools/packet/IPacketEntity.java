@@ -3,6 +3,7 @@ package net.vadamdev.viapi.tools.packet;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -36,5 +37,6 @@ public interface IPacketEntity {
         updateLocation(Collections.singleton(player));
     }
 
+    @Nonnull
     Location getLocalLocation();
 }

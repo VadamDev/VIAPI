@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -88,6 +89,7 @@ public class PacketFloatingItem implements IPacketEntity {
             getPlayerConnection(player).sendPacket(packet);
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return location;

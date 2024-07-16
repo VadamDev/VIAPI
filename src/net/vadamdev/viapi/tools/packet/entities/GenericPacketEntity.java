@@ -8,6 +8,7 @@ import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -121,6 +122,7 @@ public class GenericPacketEntity implements IPacketEntity, INamedPacketEntity, I
         return entity.getEquipment(slot);
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return location;

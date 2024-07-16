@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 
 /**
@@ -135,6 +136,7 @@ public class GuardianBeam implements IPacketEntity {
         }
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return startingPosition;

@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -122,6 +123,7 @@ public class EntityStructure implements IEntityStructure {
         });
     }
 
+    @Nonnull
     @Override
     public Location getLocalLocation() {
         return location;
